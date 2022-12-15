@@ -1,0 +1,52 @@
+body {
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+    font-family: 'Raleway', sans-serif;
+    background-color: #a3a3a3;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #000000;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #f21d44, #cb0060, #970f6e, #5d206c, #222059);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(to right, #f21d44, #cb0060, #970f6e, #5d206c, #222059);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+    }
+}
+
+.border__decoration {
+    border-left: 2px solid #cb0060;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+
+.btn__personalizado {
+    background: -webkit-linear-gradient(#f21d44, #cb0060, #970f6e, #5d206c, #222059);
+    background-size: 1px 100px;
+    color: white;
+    transition: all .3s;
+    border: 0px;
+}
+
+.btn__personalizado:hover {
+    background-position: 0 -20px;
+    transition: all .3s;
+    color: white;
+    border: 0px;
+}
