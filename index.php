@@ -39,7 +39,7 @@
                                       </div>
                                   </div>
 
-                                  <form>
+                                  <form method="post" id="formularioIniciarSesion">
                                       <div class="mb-3 mt-3">
                                           <label for="nom_usu" class="form-label"><b>Nombre de usuario:</b></label>
                                               <div class="input-group">
@@ -58,7 +58,7 @@
                                           </div>
                                       </div>
                                       <div class="d-grid gap-2 col-6 mx-auto">
-                                          <button type="button" class="btn btn__personalizado"><i
+                                          <button type="submit" class="btn btn__personalizado"><i
                                                   class="fa-solid fa-right-to-bracket"></i> Iniciar
                                               Sesión</button>
                                       </div>
