@@ -1,0 +1,99 @@
+:root {
+    --main-bg-color: #f21d44;
+    --main-text-color: #ffffff;
+    --second-text-color: #ffffff;
+    --second-bg-color: #222059;
+  }
+
+  body {
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+    font-family: 'Raleway', sans-serif;
+}
+  
+  .primary-text {
+    color: var(--main-text-color);
+  }
+  
+  .second-text {
+    color: var(--second-text-color);
+  }
+  
+  .primary-bg {
+    background-color: var(--main-bg-color);
+  }
+  
+  .secondary-bg {
+    background-color: var(--second-bg-color);
+  }
+  
+  .rounded-full {
+    border-radius: 100%;
+  }
+  
+  #wrapper {
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23f8f8f8' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23f1f1f1' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23eaeaea' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23e3e3e3' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23DCDCDC' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  }
+  
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+  
+  #menu-toggle {
+    cursor: pointer;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 20px 30px;
+  }
+  
+  .list-group-item.active {
+    background-color: transparent;
+    color: var(--main-text-color);
+    font-weight: bold;
+    border: none;
+  }
+  
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+  
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: -15rem;
+    }
+  }
+
+  .fondo__sidebar{
+    background-color: var(--second-bg-color) }
