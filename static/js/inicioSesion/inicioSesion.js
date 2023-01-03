@@ -11,7 +11,6 @@ formularioIniciarSesion.addEventListener("submit", (e) => {
     }else {
         Mensaje("Todos los campos estan llenos, esperando repuesta del servidor", "success");
     }
-
 });
 
 function Mensaje(mensaje, color){
