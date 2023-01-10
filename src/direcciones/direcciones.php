@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="static/css/style.css" />
-    <link rel="stylesheet" href="static/css/datatables.min.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <link rel="stylesheet" href="../../static/css/datatables.min.css">
     <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
     <title>SANMEX</title>
 </head>
@@ -54,76 +54,19 @@
 
             <div class="container-fluid px-4" style="margin-top: 80px;">
                 <div class="row g-3">
-                    <div class="col-md-4 mt-3">
-                        <div class="card sombra" style="border-left: 5px solid green;">
-                            <div class="card-body" style="display:flex; justify-content:space-between;">
-                                <h5>Sanitarios disponibles</h5>
-                                <h5>50</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                        <div class="card sombra" style="border-left: 5px solid yellow;">
-                            <div class="card-body" style="display:flex; justify-content:space-between;">
-                                <h5>Sanitarios disponibles</h5>
-                                <h5>50</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-3">
-                        <div class="card sombra" style="border-left: 5px solid red;">
-                            <div class="card-body" style="display:flex; justify-content:space-between;">
-                                <h5>Sanitarios disponibles</h5>
-                                <h5>50</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
                     <div class="col-md-12 mt-3">
                         <div class="card sombra">
                             <div class="card-body">
-                                <div id="chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row g-3">
-                    <div class="col-md-12 mt-3">
-                        <div class="card sombra">
-                            <div class="card-body">
-                                <h1 style="text-align: center;">Últimos 10 sanitarios atentidos</h4>
+                                <h1 style="text-align: center;">Lista de direcciones de clientes </h4>
                                     <table id="datatable" class="table table-striped  nowrap" style="width:100%;">
                                         <thead style="background-color: #222059; color: white;">
                                             <tr>
-                                                <th># SANITARIO</th>
-                                                <th>DESC SANITARIO</th>
-                                                <th>TIPO</th>
-                                                <th>ESTATUS</th>
-                                                <th>FEC_SER</th>
-                                                <th>CLIENTE</th>
+                                                <th>Nombre cliente</th>
+                                                <th></th>
                                                 <th>ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>NOM_USU</td>
-                                                <td>PWD</td>
-                                                <td>TIPO</th>
-                                                <td>ESTATUS</td>
-                                                <td>FEC_CRE</td>
-                                                <td>ESTATUS</td>
-                                                <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="button" class="btn btn-sm btn-default"><i class="fas fa-edit"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-default"><i class="fas fa-trash"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-default" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="generateQRCode(255)"><i class="fas fa-qrcode"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                             </div>

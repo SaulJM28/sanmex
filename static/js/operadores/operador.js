@@ -1,8 +1,8 @@
 $(document).ready(function () {
   //$("#datatable").DataTable();
-  $("#tableSanitarios").DataTable({
+  $("#tablaOperadores").DataTable({
     ajax: {
-      url: "./back/get_listSanitarios.php",
+      url: "./back/get_listOperadores.php",
     },
     deferRender: true,
     scrollY: 340,
@@ -26,10 +26,16 @@ $(document).ready(function () {
     order: [[0, "asc"]],
     columns: [
       {
-        data: "num_san",
+        data: "nom",
       },
       {
-        data: "tip_san",
+        data: "ap1",
+      },
+      {
+        data: "ap2",
+      },
+      {
+        data: "tel",
       },
       {
         data: "fec_cre",
@@ -38,33 +44,33 @@ $(document).ready(function () {
         data: "estatus",
       },
       {
-        data: "id_san",
+        data: "id_ope",
         bSortable: false,
         mRender: function (data, type, row) {
           return `<div class="btn-group" role="group" aria-label="Basic example">
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
-             )"><i class="fas fa-trash" ></i></button>
-           </div>`;
+               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
+               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
+               )"><i class="fas fa-trash" ></i></button>
+             </div>`;
         },
       },
     ],
     buttons: [
       {
         extend: "excelHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadore",
         text: '<i class="fas fa-file-excel"></i>',
         className: "btn-sm",
       },
       {
         extend: "csvHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         text: '<i class="fa-solid fa-file-csv"></i>',
         className: "btn-sm",
       },
       {
         extend: "pdfHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         text: '<i class="fas fa-file-pdf"></i>',
         className: "btn-sm",
         orientation: "landscape",
@@ -75,7 +81,7 @@ $(document).ready(function () {
       },
       {
         extend: "print",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         className: "btn-sm",
         text: '<i class="fa-solid fa-print"></i>',
         footer: "true",
@@ -85,7 +91,7 @@ $(document).ready(function () {
       },
       {
         extend: "copy",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         className: "btn-sm",
         text: '<i class="fas fa-copy"></i>',
       },
@@ -116,10 +122,10 @@ toggleButton.onclick = function () {
 };
 
 function cargar_tabla() {
-  $("#tableSanitarios").DataTable().clear().destroy();
-  $("#tableSanitarios").DataTable({
+  $("#tablaOperadores").DataTable().clear().destroy();
+  $("#tablaOperadores").DataTable({
     ajax: {
-      url: "./back/get_listSanitarios.php",
+      url: "./back/get_listOperadores.php",
     },
     deferRender: true,
     scrollY: 340,
@@ -143,10 +149,16 @@ function cargar_tabla() {
     order: [[0, "asc"]],
     columns: [
       {
-        data: "num_san",
+        data: "nom",
       },
       {
-        data: "tip_san",
+        data: "ap1",
+      },
+      {
+        data: "ap2",
+      },
+      {
+        data: "tel",
       },
       {
         data: "fec_cre",
@@ -155,33 +167,33 @@ function cargar_tabla() {
         data: "estatus",
       },
       {
-        data: "id_san",
+        data: "id_ope",
         bSortable: false,
         mRender: function (data, type, row) {
           return `<div class="btn-group" role="group" aria-label="Basic example">
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
-             )"><i class="fas fa-trash" ></i></button>
-           </div>`;
+               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
+               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
+               )"><i class="fas fa-trash" ></i></button>
+             </div>`;
         },
       },
     ],
     buttons: [
       {
         extend: "excelHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadore",
         text: '<i class="fas fa-file-excel"></i>',
         className: "btn-sm",
       },
       {
         extend: "csvHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         text: '<i class="fa-solid fa-file-csv"></i>',
         className: "btn-sm",
       },
       {
         extend: "pdfHtml5",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         text: '<i class="fas fa-file-pdf"></i>',
         className: "btn-sm",
         orientation: "landscape",
@@ -192,7 +204,7 @@ function cargar_tabla() {
       },
       {
         extend: "print",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         className: "btn-sm",
         text: '<i class="fa-solid fa-print"></i>',
         footer: "true",
@@ -202,7 +214,7 @@ function cargar_tabla() {
       },
       {
         extend: "copy",
-        title: "Lista de sanitarios",
+        title: "Lista de operadores",
         className: "btn-sm",
         text: '<i class="fas fa-copy"></i>',
       },
@@ -225,16 +237,24 @@ function cargar_tabla() {
   });
 }
 
-formularioADDSanitario.addEventListener("submit", (e) => {
+formularioADDOperador.addEventListener("submit", (e) => {
   e.preventDefault();
-  let num_san_add = document.getElementById("num_san_add").value;
-  let tip_san_add = document.getElementById("tip_san_add").value;
+  let nom_ope_add = document.getElementById("nom_ope_add").value;
+  let ap1_ope_add = document.getElementById("ap1_ope_add").value;
+  let ap2_ope_add = document.getElementById("ap2_ope_add").value;
+  let tel_ope_add = document.getElementById("tel_ope_add").value;
+
+  tel_ope_add ? "" : (tel_ope_add = "N/A");
+
+  //poner validaciones de campos
   $.ajax({
     type: "POST",
-    url: "./back/insert_sanitario.php",
+    url: "./back/insert_operador.php",
     data: {
-      num_san_add: num_san_add,
-      tip_san_add: tip_san_add,
+      nom_ope_add: nom_ope_add,
+      ap1_ope_add: ap1_ope_add,
+      ap2_ope_add: ap2_ope_add,
+      tel_ope_add: tel_ope_add,
     },
     async: true,
     beforeSend: function () {},
@@ -242,11 +262,17 @@ formularioADDSanitario.addEventListener("submit", (e) => {
       if (response.resultado == true) {
         Mensaje(response.mensaje, "success", "ADD");
         cargar_tabla();
-        document.getElementById("num_san_add").value  = '';
+        document.getElementById("nom_ope_add").value = "";
+        document.getElementById("ap1_ope_add").value = "";
+        document.getElementById("ap2_ope_add").value = "";
+        document.getElementById("tel_ope_add").value = "";
       } else {
         Mensaje(response.mensaje, "danger", "ADD");
         cargar_tabla();
-        document.getElementById("num_san_add").value  = '';
+        document.getElementById("nom_ope_add").value = "";
+        document.getElementById("ap1_ope_add").value = "";
+        document.getElementById("ap2_ope_add").value = "";
+        document.getElementById("tel_ope_add").value = "";
       }
     },
     error: function (error) {
@@ -256,72 +282,84 @@ formularioADDSanitario.addEventListener("submit", (e) => {
 });
 
 //funcion para obtener datos de la fila
-const get_info =(id, tipo) => {
-  if(tipo == 'update'){
+const get_info = (id, tipo) => {
+  if (tipo == "update") {
     $.ajax({
       type: "POST",
-      url: "./back/get_sanById.php",
+      url: "./back/get_opeById.php",
       data: {
-        id_san: id,
+        id_ope: id,
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-        document.getElementById('id_san_up').value = response.id_san;
-        document.getElementById('num_san_up').value = response.num_san;
-        document.getElementById('tip_san_up').value = response.tip_san;
+        document.getElementById("id_ope_up").value = response.id_ope;
+        document.getElementById("nombre_ope_up").value = response.nom;
+        document.getElementById("ap1_ope_up").value = response.ap1;
+        document.getElementById("ap2_ope_up").value = response.ap2;
+        document.getElementById("tel_op_up").value = response.tel;
       },
       error: function (error) {
         console.log(error);
       },
     });
-  }else if (tipo == 'delete'){
+  } else if (tipo == "delete") {
     $.ajax({
       type: "POST",
-      url: "./back/get_sanById.php",
+      url: "./back/get_opeById.php",
       data: {
-        id_san: id,
+        id_ope: id,
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-        document.getElementById('id_san_de').value = response.id_san;
-        document.getElementById('num_san_de').value = response.num_san;
+        document.getElementById("id_ope_de").value = response.id_ope;
+        document.getElementById(
+          "nom_ope_de"
+        ).value = `${response.nom}  ${response.ap1}  ${response.ap2}`;
       },
       error: function (error) {
         console.log(error);
       },
     });
   }
-
-}
+};
 /*  funcion para actualizar la informacion */
-formularioUpdateSanitario.addEventListener("submit", (e) => {
+formularioUpdateoperador.addEventListener("submit", (e) => {
   e.preventDefault();
-  let id_san_up  = document.getElementById('id_san_up').value;
-  let num_san_up = document.getElementById('num_san_up').value;
-  let tip_san_up = document.getElementById('tip_san_up').value;
+  let id_ope_up = document.getElementById("id_ope_up").value;
+  let nombre_ope_up = document.getElementById("nombre_ope_up").value;
+  let ap1_ope_up = document.getElementById("ap1_ope_up").value;
+  let ap2_ope_up = document.getElementById("ap2_ope_up").value;
+  let tel_op_up = document.getElementById("tel_op_up").value;
   $.ajax({
     type: "POST",
-    url: "./back/update_san.php",
+    url: "./back/update_ope.php",
     data: {
-      id_san: id_san_up,
-      num_san: num_san_up,
-      tip_san: tip_san_up,
-      accion: 'update'
+      id_ope: id_ope_up,
+      nombre_ope: nombre_ope_up,
+      ap1_ope: ap1_ope_up,
+      ap2_ope: ap2_ope_up,
+      tel_op: tel_op_up,
+      accion: "update",
     },
     async: true,
     beforeSend: function () {},
     success: function (response) {
-      console.log(response.resultado);
       if (response.resultado == true) {
         Mensaje(response.mensaje, "success", "UPDATE");
         cargar_tabla();
-        document.getElementById("num_san_up").value  = '';
+        document.getElementById("nombre_ope_up").value = "";
+        document.getElementById("ap1_ope_up").value = "";
+        document.getElementById("ap2_ope_up").value = "";
+        document.getElementById("tel_op_up").value = "";
       } else {
         Mensaje(response.mensaje, "danger", "UPDATE");
         cargar_tabla();
-        document.getElementById("num_san_up").value  = '';
+        document.getElementById("nombre_ope_up").value = "";
+        document.getElementById("ap1_ope_up").value = "";
+        document.getElementById("ap2_ope_up").value = "";
+        document.getElementById("tel_op_up").value = "";
       }
     },
     error: function (error) {
@@ -330,22 +368,23 @@ formularioUpdateSanitario.addEventListener("submit", (e) => {
   });
 });
 /* funcion para eliminar informacion */
-formularioDeleteSanitario.addEventListener("submit", (e) => {
+formularioDeleteoperador.addEventListener("submit", (e) => {
   e.preventDefault();
-  let id_san_de  = document.getElementById('id_san_de').value;
+  let id_ope_de = document.getElementById("id_ope_de").value;
   $.ajax({
     type: "POST",
-    url: "./back/update_san.php",
+    url: "./back/update_ope.php",
     data: {
-      id_san: id_san_de,
-      num_san: null,
-      tip_san: null,
-      accion: 'delete'
+      id_ope: id_ope_de,
+      nombre_ope: null,
+      ap1_ope: null,
+      ap2_ope: null,
+      tel_op: null,
+      accion: "delete",
     },
     async: true,
     beforeSend: function () {},
     success: function (response) {
-      console.log(response);
       if (response.resultado == true) {
         Mensaje(response.mensaje, "success", "DELETE");
         cargar_tabla();
@@ -360,31 +399,30 @@ formularioDeleteSanitario.addEventListener("submit", (e) => {
   });
 });
 
-
 function Mensaje(mensaje, color, tipo) {
   switch (tipo) {
     case "ADD":
       document.getElementById(
         "mensajeADD"
       ).innerHTML = `<div class="alert alert-${color} alert-dismissible">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Aviso! </strong> ${mensaje}
-      </div>`;
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Aviso! </strong> ${mensaje}
+        </div>`;
     case "UPDATE":
       document.getElementById(
         "mensajeUP"
       ).innerHTML = `<div class="alert alert-${color} alert-dismissible">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Aviso! </strong> ${mensaje}
-      </div>`;
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Aviso! </strong> ${mensaje}
+        </div>`;
       break;
     case "DELETE":
       document.getElementById(
         "mensajeDE"
       ).innerHTML = `<div class="alert alert-${color} alert-dismissible">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Aviso! </strong> ${mensaje}
-      </div>`;
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          <strong>Aviso! </strong> ${mensaje}
+        </div>`;
       break;
   }
 }

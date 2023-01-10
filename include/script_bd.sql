@@ -19,7 +19,7 @@ create table operadores(
     ap2 varchar(255) default NULL,
     tel varchar(255) default NULL,
     id_usu int(11),
-    fec_cre date, 
+    fec_cre datetime, 
     estatus varchar(255)
 );
 
