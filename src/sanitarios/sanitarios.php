@@ -105,9 +105,9 @@
                             <div class="mb-3">
                                 <label for="tip_san_add" class="form-label">Tipo de sanitario:</label>
                                 <select class="form-select" id="tip_san_add" name="tip_san_add" required>
-                                    <option value="CHICO">CHICO</option>
-                                    <option value="MEDIANO">MEDIANO</option>
-                                    <option value="GRANDE">GRANDE</option>
+                                    <option value="ESTANDAR">ESTANDAR</option>
+                                    <option value="OBRA">OBRA</option>
+                                    <option value="LUJO">LUJO</option>
                                 </select>
                             </div>
                             <div style="display: flex; justify-content: right;">
@@ -144,9 +144,9 @@
                             <div class="mb-3">
                                 <label for="tip_san_up" class="form-label">Tipo de sanitario:</label>
                                 <select class="form-select" id="tip_san_up" name="tip_san_up" required>
-                                    <option value="CHICO">CHICO</option>
-                                    <option value="MEDIANO">MEDIANO</option>
-                                    <option value="GRANDE">GRANDE</option>
+                                    <option value="ESTANDAR">ESTANDAR</option>
+                                    <option value="OBRA">OBRA</option>
+                                    <option value="LUJO">LUJO</option>
                                 </select>
                             </div>
                             <div style="display: flex; justify-content: right;">
@@ -178,7 +178,7 @@
                             <div class="mb-3 mt-3">
                                 <label for="num_san_de" class="form-label">Numero de sanitario:</label>
                                 <input type="hidden" id="id_san_de" name="id_san_de">
-                                <input type="text" class="form-control" id="num_san_de" placeholder="Ingrese el numero del saniatraio" name="num_san_de" required>
+                                <input type="text" class="form-control" id="num_san_de" placeholder="Ingrese el numero del saniatraio" name="num_san_de" required readonly>
                             </div>
                             <div style="display: flex; justify-content: right;">
                                 <button type="submit" class="btn btn-danger">Aceptar <i class="fas fa-trash"></i></button>

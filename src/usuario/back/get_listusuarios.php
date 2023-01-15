@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //header para hacer formato JSON
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM usuarios  WHERE estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT id_usu, nom_usu, pwd_usu, tip_usu, U.estatus, U.fec_cre, nom, ap1, ap2 FROM usuarios U JOIN operadores O ON U.id_ope = O.id_ope WHERE  U.estatus = 'ACTIVO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
     $data = [];
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "tip_usu" => $result->tip_usu,
                 "estatus" => $result->estatus,
                 "fec_cre" => $result->fec_cre,
+                "nom_ope" => $result->nom ." ". $result->ap1 ." ".$result->ap2 
             );
         }
     }

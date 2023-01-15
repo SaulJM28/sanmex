@@ -333,6 +333,7 @@ formularioUpdateSanitario.addEventListener("submit", (e) => {
 formularioDeleteSanitario.addEventListener("submit", (e) => {
   e.preventDefault();
   let id_san_de  = document.getElementById('id_san_de').value;
+  console.log(id_san_de);
   $.ajax({
     type: "POST",
     url: "./back/update_san.php",
@@ -345,8 +346,7 @@ formularioDeleteSanitario.addEventListener("submit", (e) => {
     async: true,
     beforeSend: function () {},
     success: function (response) {
-      console.log(response);
-      if (response.resultado == true) {
+    if (response.resultado == true) {
         Mensaje(response.mensaje, "success", "DELETE");
         cargar_tabla();
       } else {
