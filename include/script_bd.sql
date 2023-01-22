@@ -1,7 +1,6 @@
 create database sanmex;
 use sanmex;
 
-
 create table usuarios(
     id_usu int(11) primary key not null auto_increment,
     nom_usu varchar(255) DEFAULT NULL,
@@ -10,7 +9,6 @@ create table usuarios(
     estatus varchar(255) DEFAULT NULL,
     fec_cre date
 );
-
 
 create table operadores(
     id_ope int(11) primary key not null auto_increment,
@@ -29,4 +27,27 @@ create table sanitarios(
     tip_san varchar(255) default null,
     fec_cre datetime,
     estatus varchar(255) default null
+);
+
+create table clientes(
+    id_clie int(11) primary key not null auto_increment,
+    nom_clie varchar(255) default null,
+    rfc varchar(255) default null,
+    razon_social varchar(255) default null,
+    nom_con varchar(255) default null,
+    num_con varchar(255) default null,
+    fec_cre datetime, 
+    estatus varchar(255) default null,
+);
+
+create table direcciones(
+    id_dire int(11) primary key not null auto_increment,
+    estado
+    municipio
+    colonia
+    calle
+    num_ext
+    num_int
+    cp
+    coordenadas
 );

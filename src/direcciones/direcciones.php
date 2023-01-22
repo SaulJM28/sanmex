@@ -34,13 +34,11 @@
             <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4" style="background-color:  #222059; color: white;">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" style="color: white;" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Dashboard</h2>
+                    <h2 class="fs-2 m-0">DIRECCIONES</h2>
                 </div>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
@@ -57,13 +55,16 @@
                     <div class="col-md-12 mt-3">
                         <div class="card sombra">
                             <div class="card-body">
-                                <h1 style="text-align: center;">Lista de direcciones de clientes </h4>
-                                    <table id="datatable" class="table table-striped  nowrap" style="width:100%;">
+                                <div>
+                                    <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
+                                    <h1 style="text-align: center;">Lista de Direcciones</h1>
+                                </div>
+                                    <table id="tableDirecciones" class="table table-striped  nowrap" style="width:100%;">
                                         <thead style="background-color: #222059; color: white;">
                                             <tr>
-                                                <th>Nombre cliente</th>
                                                 <th></th>
-                                                <th>ACCIONES</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -86,13 +87,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Informacion del sanitario</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Dirección</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Escanea el código QR para obtner información del servicio</p>
-                    <div style="display:flex; justify-content: center;" id="show_qr">
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -100,12 +99,10 @@
         </div>
     </div>
 
-    <script src="static/js/jquery-3.6.3.min.js"></script>
-    <script src="static/js/datatables.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="static/js/Home/home.js"></script>
+    <script src="../../static/js/jquery-3.6.3.min.js"></script>
+    <script src="../../static/js/datatables.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/Home/home.js"></script>
 
 </body>
 

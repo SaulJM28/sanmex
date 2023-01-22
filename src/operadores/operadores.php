@@ -57,7 +57,10 @@
                     <div class="col-md-12 mt-3">
                         <div class="card">
                             <div class="card-body">
-                                <h1 style="text-align: center;">Lista de Operadores</h1>
+                                <div>
+                                    <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
+                                    <h1 style="text-align: center;">Lista de Operadores</h1>
+                                </div>
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
                                     <br>
                                     <br>
@@ -107,19 +110,19 @@
                     <form method="POST" id="formularioADDOperador">
                         <div class="mb-3 mt-3">
                             <label for="nom_ope_add" class="form-label">Nombre de operador:</label>
-                            <input type="text" class="form-control" id="nom_ope_add" placeholder="Ingrese el nombre del operador" name="nom_ope_add" required>
+                            <input type="text" class="form-control" id="nom_ope_add" placeholder="Ingrese el nombre del operador" name="nom_ope_add" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="ap1_ope_add" class="form-label">Primer Apellido:</label>
-                            <input type="text" class="form-control" id="ap1_ope_add" placeholder="Ingrese el primer apellido del operador" name="ap1_ope_add" required>
+                            <input type="text" class="form-control" id="ap1_ope_add" placeholder="Ingrese el primer apellido del operador" name="ap1_ope_add" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="ap2_ope_add" class="form-label">Segundo Apellido:</label>
-                            <input type="text" class="form-control" id="ap2_ope_add" placeholder="Ingrese el segundo apellido del operador" name="ap2_ope_add" required>
+                            <input type="text" class="form-control" id="ap2_ope_add" placeholder="Ingrese el segundo apellido del operador" name="ap2_ope_add" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="tel_add" class="form-label">Teléfono:</label>
-                            <input type="text" class="form-control" id="tel_ope_add" placeholder="Ingrese el teléfono del operador" name="tel_ope_add">
+                            <input type="text" class="form-control" id="tel_ope_add" placeholder="Ingrese el teléfono del operador" name="tel_ope_add" minlength="10" maxlength="10">
                             <small>Campo opcional</small>
                         </div>
                         <div style="display: flex; justify-content: right;">
@@ -151,19 +154,19 @@
                         <div class="mb-3 mt-3">
                             <label for="nombre_up" class="form-label">Nombre:</label>
                             <input type="hidden" id="id_ope_up" name="id_ope_up">
-                            <input type="text" class="form-control" id="nombre_ope_up" placeholder="Ingrese el nombre del operador" name="nombre_ope_up" required>
+                            <input type="text" class="form-control" id="nombre_ope_up" placeholder="Ingrese el nombre del operador" name="nombre_ope_up" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="ap1_ope_up" class="form-label">Primer Apellido:</label>
-                            <input type="text" class="form-control" id="ap1_ope_up" placeholder="Ingrese el primer apellido del operador" name="ap1_ope_up" required>
+                            <input type="text" class="form-control" id="ap1_ope_up" placeholder="Ingrese el primer apellido del operador" name="ap1_ope_up" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="ap2_ope_up" class="form-label">Segundo Apellido:</label>
-                            <input type="text" class="form-control" id="ap2_ope_up" placeholder="Ingrese el segundo apellido del operador" name="ap2_ope_up" required>
+                            <input type="text" class="form-control" id="ap2_ope_up" placeholder="Ingrese el segundo apellido del operador" name="ap2_ope_up" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="tel_op_up" class="form-label">Teléfono:</label>
-                            <input type="text" class="form-control" id="tel_op_up" placeholder="Ingrese el teléfono del operador" name="tel_op_up" required>
+                            <input type="text" class="form-control" id="tel_op_up" placeholder="Ingrese el teléfono del operador" name="tel_op_up" required minlength="10" maxlength="10">
                         </div>
                         <div style="display: flex; justify-content: right;">
                             <button type="submit" class="btn btn-warning">Aceptar <i class="fas fa-edit"></i></button>

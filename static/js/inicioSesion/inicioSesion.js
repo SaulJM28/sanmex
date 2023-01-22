@@ -9,7 +9,29 @@ formularioIniciarSesion.addEventListener("submit", (e) => {
     }else if (pwd == ""){
         Mensaje("Campo <strong>Contraseña</strong>.", "danger")
     }else {
-        Mensaje("Todos los campos estan llenos, esperando repuesta del servidor", "success");
+       // Mensaje("Todos los campos estan llenos, esperando repuesta del servidor", "success");
+        $.ajax({
+            type: "POST",
+            url: "include/login.php",
+            data: {
+                username: nom_usu,
+                password: pwd,
+            },
+            async: true,
+            beforeSend: function () {},
+            success: function (response) {
+                console.log(response);
+            if (response.resultado == true) {
+                Mensaje(response.mensaje, "success");
+                window.location.href = `${response.url}`;
+              } else {
+                Mensaje(response.mensaje, "danger");
+              }
+            },
+            error: function (error) {
+              console.log(error);
+            },
+          });
     }
 });
 

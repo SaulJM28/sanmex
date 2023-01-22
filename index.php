@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="static/css/estilo__login.css" />
     <link rel="stylesheet" href="static/css/normalize.css" />
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color">
     <!-- link de iconos -->
     <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script> 
     <title>sanmex</title>
 
-<!--     <script type="text/javascript">
+<!-- <script type="text/javascript">
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("sw.js");
       }
@@ -79,7 +79,7 @@
           </div>
       </div>
   </section>
-
+      <script src="static/js/jquery-3.6.3.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
    <script src="static/js/inicioSesion/inicioSesion.js"></script>
   </body>

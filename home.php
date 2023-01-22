@@ -168,7 +168,6 @@
     <script src="static/js/datatables.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="static/js/Home/home.js"></script>
 
 </body>

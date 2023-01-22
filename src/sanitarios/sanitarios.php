@@ -57,7 +57,11 @@
                         <div class="col-md-12 mt-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h1 style="text-align: center;">Lista de sanitarios</h1>
+                                    <div>
+                                        <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
+                                        <h1 style="text-align: center;">Lista de sanitarios</h1>
+                                    </div>    
+
                                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
                                         <br>
                                         <br>

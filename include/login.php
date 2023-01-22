@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['tip_usu'] = $result['tip_usu'];
             $_SESSION['estatus'] = $result['estatus'];
             //validamos que tipo de usuario es y cual sera su url
-            if ($result['tip_usu'] == 'ADMIN') {
+            if ($result['tip_usu'] == 'ADMINISTRADOR') {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
