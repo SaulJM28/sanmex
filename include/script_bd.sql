@@ -42,12 +42,12 @@ create table clientes(
 
 create table direcciones(
     id_dire int(11) primary key not null auto_increment,
-    estado
-    municipio
-    colonia
-    calle
-    num_ext
-    num_int
-    cp
-    coordenadas
+    estado text DEFAULT null,
+    municipio text DEFAULT null,
+    colonia text DEFAULT null,
+    calle text DEFAULT null,
+    num_ext text DEFAULT null,
+    num_int text DEFAULT null,
+    cp text DEFAULT null,
+    coordenadas text DEFAULT null
 );

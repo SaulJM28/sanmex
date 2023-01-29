@@ -59,12 +59,21 @@
                                     <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
                                     <h1 style="text-align: center;">Lista de Direcciones</h1>
                                 </div>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
+                                    <br>
+                                    <br>
                                     <table id="tableDirecciones" class="table table-striped  nowrap" style="width:100%;">
                                         <thead style="background-color: #222059; color: white;">
                                             <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                <th>ESTADO</th>
+                                                <th>MUNICIPIO</th>
+                                                <th>COLONIA</th>
+                                                <th>CALLE</th>
+                                                <th>NUM_EXT</th>
+                                                <th>NUM_INT</th>
+                                                <th>CP</th>
+                                                <th>COORDENADAS</th>
+                                                <th>ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,7 +92,7 @@
 
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,7 +100,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
+                <div class="mensajeADD"></div>
+                <form method="POST" id="formularioADDDireccion">
+                        <div class="mb-3 mt-3">
+                            <label for="est_dir_add" class="form-label">Estado:</label>
+                            <input type="text" class="form-control" id="est_dir_add" placeholder="Ingrese el estado" name="est_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="mun_dir_add" class="form-label">Municipio:</label>
+                            <input type="text" class="form-control" id="mun_dir_add" placeholder="Ingrese el municipio" name="mun_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="col_dir_add" class="form-label">Colonia:</label>
+                            <input type="text" class="form-control" id="col_dir_add" placeholder="Ingrese la colonia" name="col_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="call_dir_add" class="form-label">Calle:</label>
+                            <input type="text" class="form-control" id="call_dir_add" placeholder="Ingrese la calle" name="call_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="numext_dir_add" class="form-label">num_ext:</label>
+                            <input type="text" class="form-control" id="numext_dir_add" placeholder="Ingrese el numero ext" name="numext_dir_add" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="numint_dir_add" class="form-label">num_int:</label>
+                            <input type="text" class="form-control" id="numint_dir_add" placeholder="Ingrese el numero int" name="numint_dir_add" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="cp_dir_add" class="form-label">cp:</label>
+                            <input type="text" class="form-control" id="cp_dir_add" placeholder="Codigo Postal" name="cp_dir_add" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="coord_dir_add" class="form-label">coordenadas:</label>
+                            <input type="text" class="form-control" id="coord_dir_add" placeholder="Coordenadas" name="coord_dir_add" required>
+                        </div>
+                        <div style="display: flex; justify-content: right;">
+                            <button type="submit" class="btn btn-primary">Aceptar <i class="fas fa-plus"></i></button>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -102,7 +148,7 @@
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/datatables.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
-    <script src="../../static/js/Home/home.js"></script>
+    <script src="../../static/js/direcciones/direcciones.js"></script>
 
 </body>
 
