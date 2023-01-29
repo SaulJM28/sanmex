@@ -60,25 +60,25 @@
                                     <h1 style="text-align: center;">Lista de Direcciones</h1>
                                 </div>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
-                                    <br>
-                                    <br>
-                                    <table id="tableDirecciones" class="table table-striped  nowrap" style="width:100%;">
-                                        <thead style="background-color: #222059; color: white;">
-                                            <tr>
-                                                <th>ESTADO</th>
-                                                <th>MUNICIPIO</th>
-                                                <th>COLONIA</th>
-                                                <th>CALLE</th>
-                                                <th>NUM_EXT</th>
-                                                <th>NUM_INT</th>
-                                                <th>CP</th>
-                                                <th>COORDENADAS</th>
-                                                <th>ACCIONES</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <br>
+                                <br>
+                                <table id="tableDirecciones" class="table table-striped  nowrap" style="width:100%;">
+                                    <thead style="background-color: #222059; color: white;">
+                                        <tr>
+                                            <th>ESTADO</th>
+                                            <th>MUNICIPIO</th>
+                                            <th>COLONIA</th>
+                                            <th>CALLE</th>
+                                            <th>NUM_EXT</th>
+                                            <th>NUM_INT</th>
+                                            <th>CP</th>
+                                            <th>COORDENADAS</th>
+                                            <th>ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
     </div>
 
 
-
+    <!-- modal para agregar -->
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -100,8 +100,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <div class="mensajeADD"></div>
-                <form method="POST" id="formularioADDDireccion">
+                    <div id="mensajeADD"></div>
+                    <form method="POST" id="formularioADDDireccion">
                         <div class="mb-3 mt-3">
                             <label for="est_dir_add" class="form-label">Estado:</label>
                             <input type="text" class="form-control" id="est_dir_add" placeholder="Ingrese el estado" name="est_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
@@ -144,11 +144,92 @@
             </div>
         </div>
     </div>
+    <!-- modal para editar -->
+    <div class="modal fade" id="ModalUpdate" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Dirección</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeUP"></div>
+                    <form method="POST" id="formularioUPDireccion">
+                        <div class="mb-3 mt-3">
+                            <label for="est_dir_up" class="form-label">Estado:</label>
+                            <input type="hidden" class="form-control" id="id_dire_up" name="id_dire_up">
+                            <input type="text" class="form-control" id="est_dir_up" placeholder="Ingrese el estado" name="est_dir_up" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="mun_dir_up" class="form-label">Municipio:</label>
+                            <input type="text" class="form-control" id="mun_dir_up" placeholder="Ingrese el municipio" name="mun_dir_up" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="col_dir_up" class="form-label">Colonia:</label>
+                            <input type="text" class="form-control" id="col_dir_up" placeholder="Ingrese la colonia" name="col_dir_up" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="call_dir_up" class="form-label">Calle:</label>
+                            <input type="text" class="form-control" id="call_dir_up" placeholder="Ingrese la calle" name="call_dir_up" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="numext_dir_up" class="form-label">num_ext:</label>
+                            <input type="text" class="form-control" id="numext_dir_up" placeholder="Ingrese el numero ext" name="numext_dir_up" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="numint_dir_up" class="form-label">num_int:</label>
+                            <input type="text" class="form-control" id="numint_dir_up" placeholder="Ingrese el numero int" name="numint_dir_up" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="cp_dir_up" class="form-label">cp:</label>
+                            <input type="text" class="form-control" id="cp_dir_up" placeholder="Codigo Postal" name="cp_dir_up" required>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="coord_dir_up" class="form-label">coordenadas:</label>
+                            <input type="text" class="form-control" id="coord_dir_up" placeholder="Coordenadas" name="coord_dir_up" required>
+                        </div>
+                        <div style="display: flex; justify-content: right;">
+                            <button type="submit" class="btn btn-primary">Aceptar <i class="fas fa-plus"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para eliminar registro -->
+    <div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Dirección</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="mensajeDE"></div>
+                    <form method="POST" id="formularioDeleteDireccion">
+                        <input type="hidden" class="form-control" id="id_dire_de" name="id_dire_de">
+                        <div class="mb-3 mt-3">
+                            <p>¿Desea eliminar el registo?</p>
+                        </div>
+                        <div style="display: flex; justify-content: right;">
+                            <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-default">Cancelar <i class="fas fa-times"></i></button>
+                            <button type="submit" class="btn btn-default">Aceptar <i class="fas fa-check"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/datatables.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
     <script src="../../static/js/direcciones/direcciones.js"></script>
+
 
 </body>
 
