@@ -21,6 +21,10 @@ if (!$_POST) {
             exit();
         } else {
             header('Content-Type: application/json; charset=utf-8');
+            include('phpqrcode/qrlib.php');
+            $content = $num_san;
+            $nameQR = 'qr-san-' . $num_san . '-' .$tip_san ;
+            QRcode::png($content, 'QRS/' . $nameQR . '.png', QR_ECLEVEL_L, 10, 2);
             $data = array(
                 "resultado" => true,
                 "mensaje" => "Información actualizada correctamente."

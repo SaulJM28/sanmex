@@ -42,9 +42,10 @@ $(document).ready(function () {
         bSortable: false,
         mRender: function (data, type, row) {
           return `<div class="btn-group" role="group" aria-label="Basic example">
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
+             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" title="Editar" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
+             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" title="Eliminar" onclick="get_info(${data}, 'delete'
              )"><i class="fas fa-trash" ></i></button>
+             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalQR" title="Ver Qr" onclick="QR('${row.num_san}', '${row.tip_san}')" ><i class="fas fa-qrcode"></i></button>
            </div>`;
         },
       },
@@ -159,10 +160,11 @@ function cargar_tabla() {
         bSortable: false,
         mRender: function (data, type, row) {
           return `<div class="btn-group" role="group" aria-label="Basic example">
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-             <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" onclick="get_info(${data}, 'delete'
-             )"><i class="fas fa-trash" ></i></button>
-           </div>`;
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" title="Editar" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" title="Eliminar" onclick="get_info(${data}, 'delete'
+          )"><i class="fas fa-trash" ></i></button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalQR" title="Ver Qr" onclick="QR('${row.num_san}', '${row.tip_san}')" ><i class="fas fa-qrcode"></i></button>
+        </div>`;
         },
       },
     ],
@@ -313,7 +315,6 @@ formularioUpdateSanitario.addEventListener("submit", (e) => {
     async: true,
     beforeSend: function () {},
     success: function (response) {
-      console.log(response.resultado);
       if (response.resultado == true) {
         Mensaje(response.mensaje, "success", "UPDATE");
         cargar_tabla();
@@ -333,7 +334,6 @@ formularioUpdateSanitario.addEventListener("submit", (e) => {
 formularioDeleteSanitario.addEventListener("submit", (e) => {
   e.preventDefault();
   let id_san_de  = document.getElementById('id_san_de').value;
-  console.log(id_san_de);
   $.ajax({
     type: "POST",
     url: "./back/update_san.php",
@@ -360,6 +360,11 @@ formularioDeleteSanitario.addEventListener("submit", (e) => {
   });
 });
 
+const QR = (num, tipo) => {
+    document.getElementById("titleHeaderModalQr").innerHTML = `Codigo QR del sanitario: ${num}` ;
+    document.getElementById("imgQR").innerHTML = `<img class="img-fluid" loading="lazy" src ="./back/QRS/qr-san-${num}-${tipo}.png" >`;
+    document.getElementById("btnDes").innerHTML = `<a target="_blank" class="btn btn-primary" download="qr-san-${num}-${tipo}.png" href = "./back/QRS/qr-san-${num}-${tipo}.png" >Desacargar QR</a>`;
+}
 
 function Mensaje(mensaje, color, tipo) {
   switch (tipo) {

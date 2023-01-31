@@ -196,6 +196,27 @@
                 </div>
             </div>
         </div>
+        <!-- MODAL PARA VER EL CODIGO QR -->
+        <div class="modal fade" id="ModalQR">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="titleHeaderModalQr"></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div id="imgQR" style="display: flex;  justify-content: center;"></div>
+                        <div id="btnDes" style="display: flex;  justify-content: center;"></div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
