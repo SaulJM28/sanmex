@@ -136,6 +136,20 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-md-4 mt-2 ">
+                        <a href="./src/servicios/servicios.php" class="link__card">
+                            <div class="card sombra">
+                                <div class="card-body">
+                                    <img src="static/img/iconos/servicio.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                    <h4 class="card-title">Generar Servicio</h4>
+                                    <p class="card-text">Módulo para generar un servicio</p>
+                                    <div style="display: flex; justify-content: right;">
+                                        <a href="./src/servicios/servicios.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -143,27 +157,6 @@
     </div>
     <!-- /#page-content-wrapper -->
     </div>
-
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Informacion del sanitario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Escanea el código QR para obtner información del servicio</p>
-                    <div style="display:flex; justify-content: center;" id="show_qr">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="static/js/jquery-3.6.3.min.js"></script>
     <script src="static/js/datatables.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>

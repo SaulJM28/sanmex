@@ -10,7 +10,7 @@ if (!$_POST) {
   $hoy = date('Y-m-d h:i:s');
 
   include("../../../include/conexion.php");
-  $sql = " INSERT INTO `sanitarios` (`id_san`, `num_san`, `tip_san`, `fec_cre`, `estatus`) VALUES (NULL, '$num_san', '$tip_san', '$hoy', 'ACTIVO');";
+  $sql = " INSERT INTO `sanitarios` (`id_san`, `num_san`, `tip_san`, `fec_cre`, `estatus`) VALUES (NULL, '$num_san', '$tip_san', '$hoy', 'DISPONIBLE');";
   $resultado = mysqli_query($enlace, $sql);
 
   if (!$resultado) {

@@ -6,10 +6,11 @@ $dbConn =  connect($db);
 /*
   listar todos los posts/gets o solo uno
  */
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_ser = $_POST['id_ser'];
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM sanitarios WHERE estatus <> 'INACTIVO';");
+    $sql = $dbConn->prepare("SELECT SA.num_san, tip_san, SE.num_san as sans_rent FROM `servicio_sani` SEA INNER JOIN sanitarios SA ON SEA.id_san = SA.id_san INNER JOIN servicio SE ON SEA.id_ser = SE.id_ser WHERE SEA.id_ser = '$id_ser'");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -19,16 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         foreach ($results as $result) {
             //datos
             $data[] = array(
-                "id_san" => $result->id_san,
                 "num_san" => $result->num_san,
                 "tip_san" => $result->tip_san,
-                "fec_cre" => $result->fec_cre,
-                "estatus" => $result->estatus
+                "sans_rent" => $result->sans_rent,
             );
         }
     }
-    $objeto = array('data' => $data);
-    $json = json_encode($objeto, JSON_UNESCAPED_UNICODE);
+    $json = json_encode($data, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
 } 

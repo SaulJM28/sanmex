@@ -1,7 +1,7 @@
 <?php
 /* conexion memo cliente */
+/* $enlace = mysqli_connect("localhost", "u226254042_sa", "s4NM3X_2023", "u226254042_sanmex"); */
 $enlace = mysqli_connect("localhost", "root", "", "sanmex");
-
 
 if (!$enlace) {
     echo "Error: No se pudo conectar a MySQL." . PHP_EOL;

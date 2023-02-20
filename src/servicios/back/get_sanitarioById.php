@@ -6,29 +6,32 @@ $dbConn =  connect($db);
 /*
   listar todos los posts/gets o solo uno
  */
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $num_san = $_POST['num_san'];
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM sanitarios WHERE estatus <> 'INACTIVO';");
+    $sql = $dbConn->prepare("SELECT id_san, num_san, tip_san FROM sanitarios WHERE num_san = '$num_san'  AND  estatus = 'DISPONIBLE';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
-
     $data = [];
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
             //datos
-            $data[] = array(
+            $data = array(
+                "resultado" => true,
                 "id_san" => $result->id_san,
                 "num_san" => $result->num_san,
                 "tip_san" => $result->tip_san,
-                "fec_cre" => $result->fec_cre,
-                "estatus" => $result->estatus
             );
         }
+    } else {
+        $data = array(
+            "resultado" => false,
+            "mensaje" => "No se pudo encontrar el sanitario",
+        );
     }
-    $objeto = array('data' => $data);
-    $json = json_encode($objeto, JSON_UNESCAPED_UNICODE);
+    $json = json_encode($data, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
 } 

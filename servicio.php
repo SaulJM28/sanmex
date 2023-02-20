@@ -1,198 +1,146 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">  
-    <title>QR Code Scanner or Reader | Codequs</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome CDN Link for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  </head>
-  <style>
-    /* Import Google Font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 0 10px;
-  background: #E3F2FD;
-}
-.wrapper{
-  height: 270px;
-  width: 420px;
-  border-radius: 7px;
-  background: #0B85FF;
-  padding: 30px 30px 35px;
-  transition: height 0.2s ease;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.wrapper.active{
-  height: 525px;
-}
-.wrapper form{
-  height: 210px;
-  display: flex;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  border-radius: 7px;
-  background: #fff;
-  align-items: center;
-  justify-content: center;
-  transition: height 0.2s ease;
-}
-.wrapper.active form{
-  height: 225px;
-  pointer-events: none;
-}
-form img{
-  display: none;
-  max-width: 148px;
-}
-.wrapper.active form img{
-  display: block;
-}
-.wrapper.active form .content{
-  display: none;
-}
-form .content i{
-  color: #0B85FF;
-  font-size: 55px;
-}
-form .content p{
-  color: #0B85FF;
-  margin-top: 15px;
-  font-size: 16px;
-}
-.wrapper .details{
-  opacity: 0;
-  margin-top: 25px;
-  pointer-events: none;
-}
-.wrapper.active .details{
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.5s 0.05s ease;
-}
-.details textarea{
-  width: 100%;
-  height: 128px;
-  outline: none;
-  resize: none;
-  color: #fff;
-  font-size: 18px;
-  background: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  border: 1px solid #fff;
-}
-textarea::-webkit-scrollbar{
-  width: 0px;
-}
-textarea:hover::-webkit-scrollbar{
-  width: 5px;
-}
-textarea:hover::-webkit-scrollbar-track{
-  background: none;
-}
-textarea:hover::-webkit-scrollbar-thumb{
-  background: #fff;
-  border-radius: 8px;
-}
-.details .buttons{
-  display: flex;
-  margin-top: 20px;
-  align-items: center;
-  justify-content: space-between;
-}
-.buttons button{
-  height: 55px;
-  outline: none;
-  border: none;
-  font-weight: 500;
-  font-size: 16px;
-  cursor: pointer;
-  color: #0B85FF;
-  border-radius: 5px;
-  background: #fff;
-  transition: transform 0.3s ease;
-  width: calc(100% / 2 - 10px);
-}
-.buttons button:active{
-  transform: scale(0.95);
-}
-@media (max-width: 450px) {
-  .wrapper{
-    padding: 25px;
-    height: 260px;
-  }
-  .wrapper.active{
-    height: 520px;
-  }
-}
-  </style>
-  <body>
-    <div class="wrapper">
-      <form action="#">
-        <input type="file" hidden>
-        <img src="#" alt="qr-code">
-        <div class="content">
-          <i class="fas fa-cloud-upload"></i>
-          <p>Upload QR Code to Read</p>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="static/css/style.css" />
+    <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
+    <title>SANMEX</title>
+</head>
+<style>
+    .ocultar {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="fondo__sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
+            </div>
+            <div class="list-group list-group-flush my-3">
+                <a href="./src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action bg-transparent second-text active">
+                    <i class="fas fa-toilet me-2"></i>Sanitarios</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-project-diagram me-2"></i>Operadores</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-dollar me-2"></i>Vendedores</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-users me-2"></i>Clientes</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-chart-line me-2"></i>Reportes</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+            </div>
         </div>
-      </form>
-      <div class="details">
-        <textarea spellcheck="false" disabled></textarea>
-        <div class="buttons">
-          <button class="close">Close</button>
-          <button class="copy">Copy Text</button>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4" style="background-color:  #222059; color: white;">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" style="color: white;" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Servicio</h2>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>Usuario
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container-fluid" style="margin-top: 80px; padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style="text-align: center;">Realizar Servicio</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="qr-reader" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Información del cliente.</h5>
+                                <p class="card-text" id="nom_clieView"></p>
+                                <p class="card-text" id="raz_socView"></p>
+                                <p class="card-text" id="rfc_view"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Dirección</h5>
+                                <p class="card-text" id="estadoView"></p>
+                                <p class="card-text" id="municipioView"></p>
+                                <p class="card-text" id="coloniaView"></p>
+                                <p class="card-text" id="calleView"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Informacion del sanitario -->
+                <br>
+                <div class="row g-3">
+                    <div class="col-md-12 mt-2">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Informacion del sanitario</h5>
+                                <p class="card-text" id="num_sanView"></p>
+                                <p class="card-text" id="tip_sanView"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row g-3">
+                    <div class="col-md-12 mt-2">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Realizar Servicio</h5>
+                                <form id="formularioADDSerBit">
+                                        <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="ejemplo">
+                                        <input type="hidden" class="form-control" id="servicioADD" name="servicioADD">
+                                        <input type="hidden" class="form-control" id="clienteADD" name="clienteADD">
+                                        <input type="hidden" class="form-control" id="sanitarioADD" name="sanitarioADD">
+                                        <input type="hidden" class="form-control" id="coordADD" name="coordADD">
+                                    <div class="mb-3">
+                                        <label for="comentarioADD" class="form-label">Comentario: </label>
+                                        <textarea type="text" class="form-control" id="comentarioADD" name="comentarioADD"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="evidenciaADD" class="form-label">Evidencia: </label>
+                                        <input type="file" capture="camera" class="form-control" id="evidenciaADD" name="evidenciaADD">
+                                    </div>
+                                    <div style="display: flex; justify-content: right;">
+                                        <button type="submit" class="btn btn-primary">Realizar Servicio</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <script>
-        
-const wrapper = document.querySelector(".wrapper"),
-form = document.querySelector("form"),
-fileInp = form.querySelector("input"),
-infoText = form.querySelector("p"),
-closeBtn = document.querySelector(".close"),
-copyBtn = document.querySelector(".copy");
-function fetchRequest(file, formData) {
-    infoText.innerText = "Scanning QR Code...";
-    fetch("http://api.qrserver.com/v1/read-qr-code/", {
-        method: 'POST', body: formData
-    }).then(res => res.json()).then(result => {
-        result = result[0].symbol[0].data;
-        infoText.innerText = result ? "Upload QR Code to Scan" : "Couldn't scan QR Code";
-        if(!result) return;
-        document.querySelector("textarea").innerText = result;
-        form.querySelector("img").src = URL.createObjectURL(file);
-        wrapper.classList.add("active");
-    }).catch(() => {
-        infoText.innerText = "Couldn't scan QR Code";
-    });
-}
-fileInp.addEventListener("change", async e => {
-    let file = e.target.files[0];
-    if(!file) return;
-    let formData = new FormData();
-    formData.append('file', file);
-    fetchRequest(file, formData);
-});
-copyBtn.addEventListener("click", () => {
-    let text = document.querySelector("textarea").textContent;
-    navigator.clipboard.writeText(text);
-});
-form.addEventListener("click", () => fileInp.click());
-closeBtn.addEventListener("click", () => wrapper.classList.remove("active"));
-    </script>
-  </body>
+    <script src="static/js/jquery-3.6.3.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+    <script src="static/js/servicio/servicio.js"></script>
+</body>
+
 </html>

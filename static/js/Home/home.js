@@ -226,7 +226,6 @@ chart.render();
 
 /* GENERADOR DE CODIGO QR */
 
-
 function generateQRCode(id) {
       let qrcodeContainer2 = document.getElementById("show_qr");
       qrcodeContainer2.innerHTML = "";
