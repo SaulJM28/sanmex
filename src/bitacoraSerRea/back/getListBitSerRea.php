@@ -9,7 +9,7 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM clientes WHERE estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT * FROM bitacora_servicio");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -19,15 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         foreach ($results as $result) {
             //datos
             $data[] = array(
-                "id_clie" => $result->id_clie,
-                "nom_clie" => $result->nom_clie,
-                "tel_clie" => $result->tel_clie,
-                "rfc" => $result->rfc,
-                "razon_social" => $result->razon_social,
-                "nom_con" => $result->nom_con,
-                "num_con" => $result->num_con,
-                "fec_cre" => $result->fec_cre,
-                "estatus" => $result->estatus
+                "id_bit" => $result->id_bit,
+                "servicio" => $result->servicio,
+                "cliente" => $result->cliente,
+                "sanitario" => $result->sanitario,
+                "operador" => $result->operador,
+                "fecha" => $result->fecha,
+                "evidencia" => $result->evidencia,
+                "comentario" => $result->comentario,
+                "estatus" => $result->estatus,
             );
         }
     }
@@ -39,3 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
 header("HTTP/1.1 400 Bad Request");
+
+

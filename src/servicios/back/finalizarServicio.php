@@ -2,22 +2,22 @@
 if (!$_POST) {
     echo "Don't exist method POST";
 } else {
-    $id_san = $_POST['id_san'];
+    $id_ser = $_POST['id_ser'];
     include("../../../include/conexion.php");
     /* in this we need to do the update in the table sanitarios */
-    $queryUpdate = "DELETE FROM servicio_sani WHERE id_san = '$id_san'";
+    $queryUpdate = "UPDATE servicio_sani set estatus = 'FINALIZADO' WHERE id_ser = '$id_ser'";
     $resultUpdate = mysqli_query($enlace, $queryUpdate);
     if (!$resultUpdate) {
         echo "Error: " . $queryUpdate . "<br>" . mysqli_error($enlace);
         $data = array(
             "resultado" => false,
-            "mensaje" => "No se pudo remover el sanitario",
+            "mensaje" => "Ocurrio un error",
             "url" => "../sanitarios.php"
         );
     } else {
         $data = array(
             "resultado" => true,
-            "mensaje" => "Sanitario removido correctamente",
+            "mensaje" => "Servicio finalizado correctamente",
             "url" => "../sanitarios.php"
         );
     }

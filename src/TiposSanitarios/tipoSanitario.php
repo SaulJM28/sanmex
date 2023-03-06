@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -111,14 +111,9 @@
                             <div class="mb-3">
                                 <label for="tip_san_add" class="form-label">Tipo de sanitario:</label>
                                 <select class="form-select" id="tip_san_add" name="tip_san_add" required>
-                                    <option value="ESTANDAR ROJO OBRA">ESTANDAR ROJO OBRA</option>
-                                    <option value="ESTANDAR ROJO EVENTO">ESTANDAR ROJO EVENTO</option>
-                                    <option value="ESTANDAR GRIS OBRA">ESTANDAR GRIS OBRA</option>
-                                    <option value="LUJO ROJO LAVAMANOS">LUJO ROJO LAVAMANOS</option>
-                                    <option value="LUJO GRIS LAVAMANOS WC FLUSH">LUJO GRIS LAVAMANOS WC FLUSH</option>
-                                    <option value="DISCAPACITADOS">DISCAPACITADOS</option>
-                                    <option value="LAVAMANOS OBRA">LAVAMANOS OBRA</option>
-                                    <option value="LAVAMANOS EVENTO">LAVAMANOS EVENTO</option>
+                                    <option value="ESTANDAR">ESTANDAR</option>
+                                    <option value="OBRA">OBRA</option>
+                                    <option value="LUJO">LUJO</option>
                                 </select>
                             </div>
                             <div style="display: flex; justify-content: right;">
@@ -155,14 +150,9 @@
                             <div class="mb-3">
                                 <label for="tip_san_up" class="form-label">Tipo de sanitario:</label>
                                 <select class="form-select" id="tip_san_up" name="tip_san_up" required>
-                                    <option value="ESTANDAR ROJO OBRA">ESTANDAR ROJO OBRA</option>
-                                    <option value="ESTANDAR ROJO EVENTO">ESTANDAR ROJO EVENTO</option>
-                                    <option value="ESTANDAR GRIS OBRA">ESTANDAR GRIS OBRA</option>
-                                    <option value="LUJO ROJO LAVAMANOS">LUJO ROJO LAVAMANOS</option>
-                                    <option value="LUJO GRIS LAVAMANOS WC FLUSH">LUJO GRIS LAVAMANOS WC FLUSH</option>
-                                    <option value="DISCAPACITADOS">DISCAPACITADOS</option>
-                                    <option value="LAVAMANOS OBRA">LAVAMANOS OBRA</option>
-                                    <option value="LAVAMANOS EVENTO">LAVAMANOS EVENTO</option>
+                                    <option value="ESTANDAR">ESTANDAR</option>
+                                    <option value="OBRA">OBRA</option>
+                                    <option value="LUJO">LUJO</option>
                                 </select>
                             </div>
                             <div style="display: flex; justify-content: right;">

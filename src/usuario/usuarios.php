@@ -22,17 +22,14 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-toilet me-2"></i>operadors</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Operadores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-dollar me-2"></i>Vendedores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-users me-2"></i>Clientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>Reportes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="../../src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action second-text fw-bold ">Sanitarios</a>
+                <a href="../../src/operadores/operadores.php" class="list-group-item list-group-item-action second-text fw-bold">Operadores</a>
+                <a href="../../src/usuario/usuarios.php" class="list-group-item list-group-item-action second-text fw-bold active">Usuarios</a>
+                <a href="../../src/direcciones/direcciones.php" class="list-group-item list-group-item-action second-text fw-bold ">Direcciones</a>
+                <a href="../../src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold">Clientes</a>
+                <a href="../../src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
+                <a href="../../src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
+                <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
@@ -170,6 +167,7 @@
                             <select id="tip_usu_add" name="tip_usu_add" class="form-select" required>
                                 <option value="" selected>seleccione una opcion</option>
                                 <option value="OPERADOR">Operador</option>
+                                <option value="ALMACENISTA">Almacenista</option>
                                 <option value="ADMINISTRADOR">Administrador</option>
                             </select>
                         </div>
@@ -220,6 +218,7 @@
                             <select id="tip_usu_up" name="tip_usu_up" class="form-select" required>
                                 <option value="" selected>seleccione una opcion</option>
                                 <option value="OPERADOR">Operador</option>
+                                <option value="ALMACENISTA">Almacenista</option>
                                 <option value="ADMINISTRADOR">Administrador</option>
                             </select>
                         </div>

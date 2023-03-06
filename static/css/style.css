@@ -69,12 +69,13 @@ body {
 }
 
 .list-group-item {
+  background-color: #222059;
   border: none;
   padding: 20px 30px;
 }
 
 .list-group-item.active {
-  background-color: transparent;
+  background-color: #f21d44;;
   color: var(--main-text-color);
   font-weight: bold;
   border: none;

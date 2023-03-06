@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR"):
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,6 +75,12 @@
                                     <a href="../../home.php" class="btn btn-default"><i
                                             class="fas fa-arrow-left"></i></a>
                                     <h1 style="text-align: center;">Detalles del Servicio</h1>
+                                </div>
+                                <br>
+                                <div class="row g-3">
+                                    <div class="col-md-12 mt-2" style = "display: flex; justify-content: right;">
+                                        <button class="btn btn-warning" onclick="finalizarServ()">Finalizar servicio <i class="fas fa-check"></i></button>
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="row g-3">
@@ -298,3 +309,8 @@
 </body>
 
 </html>
+<?php
+else:
+    header('location: ../../include/logout.php');
+endif;
+?>

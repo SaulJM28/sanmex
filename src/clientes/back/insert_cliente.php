@@ -4,10 +4,12 @@ if (!$_POST) {
 } else {
     header('Content-Type: application/json; charset=utf-8');
   $nom_clie_add  = $_POST['nom_clie_add'];
+  $tel_clie_add = $_POST['tel_clie_add'];
   $rfc_clie_add = $_POST['rfc_clie_add'];
   $razsoc_clie_add  = $_POST['razsoc_clie_add'];
   $nomcon_clie_add = $_POST['nomcon_clie_add'];
   $numtel_clie_add = $_POST['numtel_clie_add'];
+  
 
   date_default_timezone_set('america/mexico_city');
   $hoy = date('Y-m-d h:i:s');
@@ -16,6 +18,7 @@ include("../../../include/conexion.php");
   $sql = " INSERT INTO `clientes` (
     `id_clie`, 
     `nom_clie`, 
+    `tel_clie`,
     `rfc`, 
     `razon_social`, 
     `nom_con`, 
@@ -24,6 +27,7 @@ include("../../../include/conexion.php");
     `estatus`) VALUES (
         NULL, 
         '$nom_clie_add', 
+        '$tel_clie_add',
         '$rfc_clie_add', 
         '$razsoc_clie_add', 
         '$nomcon_clie_add', 

@@ -4,6 +4,7 @@ if (!$_POST) {
 } else {
     $id = $_POST['id'];
     $nom_clie = $_POST['nom_clie'];
+    $tel_clie = $_POST['tel_clie'];
     $rfc_clie = $_POST['rfc_clie'];
     $razsoc_clie = $_POST['razsoc_clie'];
     $nomcon_clie = $_POST['nomcon_clie'];
@@ -14,6 +15,7 @@ if (!$_POST) {
         include("../../../include/conexion.php");
         $sql = "UPDATE clientes SET 
         nom_clie = '$nom_clie',
+        tel_clie = '$tel_clie',
         rfc = '$rfc_clie', 
         razon_social = '$razsoc_clie', 
         nom_con = '$nomcon_clie',  

@@ -1,3 +1,7 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR"):
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +59,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Usuario
+                                <i class="fas fa-user me-2"></i> <?php echo $_SESSION['nom_usu']; ?>
                             </a>
                         </li>
                     </ul>
@@ -71,10 +75,11 @@
                                     <a href="../../home.php" class="btn btn-default"><i
                                             class="fas fa-arrow-left"></i></a>
                                     <h1 style="text-align: center;">Crear Servicio</h1>
+                                    <p class = "text-center">Campos obligatorios<strong style="color: red;">*</strong></p>
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-md-12 mt-2">
-                                        <label>Cliente</label>
+                                        <label>Cliente<strong style="color: red;">*</strong></label>
                                         <input type="text" class="form-control" onkeyup="buscador()" id="key" name="key"
                                             placeholder="Buscar cliente por RFC o Razon Social">
                                         <small>De no encontrar el cliente, registralo <a
@@ -86,7 +91,7 @@
                                 <br>
                                 <div class="row g-3">
                                     <div class="col-md-12 mt-2">
-                                        <label>Direccion</label>
+                                        <label>Direccion<strong style="color: red;">*</strong></label>
                                         <input type="text" class="form-control" onkeyup="buscador_dire()" id="key_dire"
                                             name="key_dire" placeholder="Buscar direccion por Colonia o Calle">
                                         <small>De no encontrar la direccion, registrala <a
@@ -96,14 +101,14 @@
                                     </div>
                                 </div>
                                 <div class="row g-3">
-                                    <h2>Datos del cliente</h2>
+                                    <h2 class = "text-center">Datos del cliente</h2>
                                     <div class="col-md-12">
                                         <ul class="list-group" id="infoClient">
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="row g-3">
-                                    <h2>Datos de la direccion</h2>
+                                    <h2 class = "text-center">Datos de la direccion</h2>
                                     <div class="col-md-12">
                                         <ul class="list-group" id="infoDire">
                                         </ul>
@@ -111,26 +116,26 @@
                                 </div>
                                 <form class="row g-3" id="formularioADDServicio" method="post">
                                     <div id='mensaje'></div>
-                                    <h2>Datos del servicio</h2>
+                                    <h2 class = "text-center">Datos del servicio</h2>
                                     <input type="hidden"  class="form-control" id="id_clie">
                                     <input type="hidden"  class="form-control" id="id_dire">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="num_san">Numero de Sanitarios</label>
+                                            <label for="num_san">Numero de Sanitarios <strong style="color: red;">*</strong></label>
                                             <input type="number" step="any" class="form-control" id="num_san"
                                                 placeholder="Ingrese el numero de sanitarios a rentar" onChange="calcularTotal()">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="cost_unit">Costo Unitario</label>
+                                            <label for="cost_unit">Costo Unitario <strong style="color: red;">*</strong></label>
                                             <input type="number" step="any" class="form-control" id="cost_unit"
                                                 placeholder="Ingrese el unitario por sanitario" onChange="calcularTotal()">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="cost_tot">Costo Total</label>
+                                            <label for="cost_tot">Costo Total <strong style="color: red;">*</strong></label>
                                             <input type="number" step="any" class="form-control" id="cost_tot"
                                                 placeholder="Ingrese el costo total" readonly>
                                             <small>El costo total se calcula al ingresar el numero de sanitarios y el
@@ -139,16 +144,17 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="tip_pag">Tipo de pago</label>
+                                            <label for="tip_pag">Tipo de pago <strong style="color: red;">*</strong></label>
                                             <select class="form-select" name="tip_pag" id="tip_pag">
                                                 <option value="" selected>Seleccione un tipo de pago</option>
                                                 <option value="EFECTIVO">EFECTIVO</option>
+                                                <option value="TRANSFERENCIA">TRANSFERENCIA</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="dia_de_pag">Dia en que se realizaran los pagos</label>
+                                            <label for="dia_de_pag">Dia en que se realizaran los pagos <strong style="color: red;">*</strong></label>
                                             <select class="form-select" name="dia_de_pag" id="dia_de_pag">
                                                 <option value="" selected>Seleccione un dia</option>
                                                 <option value="01">1 </option>
@@ -188,7 +194,7 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="dia_ser">Dias que se realizara el servicio</label>
+                                            <label for="dia_ser">Dias que se realizara el servicio <strong style="color: red;">*</strong></label>
                                             <br>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" id="CheckboxL"
@@ -227,6 +233,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <h2 class = "text-center">Consideraciones</h2>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="hora_aten">Horario y fecha de atencion</label>
+                                            <input type="text" name = "hora_aten" id="hora_aten" class = "form-control" placeholder="Ingrese el horar y fecha de atencion en el que se puede brindar el servico">
+                                            <small>Ejemplo: de lunes a viernes de 8:00 am a 5:00 pm</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="obser">Observaciones</label>
+                                            <textarea class = "form-control" name="obser" id="obser" row = "1" placeholder="Ingrese observaciones a tomar en cuenta para realizar el servicio, como; accesos, equipo necesario, etc..." ></textarea>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12" style="display: flex; justify-content: right;">
                                         <button type="submit" class="btn btn-primary">Aceptar</button>
                                     </div>
@@ -237,13 +257,17 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <script src="../../static/js/servicio/create_servicio.js"></script>
 </body>
-
 </html>
+<?php
+else:
+    header('location: ../../include/logout.php');
+endif;
+?>

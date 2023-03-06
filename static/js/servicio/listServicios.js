@@ -38,11 +38,15 @@ $(document).ready(function () {
         },
       },
       {
-        data: "cost_tot",
+        data: "cost_unit",
       },
       {
         data: "num_san",
       },
+      {
+        data: "cost_tot",
+      },
+  
       {
         data: "id_ser",
         bSortable: false,

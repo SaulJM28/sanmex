@@ -11,17 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json; charset=utf-8');
     header("HTTP/1.1 200 OK");
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM sanitarios  WHERE num_san = '$id_san' AND estatus = 'EN SERVICIO';");
+    $sql = $dbConn->prepare("SELECT * FROM sanitarios SA INNER JOIN servicio_sani SEA ON SEA.id_san = SA.id_san WHERE num_san = '$id_san' AND SEA.estatus = 'ACTIVO' AND SA.estatus = 'EN SERVICIO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
     $data = [];
-    if ($sql->rowCount() > 0) {
-        
+    if ($sql->rowCount() == 1) {
         foreach ($results as $result) {
             $num_san = $result->num_san;
         }
-
         $data = array(
             "resultado" => true,
             "mensaje" => 'El sanitario '.$num_san.'  ya esta en servicio'

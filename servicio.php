@@ -1,3 +1,8 @@
+
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +55,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Usuario
+                                <i class="fas fa-user me-2"></i><?php  echo $_SESSION['nom_usu']; ?>
                             </a>
                         </li>
                     </ul>
@@ -58,6 +63,12 @@
             </nav>
 
             <div class="container-fluid" style="margin-top: 80px; padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align: left;"><a href="home_ope.php">Inicio</a>/<a href="servicio.php">Realizar Servicio</a></p>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <h1 style="text-align: center;">Realizar Servicio</h1>
@@ -111,15 +122,15 @@
                         <div class="card" style="width: 100%;">
                             <div class="card-body">
                                 <h5 class="card-title">Realizar Servicio</h5>
-                                <form id="formularioADDSerBit">
-                                        <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="ejemplo">
+                                <form  action="./include/insert_bit.php" id="formularioADDSerBit" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="<?php  echo $_SESSION['nombre']; ?>">
                                         <input type="hidden" class="form-control" id="servicioADD" name="servicioADD">
                                         <input type="hidden" class="form-control" id="clienteADD" name="clienteADD">
                                         <input type="hidden" class="form-control" id="sanitarioADD" name="sanitarioADD">
                                         <input type="hidden" class="form-control" id="coordADD" name="coordADD">
                                     <div class="mb-3">
                                         <label for="comentarioADD" class="form-label">Comentario: </label>
-                                        <textarea type="text" class="form-control" id="comentarioADD" name="comentarioADD"></textarea>
+                                        <textarea type="text" class="form-control" id="comentarioADD" name="comentarioADD" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="evidenciaADD" class="form-label">Evidencia: </label>
@@ -142,5 +153,9 @@
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
     <script src="static/js/servicio/servicio.js"></script>
 </body>
-
 </html>
+<?php 
+else : 
+    header('location: ../../include/logout.php'); 
+endif;
+?>

@@ -1,18 +1,18 @@
 var el = document.getElementById("wrapper");
 var toggleButton = document.getElementById("menu-toggle");
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get('id_ser')
+
 if(navigator.geolocation){
     var success = function(position){
     let coordenadas = `${position.coords.latitude}, ${position.coords.longitude}`; 
-
-    
     }
     navigator.geolocation.getCurrentPosition(success, function(msg){
     console.error( msg );
     });
     }
-
-
 toggleButton.onclick = function() {
     el.classList.toggle("toggled");
 };
@@ -23,6 +23,7 @@ function onScanSuccess(decodedText, decodedResult) {
         url: "./include/getInfoServicio.php",
         data: {
           num_san: decodedText,
+          id_ser: id
         },
         async: true,
         beforeSend: function () {},
@@ -46,7 +47,6 @@ function onScanSuccess(decodedText, decodedResult) {
                   document.getElementById("servicioADD").value = `${response.razon_social}-${response.colonia}-${response.calle}`;
                   document.getElementById("clienteADD").value = `${response.nom_clie}`;
                   document.getElementById("sanitarioADD").value = `${response.num_san}`;
-
             }else if(response.resultado == false){
                 Swal.fire({
                     title: 'Alerta',
@@ -70,8 +70,22 @@ html5QrcodeScanner.render(onScanSuccess);
 
 formularioADDSerBit.addEventListener("submit", (e) => {
     e.preventDefault();
+    let operadorADD = document.getElementById("operadorADD").value;
+    let servicioADD = document.getElementById("servicioADD").value; 
+    let clienteADD = document.getElementById("clienteADD").value; 
+    let sanitarioADD = document.getElementById("sanitarioADD").value; 
+    let coordADD = document.getElementById("coordADD").value;
+    let comentarioADD = document.getElementById("comentarioADD").value;
+    let evidenciaADD = document.getElementById("evidenciaADD").value;
     
-
-
-
+    if(sanitarioADD.length == 0){
+        Swal.fire({
+            title: 'Alerta',
+            text: 'Para continuar escanea el QR del sanitario',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+    }else{
+        formularioADDSerBit.submit();
+    }
 });

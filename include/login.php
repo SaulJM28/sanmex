@@ -24,9 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
     } else {
         if ($password == $result['pwd_usu']) {
+            $queryGetInfoUsu = $dbConn->prepare("SELECT nom, ap1, ap2 FROM usuarios USU INNER JOIN operadores OP ON USU.id_ope = OP.id_ope WHERE nom_usu = '$username'");
+            $queryGetInfoUsu->execute();
+        
+            $resultResponse = $queryGetInfoUsu->fetch(PDO::FETCH_ASSOC);
+                if(!$resultResponse){
+                    echo "Error, no se pudo obtner el nombre";
+                }else{
+                    $nombre = $resultResponse['nom'] . " " .$resultResponse['ap1'] . " " .$resultResponse['ap2']; 
+                }
+
             $_SESSION['nom_usu'] = $result['nom_usu'];
             $_SESSION['tip_usu'] = $result['tip_usu'];
             $_SESSION['estatus'] = $result['estatus'];
+            $_SESSION['nombre'] = $nombre;
             //validamos que tipo de usuario es y cual sera su url
             if ($result['tip_usu'] == 'ADMINISTRADOR') {
                 $data = array(

@@ -96,18 +96,18 @@ function buscador_dire() {
 
 function infoClient(id, nomClie, rfc, razSoc, nom_con, num_con) {
     document.getElementById('infoClient').innerHTML = `
-    <li class="list-group-item"><strong>Nombre:</strong> ${nomClie}. <strong>RFC:</strong> ${rfc}</li>
-    <li class="list-group-item"><strong>Razon Social:</strong> ${razSoc}. <strong>Nombre Contacto:</strong> ${nom_con}</li>
-    <li class="list-group-item"><strong>Numero Contacto:</strong> ${num_con}</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Nombre:</strong> ${nomClie}. <strong>RFC:</strong> ${rfc}</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Razon Social:</strong> ${razSoc}. <strong>Nombre Contacto:</strong> ${nom_con}</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Numero Contacto:</strong> ${num_con}</li>
     `;
     document.getElementById('id_clie').value = id;
 }
 
 function infoDire(id, estado, municipio, colonia, calle, num_ext, num_int, cp){
     document.getElementById('infoDire').innerHTML = `
-    <li class="list-group-item"><strong>Estado:</strong> ${estado}. <strong>Municipio:</strong> ${municipio}.</li>
-    <li class="list-group-item"><strong>Colonia:</strong> ${colonia}. <strong>Calle:</strong> ${calle}.</li>
-    <li class="list-group-item"><strong>Núm Ext:</strong> ${num_ext}. <strong>Núm Int:</strong> ${num_int}. <strong>Código Postal:</strong> ${cp}</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Estado:</strong> ${estado}. <strong>Municipio:</strong> ${municipio}.</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Colonia:</strong> ${colonia}. <strong>Calle:</strong> ${calle}.</li>
+    <li class="list-group-item" style = "background-color: white;"><strong>Núm Ext:</strong> ${num_ext}. <strong>Núm Int:</strong> ${num_int}. <strong>Código Postal:</strong> ${cp}</li>
     `;
     document.getElementById('id_dire').value = id;
 }
@@ -129,14 +129,9 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
     let CheckboxV = document.getElementById('CheckboxV').checked;
     let CheckboxS = document.getElementById('CheckboxS').checked;
     let CheckboxD = document.getElementById('CheckboxD').checked;
-
-    let CheckboxLValue = document.getElementById('CheckboxL').value;
-    let CheckboxMValue = document.getElementById('CheckboxM').value;
-    let CheckboxMIValue = document.getElementById('CheckboxMI').value;
-    let CheckboxJValue = document.getElementById('CheckboxJ').value;
-    let CheckboxVValue = document.getElementById('CheckboxV').value;
-    let CheckboxSValue = document.getElementById('CheckboxS').value;
-    let CheckboxDValue = document.getElementById('CheckboxD').value;
+    /* variables de consideraciones */
+    let hora_aten = document.getElementById('hora_aten').value;
+    let obser = document.getElementById('obser').value;  
     
     let error = [];
 
@@ -181,7 +176,7 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
         error.push("Without kind of pay");
     }
 
-        if(dia_de_pag.length == 0){
+    if(dia_de_pag.length == 0){
         Mensaje("Debe de seleccionar el dia de pago", "danger");
         error.push("You don't select a day of pay");
     }
@@ -200,12 +195,18 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
           cost_tot: cost_tot, 
           tip_pag: tip_pag, 
           dia_de_pag: dia_de_pag,
-          diasServicio: dias 
+          diasServicio: dias,
+          hora_aten: hora_aten,
+          obser: obser 
         },
         async: true,
         beforeSend: function () {},
         success: function (response) {
-          
+          Swal.fire(
+            'Alerta',
+            `${response.mensaje}`,
+            'success'
+          )
         },
         error: function (error) {
           console.log(error);

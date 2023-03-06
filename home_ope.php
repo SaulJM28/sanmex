@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,19 +24,9 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="./src/sanitarios/sanitarios.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-toilet me-2"></i>Sanitarios</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Operadores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-dollar me-2"></i>Vendedores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-users me-2"></i>Clientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>Reportes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                        class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+                <a href="servicio.php" class="list-group-item list-group-item-action second-text">Realizar Servicio</a>
+                <a href="./src/serviciosRea/servicios_rea.php" class="list-group-item list-group-item-action second-text fw-bold">Servicios Realizados</a>
+                <a href="./include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -56,7 +51,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Usuario
+                                <i class="fas fa-user me-2"></i><?php  echo $_SESSION['nom_usu']; ?>
                             </a>
                         </li>
                     </ul>
@@ -67,20 +62,33 @@
                 <div class="row">
                     <h1>Lista de Módulos</h1>
                     <div class="col-md-4 mt-2 ">
-                        <a href="servicio.php" class="link__card">
+                        <a href="listaServicios.php" class="link__card">
                             <div class="card sombra">
                                 <div class="card-body">
                                     <img src="static/img/iconos/bano.png" class="img-fluid" loading="lazy" width="60" height="60">
-                                    <h4 class="card-title">Realizar Servicio</h4>
+                                    <h4 class="card-title">Servicios</h4>
+                                    <p>Lista de servicios</p>
                                     <div style="display: flex; justify-content: right;">
-                                        <a href="servicio.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                        <a href="listaServicios.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-
-
+                    <div class="col-md-4 mt-2 ">
+                        <a href="./src/serviciosRea/servicios_rea.php" class="link__card">
+                            <div class="card sombra">
+                                <div class="card-body">
+                                    <img src="static/img/iconos/ser_rea.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                    <h4 class="card-title">Servicios Realizados</h4>
+                                    <p>Lista de servicios que ya haz realizado</p>
+                                    <div style="display: flex; justify-content: right;">
+                                        <a href="./src/serviciosRea/servicios_rea.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,3 +107,9 @@
 </body>
 
 </html>
+
+<?php 
+else : 
+    header('location: ./include/logout.php'); 
+endif;
+?>

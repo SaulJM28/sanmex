@@ -29,9 +29,18 @@ create table sanitarios(
     estatus varchar(255) default null
 );
 
+
+create table tip_san(
+    id_tsan int(11) primary key not null auto_increment,
+    nom_tip varchar(255) default null,
+    fec_cre datetime,
+    estatus varchar(255) default null
+);
+
 create table clientes(
     id_clie int(11) primary key not null auto_increment,
     nom_clie varchar(255) default null,
+    tel_clie varchar(255) default null,
     rfc varchar(255) default null,
     razon_social varchar(255) default null,
     nom_con varchar(255) default null,
@@ -51,3 +60,24 @@ create table direcciones(
     cp text DEFAULT null,
     coordenadas text DEFAULT null
 );
+
+create table bitacora_servicio (
+    id_bit int(11) primary key not null auto_increment,
+    servicio text DEFAULT null,
+    cliente text DEFAULT null,
+    sanitario text DEFAULT null,
+    operador text DEFAULT null, 
+    fecha TIMESTAMP, 
+    evidencia text DEFAULT null,
+    comentario text DEFAULT null,
+    estatus text DEFAULT null,
+);
+
+
+
+CREATE TRIGGER `after_update_servicio_sani` AFTER UPDATE ON `servicio_sani` FOR EACH ROW
+BEGIN
+    UPDATE TABLE sanitarios
+    SET  estatus = 'DISPONIBLE'
+    WHERE id_san = id_san;
+END $$

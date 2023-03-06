@@ -6,10 +6,11 @@ $dbConn =  connect($db);
 /*
   listar todos los posts/gets o solo uno
  */
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nom_usu = $_POST['nom_usu'];
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM clientes WHERE estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT * FROM bitacora_servicio WHERE operador = '$nom_usu' ORDER BY fecha desc");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -19,15 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         foreach ($results as $result) {
             //datos
             $data[] = array(
-                "id_clie" => $result->id_clie,
-                "nom_clie" => $result->nom_clie,
-                "tel_clie" => $result->tel_clie,
-                "rfc" => $result->rfc,
-                "razon_social" => $result->razon_social,
-                "nom_con" => $result->nom_con,
-                "num_con" => $result->num_con,
-                "fec_cre" => $result->fec_cre,
-                "estatus" => $result->estatus
+                "id_bit" => $result->id_bit,
+                "servicio" => $result->servicio,
+                "cliente" => $result->cliente,
+                "sanitario" => $result->sanitario,
+                "fecha" => $result->fecha,
             );
         }
     }
@@ -39,3 +36,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
 header("HTTP/1.1 400 Bad Request");
+
+

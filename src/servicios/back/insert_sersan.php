@@ -6,7 +6,7 @@ if (!$_POST) {
     $id_ser = $_POST['id_ser'];
     include("../../../include/conexion.php");
 
-    $sql1 = "SELECT * FROM servicio_sani WHERE id_san = '$id_san'";
+    $sql1 = "SELECT * FROM servicio_sani WHERE id_san = '$id_san' AND estatus = 'ACTIVO'";
     $result = mysqli_query($enlace, $sql1);
 
     if ($result->num_rows > 0) { {
@@ -18,7 +18,7 @@ if (!$_POST) {
         }
 
     } else {
-            $sql = " INSERT INTO `servicio_sani` (`id_sersan`, `id_ser`, `id_san`) VALUES (NULL, '$id_ser', '$id_san');";
+            $sql = " INSERT INTO `servicio_sani` (`id_sersan`, `id_ser`, `id_san`, `estatus`) VALUES (NULL, '$id_ser', '$id_san', 'ACTIVO');";
             $resultado = mysqli_query($enlace, $sql);
             if (!$resultado) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($enlace);

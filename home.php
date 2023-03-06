@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR" ) :
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,18 +24,14 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="./src/sanitarios/sanitarios.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-toilet me-2"></i>Sanitarios</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Operadores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-dollar me-2"></i>Vendedores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-users me-2"></i>Clientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>Reportes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="./src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action second-text fw-bold">Sanitarios</a>
+                <a href="./src/operadores/operadores.php" class="list-group-item list-group-item-action second-text fw-bold">Operadores</a>
+                <a href="./src/usuario/usuarios.php" class="list-group-item list-group-item-action second-text fw-bold">Usuarios</a>
+                <a href="./src/direcciones/direcciones.php" class="list-group-item list-group-item-action second-text fw-bold">Direcciones</a>
+                <a href="./src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold">Clientes</a>
+                <a href="./src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
+                <a href="./src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
+                <a href="./include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
@@ -56,7 +57,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Usuario
+                                <i class="fas fa-user me-2"></i> <?php  echo $_SESSION['nom_usu']; ?>
                             </a>
                         </li>
                     </ul>
@@ -150,6 +151,20 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-md-4 mt-2 ">
+                        <a href="./src/bitacoraSerRea/listaBitacoraServRea.php" class="link__card">
+                            <div class="card sombra">
+                                <div class="card-body">
+                                    <img src="static/img/iconos/ser_rea.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                    <h4 class="card-title">Bitacora de Servicios Realizados</h4>
+                                    <p class="card-text">Módulo para ver la bitacora de servicios realizados</p>
+                                    <div style="display: flex; justify-content: right;">
+                                        <a href="./src/bitacoraSerRea/listaBitacoraServRea.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -164,5 +179,10 @@
     <script src="static/js/Home/home.js"></script>
 
 </body>
-
 </html>
+
+<?php 
+else : 
+    header('location: ./include/logout.php'); 
+endif;
+?>

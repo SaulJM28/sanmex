@@ -10,6 +10,9 @@ if(!$_POST){
     $tip_pag = $_POST['tip_pag'];
     $dia_de_pag = $_POST['dia_de_pag'];
     $diasServicio = $_POST['diasServicio'];
+    $hora_aten = $_POST['hora_aten'];
+    $obser = $_POST['obser']; 
+
     $dias = "";
     if(isset($diasServicio['Lunes'])){
         $dias = $dias . "Lunes";
@@ -48,6 +51,8 @@ include("../../../include/conexion.php");
     `tip_pag`, 
     `dia_de_pag`, 
     `dias_serv`,
+    `hora_aten`,
+    `obser`,
     `fec_crea`,
     `estatus`,
     `id_clie`,
@@ -59,6 +64,8 @@ include("../../../include/conexion.php");
         '$tip_pag',
         '$dia_de_pag',
         '$dias', 
+        '$hora_aten', 
+        '$obser', 
         '$hoy', 
         'ACTIVO',
         '$id_clie',
@@ -70,18 +77,18 @@ include("../../../include/conexion.php");
     $data = array(
         "resultado" => false,
         "mensaje" => "No se pudo hacer el registro",
-        "url" => "../sanitarios.php"
+        "url" => "../servicios.php"
     );
   } else {
         $data = array(
             "resultado" => true,
             "mensaje" => "Registro insertado correctamente",
-            "url" => "../sanitarios.php"
+            "url" => "../servicios.php"
         );
+    } 
+    header('Content-Type: application/json; charset=utf-8');  
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit();
-  } 
-
 
 }
 

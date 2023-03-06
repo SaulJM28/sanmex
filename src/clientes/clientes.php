@@ -19,18 +19,14 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="./src/sanitarios/sanitarios.php"
-                    class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-toilet me-2"></i>Sanitarios</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>Operadores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-dollar me-2"></i>Vendedores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-users me-2"></i>Clientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>Reportes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                <a href="../../src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action second-text fw-bold">Sanitarios</a>
+                <a href="../../src/operadores/operadores.php" class="list-group-item list-group-item-action second-text fw-bold">Operadores</a>
+                <a href="../../src/usuario/usuarios.php" class="list-group-item list-group-item-action second-text fw-bold">Usuarios</a>
+                <a href="../../src/direcciones/direcciones.php" class="list-group-item list-group-item-action second-text fw-bold">Direcciones</a>
+                <a href="../../src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold active">Clientes</a>
+                <a href="../../src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
+                <a href="../../src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
+                <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
@@ -84,6 +80,7 @@
                                         <thead style="background-color: #222059; color: white;">
                                             <tr>
                                                 <th>NOMBRE</th>
+                                                <th>TEL_ClIE</th>
                                                 <th>RFC</th>
                                                 <th>RAZON SOCIAL</th>
                                                 <th>NOM_CON</th>
@@ -115,12 +112,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="mensajeADD"></div>
                     <form id="formularioADDCliente">
+                        <h4>Informacion del responsable que contrata el servicio</h4>
                         <div class="mb-3 mt-3">
                             <label for="nom_clie_add" class="form-label">Nombre del cliente:</label>
                             <input type="text" class="form-control" id="nom_clie_add" name="nom_clie_add"
                                 placeholder="Ingrese el nombre del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="tel_clie_add" class="form-label">Teléfono del cliente:</label>
+                            <input type="text" class="form-control" id="tel_clie_add" name="tel_clie_add" placeholder="Ingrese el nombre del cliente" required>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="rfc_clie_add" class="form-label">RFC:</label>
@@ -132,6 +133,7 @@
                             <input type="text" class="form-control" id="razsoc_clie_add" name="razsoc_clie_add"
                                 placeholder="Ingrese la razon social del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
+                        <h4>Informacion del responsable que recibe el servicio</h4>
                         <div class="mb-3 mt-3">
                             <label for="nomcon_clie_add" class="form-label">Nombre del contacto:</label>
                             <input type="text" class="form-control" id="nomcon_clie_add" name="nomcon_clie_add"
@@ -161,13 +163,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="mensajeUP"></div>
                     <form id="formularioUPDATECliente">
+                    <h4>Informacion del responsable que contrata el servicio</h4>
                         <div class="mb-3 mt-3">
                             <input type="hidden" id="id_up" name="id_up">
                             <label for="nom_clie_up" class="form-label">Nombre del cliente:</label>
                             <input type="text" class="form-control" id="nom_clie_up" name="nom_clie_up"
                                 placeholder="Ingrese el nombre del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="tel_clie_up" class="form-label">Teléfono del cliente:</label>
+                            <input type="text" class="form-control" id="tel_clie_up" name="tel_clie_up"
+                                placeholder="Ingrese el nombre del cliente" required>
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="rfc_clie_up" class="form-label">RFC:</label>
@@ -179,6 +186,7 @@
                             <input type="text" class="form-control" id="razsoc_clie_up" name="razsoc_clie_up"
                                 placeholder="Ingrese la razon social del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                         </div>
+                        <h4>Informacion del responsable que recibe el servicio</h4>
                         <div class="mb-3 mt-3">
                             <label for="nomcon_clie_up" class="form-label">Nombre del contacto:</label>
                             <input type="text" class="form-control" id="nomcon_clie_up" name="nomcon_clie_up"
@@ -231,6 +239,7 @@
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/datatables.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../static/js/clientes/cliente.js"></script>
 </body>
 
