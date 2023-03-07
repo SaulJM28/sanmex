@@ -124,6 +124,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
                                 <h5 class="card-title">Realizar Servicio</h5>
                                 <form  action="./include/insert_bit.php" id="formularioADDSerBit" method="POST" enctype="multipart/form-data">
                                         <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="<?php  echo $_SESSION['nombre']; ?>">
+                                        <input type="hidden" class="form-control" id="tipo" name="tipo" value="REALIZACION">
                                         <input type="hidden" class="form-control" id="servicioADD" name="servicioADD">
                                         <input type="hidden" class="form-control" id="clienteADD" name="clienteADD">
                                         <input type="hidden" class="form-control" id="sanitarioADD" name="sanitarioADD">

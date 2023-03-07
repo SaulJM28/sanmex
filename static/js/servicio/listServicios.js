@@ -46,7 +46,11 @@ $(document).ready(function () {
       {
         data: "cost_tot",
       },
-  
+      {
+        mRender: function (data, type, row) {
+          return `<p style = "background-color: ${row.color}; padding: 2px; border-radius: 5px; margin: 0px;" >${row.estatus}</p>`;
+        },
+      },
       {
         data: "id_ser",
         bSortable: false,

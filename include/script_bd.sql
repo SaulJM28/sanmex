@@ -73,11 +73,10 @@ create table bitacora_servicio (
     estatus text DEFAULT null,
 );
 
-
-
+DELIMITER $$
 CREATE TRIGGER `after_update_servicio_sani` AFTER UPDATE ON `servicio_sani` FOR EACH ROW
 BEGIN
     UPDATE TABLE sanitarios
     SET  estatus = 'DISPONIBLE'
-    WHERE id_san = id_san;
+    WHERE id_san = OLD.id_san;
 END $$

@@ -90,6 +90,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR"):
                                                         <th>Cost Unit</th>
                                                         <th># Sanitarios</th>
                                                         <th>Monto Total</th>
+                                                        <th>Estatus</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>

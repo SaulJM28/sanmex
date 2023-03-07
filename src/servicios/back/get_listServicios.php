@@ -9,7 +9,7 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire WHERE SE.estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire WHERE SE.estatus <> 'INACTIVO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -17,6 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
+            if($result->estatus == 'ACTIVO'){
+                $color = '#fefefe';
+            }else if($result->estatus == 'FINALIZADO'){
+                $color = '#ffdd00';
+            }
+
             //datos
             $data[] = array(
                 "id_ser" => $result->id_ser,
@@ -42,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "razon_social" => $result->razon_social,
                     "rfc" => $result->rfc
                 ),
+                "color" => $color
             );
         }
     }

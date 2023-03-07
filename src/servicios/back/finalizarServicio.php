@@ -12,18 +12,29 @@ if (!$_POST) {
         $data = array(
             "resultado" => false,
             "mensaje" => "Ocurrio un error",
-            "url" => "../sanitarios.php"
+            "url" => "../servicios.php"
         );
     } else {
-        $data = array(
-            "resultado" => true,
-            "mensaje" => "Servicio finalizado correctamente",
-            "url" => "../sanitarios.php"
-        );
+        /* update tableServicios */
+        $queryUpdateServicio = "UPDATE servicio set estatus = 'FINALIZADO' WHERE id_ser = '$id_ser'";
+        $resultUpdateServicio = mysqli_query($enlace, $queryUpdateServicio);
+        if (!$resultUpdateServicio) {
+            echo "Error: " . $queryUpdatequeryUpdateServicio . "<br>" . mysqli_error($enlace);
+            $data = array(
+                "resultado" => false,
+                "mensaje" => "Ocurrio un error",
+                "url" => "../servicios.php"
+            );
+        } else {
+            $data = array(
+                "resultado" => true,
+                "mensaje" => "Servicio finalizado correctamente 22",
+                "url" => "../servicios.php"
+            );
+        }
     }
     //print the result
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit();
 }
-?>

@@ -286,12 +286,14 @@ function finalizarServ() {
         beforeSend: function () {},
         success: function (response) {
           if(response.resultado == true){
+            get_infoSanBySer();
             Swal.fire(
               'Alerta',
               `${response.mensaje}`,
               'success'
             )
           }else{
+            get_infoSanBySer();
             Swal.fire(
               'Alerta',
               `${response.mensaje}`,
