@@ -18,13 +18,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
+
+            if($result->estatus == 'REALIZADO' ){
+                $color = '#279b37';
+                $icono = 'fas fa-check';
+                $san = $result->sanitario;
+            }else if($result->estatus == 'INCIDENCIA'){
+                $color = '#be0027';
+                $icono = 'fas fa-times';
+                $san = 'No se pudo realizar el servicio';
+            }
+
             //datos
             $data[] = array(
                 "id_bit" => $result->id_bit,
                 "servicio" => $result->servicio,
                 "cliente" => $result->cliente,
-                "sanitario" => $result->sanitario,
+                "sanitario" => $san,
                 "fecha" => $result->fecha,
+                "comentario" => $result->comentario,
+                "estatus" => $result->estatus,
+                "color" => $color,
+                "icono" => $icono
             );
         }
     }

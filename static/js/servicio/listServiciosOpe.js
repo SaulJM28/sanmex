@@ -43,10 +43,10 @@ const cargarServicios = async () => {
           botones = `Ya no puedes realizar limpiezas, el servcio ha terminado`;
         }
         servicios += `
-                    <div class="card sombra" style = "margin-top: 10px; background-color: ${color}">
+                    <div class="card sombra" style = "margin-top: 10px; border-left: 5px solid  ${color}">
                         <div class="card-body">
                             <h5 class="card-title">Nombre del servicio: ${element.cliente.razon_social} - ${element.dirreccion.colonia} - ${element.dirreccion.calle}  </h5>
-                            <h6 class="card-subtitle mb-2"><strong>Razón Social:</strong>${element.cliente.nom_clie}. </h6>
+                            <h6 class="card-subtitle mb-2"><strong>Nombre cliente:</strong>${element.cliente.nom_clie}. </h6>
                             	<p class="card-text"><strong>Estado:</strong> ${element.dirreccion.estado}. <strong>Municipio:</strong> ${element.dirreccion.municipio} <strong>Colonia:</strong> ${element.dirreccion.colonia} <strong>Calle:</strong> ${element.dirreccion.calle}</p>
                                 <p class="card-text" style="text-align: right;">Sanitarios a limpiar: ${element.san_soli}</p>
                                 <div style="display: flex; justify-content: right">

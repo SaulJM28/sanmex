@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($sql->rowCount() > 0) {
         foreach ($results as $result) {
             if($result->estatus == 'ACTIVO'){
-                $color = '#fefefe';
+                $color = '#279b37';
             }else if ($result->estatus == 'FINALIZADO'){
                 $color = '#ffdd00';
             }
