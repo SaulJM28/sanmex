@@ -78,6 +78,7 @@
                                             <th>SANITARIO</th>
                                             <th>OPERADOR</th>
                                             <th>FECHA DE REA</th>
+                                            <th>ESTATUS</th>
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>

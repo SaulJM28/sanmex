@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
             if($result->estatus == 'ACTIVO'){
-                $color = '#fefefe';
+                $color = '#279b37';
             }else if($result->estatus == 'FINALIZADO'){
                 $color = '#ffdd00';
             }

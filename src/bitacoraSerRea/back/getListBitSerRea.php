@@ -17,6 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
+
+            if($result->estatus == 'REALIZADO'){
+                $color = '#279b37';
+            }else if($result->estatus == 'INCIDENCIA'){
+                $color = '#be0027';
+            }
+
             //datos
             $data[] = array(
                 "id_bit" => $result->id_bit,
@@ -28,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "evidencia" => $result->evidencia,
                 "comentario" => $result->comentario,
                 "estatus" => $result->estatus,
+                "color" => $color
             );
         }
     }

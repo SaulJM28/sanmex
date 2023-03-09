@@ -41,6 +41,11 @@ $(document).ready(function () {
           data: "fecha",
         },
         {
+          mRender: function (data, type, row) {
+            return `<p style = 'background-color: ${row.color}; margin: 0px; padding: 2px; text-align: center; border-radius: 5px;' >${row.estatus} </p>`;
+          },
+        },
+        {
           data: "id_bit",
           bSortable: false,
           mRender: function (data, type, row) {
@@ -119,7 +124,8 @@ $(document).ready(function () {
 const  showEvidencia = (evi, coment) =>{
   document.getElementById("evidenciaSerReaBit").innerHTML = `
   <img src="../../static/img/evidenciasBitacoras/${evi}" alt="" srcset="" class="img-fluid"> 
-  <p>${coment}</p> 
+  <h4 class = 'text-center'>Comentario</h4>
+  <p class = 'text-justify;' >${coment}</p> 
   `;
 
 }
