@@ -9,7 +9,7 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire WHERE SE.estatus <> 'INACTIVO';");
+    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, R.nom_rut, OP.nom, OP.ap1, OP.ap2, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire INNER JOIN rutas R ON R.id_rut = SE.id_rut INNER JOIN operadores OP ON OP.id_ope = SE.id_ope WHERE SE.estatus <> 'INACTIVO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "dias_serv" => $result->dias_serv,
                 "fec_crea" => $result->fec_crea,
                 "estatus" => $result->estatus,
+                "ruta" => $result->nom_rut,
+                "operador" => $result->nom .' '. $result->ap1 .' '. $result->ap2,
                 "direccion" => array(
                     "estado" => $result->estado,
                     "municipio" => $result->municipio,

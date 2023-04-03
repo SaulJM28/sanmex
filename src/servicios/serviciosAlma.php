@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == "ALMACENISTA" || $_SESSION['tip_usu'] == "VENDEDOR") ) :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == "ALMACENISTA")) :
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -72,34 +72,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                         <a href="../../home.php" class="btn btn-default"><i
                                                 class="fas fa-arrow-left"></i></a>
                                         <h1 style="text-align: center;">Lista de Servicios</h1>
-                                    </div>
-                                    <div>
-                                        <a href="create_servicio.php" class="btn btn-primary">Crear Servicio <i
-                                                class="fas fa-plus"> </i></a>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="row g-3">
-                                        <div class="col-md-12 mt-2 table-responsive">
-                                            <table class="table table-striped  nowrap" style="width:100%;"
-                                                id="tableServicios">
-                                                <thead style="background-color: #222059; color: white;">
-                                                    <tr>
-                                                        <th>Nombre del cliente</th>
-                                                        <th>Direccion</th>
-                                                        <th>Cost Unit</th>
-                                                        <th># Sanitarios</th>
-                                                        <th>Monto Total</th>
-                                                        <th>Ruta</th>
-                                                        <th>Operador</th>
-                                                        <th>Estatus</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

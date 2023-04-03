@@ -121,6 +121,8 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
     let cost_tot = document.getElementById('cost_tot').value;
     let tip_pag = document.getElementById('tip_pag').value;  
     let dia_de_pag = document.getElementById('dia_de_pag').value;
+    let ruta = document.getElementById('ruta').value;
+    let operador = document.getElementById('operador').value;
     /* variables de checkbox */
     let CheckboxL = document.getElementById('CheckboxL').checked;
     let CheckboxM = document.getElementById('CheckboxM').checked;
@@ -197,16 +199,28 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
           dia_de_pag: dia_de_pag,
           diasServicio: dias,
           hora_aten: hora_aten,
-          obser: obser 
+          obser: obser,
+          ruta: ruta,
+          operador: operador
         },
         async: true,
         beforeSend: function () {},
         success: function (response) {
-          Swal.fire(
-            'Alerta',
-            `${response.mensaje}`,
-            'success'
-          )
+          if(response.resultado == true){
+            Swal.fire(
+              'Alerta',
+              `${response.mensaje}`,
+              'success'
+            )
+            window.location.href = `${response.url}`;
+          }else{
+            Swal.fire(
+              'Alerta',
+              `${response.mensaje}`,
+              'error'
+            )
+          }
+          
         },
         error: function (error) {
           console.log(error);
@@ -220,6 +234,52 @@ const calcularTotal = () => {
       let costTotal = document.getElementById('num_san').value * document.getElementById('cost_unit').value;
       document.getElementById('cost_tot').value = costTotal;
 }
+
+const getListRutas = () => {
+  $.ajax({
+    type: "GET",
+    url: "../rutas/back/get_listRutas.php",
+    async: true,
+    beforeSend: function () {},
+    success: function (response) {
+      let listRutas = '<option value=""  selected>Seleccione la ruta</option>';
+      response.data.forEach(element => {
+        listRutas += `<option value="${element.id_rut}"> ${element.nom_rut} </option>`;
+      });
+      document.getElementById('ruta').innerHTML = listRutas;
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+}
+
+document.getElementById('ruta').addEventListener('change', function handleChange(event) {
+  let id_ope = event.target.value; 
+  $.ajax({
+    type: "GET",
+    url: "../rutas/back/get_listRutas.php",
+    async: true,
+    beforeSend: function () {},
+    success: function (response) {
+      response.data.forEach(element => {
+        if(id_ope == element.id_ope){
+          document.getElementById('operador').value = element.id_ope;
+          document.getElementById('viewOperador').value = `${element.operador}`;
+        }else{
+          document.getElementById('operador').value = ``;
+          document.getElementById('viewOperador').value = ``;
+        }
+      
+      });
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+});
+
+getListRutas();
 
 const Mensaje = (mensaje, color) => {
   document.getElementById('mensaje').innerHTML = `  

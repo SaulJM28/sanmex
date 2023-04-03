@@ -73,6 +73,13 @@ create table bitacora_servicio (
     estatus text DEFAULT null,
 );
 
+create table rutas (
+    id_rut int(11) primary key not null auto_increment,
+    nom_rut varchar(255) DEFAULT null,
+    id_ope int(11),
+    estatus varchar(255) DEFAULT null
+);
+
 DELIMITER $$
 CREATE TRIGGER `after_update_servicio_sani` AFTER UPDATE ON `servicio_sani` FOR EACH ROW
 BEGIN

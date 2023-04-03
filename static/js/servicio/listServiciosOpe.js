@@ -7,6 +7,7 @@ let ultimoServicio;
 toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
+
 /* creamos el observador */
 let observador = new IntersectionObserver(
   (entradas, observador) => {
@@ -26,12 +27,13 @@ let observador = new IntersectionObserver(
 const cargarServicios = async () => {
   try {
     const respuesta = await fetch(
-      `./include/getListServicios.php?limite=${limite}`
+      `./include/getListServicios.php?limite=${limite}&id_ope=${id_ope}`
     );
     // Si la respuesta es correcta
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       datos.forEach((element) => {
+        console.log(element);
         if (element.estatus == "ACTIVO") {
           color = element.color;
           botones = `<div class="btn-group">
@@ -48,7 +50,8 @@ const cargarServicios = async () => {
                             <h5 class="card-title">Nombre del servicio: ${element.cliente.razon_social} - ${element.dirreccion.colonia} - ${element.dirreccion.calle}  </h5>
                             <h6 class="card-subtitle mb-2"><strong>Nombre cliente:</strong>${element.cliente.nom_clie}. </h6>
                             	<p class="card-text"><strong>Estado:</strong> ${element.dirreccion.estado}. <strong>Municipio:</strong> ${element.dirreccion.municipio} <strong>Colonia:</strong> ${element.dirreccion.colonia} <strong>Calle:</strong> ${element.dirreccion.calle}</p>
-                                <p class="card-text" style="text-align: right;">Sanitarios a limpiar: ${element.san_soli}</p>
+                            	<p class="card-text"><strong>Operador:</strong> ${element.operador}. <strong>Ruta:</strong> ${element.ruta}  </p>  
+                              <p class="card-text" style="text-align: right;">Sanitarios a limpiar: ${element.san_soli}</p>
                                 <div style="display: flex; justify-content: right">
                                     ${botones}
                                 </div>
@@ -84,26 +87,22 @@ const getInfoServById = (id_ser, servicio, cliente) => {
   document.getElementById("id_serADD").value = id_ser;
   document.getElementById("servicioADD").value = servicio;
   document.getElementById("clienteADD").value = cliente;
-}
+};
 
-formularioADDSerBit.addEventListener('submit', (e) => {
+formularioADDSerBit.addEventListener("submit", (e) => {
   e.preventDefault();
-  let id_serADD = document.getElementById('id_serADD').value;
-  let operadorADD = document.getElementById('operadorADD').value;
-  let tipo = document.getElementById('tipo').value;
-  let servicioADD = document.getElementById('servicioADD').value;
-  let clienteADD = document.getElementById('clienteADD').value;
-  let comentarios = document.getElementById('comentarioADD').value;
+  let id_serADD = document.getElementById("id_serADD").value;
+  let operadorADD = document.getElementById("operadorADD").value;
+  let tipo = document.getElementById("tipo").value;
+  let servicioADD = document.getElementById("servicioADD").value;
+  let clienteADD = document.getElementById("clienteADD").value;
+  let comentarios = document.getElementById("comentarioADD").value;
 
-  if(comentarios.length == 0){
-    Swal.fire(
-      'Aviso',
-      'El campo de comentario esta vacio',
-      'error'
-    )
-    document.getElementById('comentarioADD').classList.add('is-invalid');
-  }else{
-    document.getElementById('comentarioADD').classList.remove('is-invalid');
+  if (comentarios.length == 0) {
+    Swal.fire("Aviso", "El campo de comentario esta vacio", "error");
+    document.getElementById("comentarioADD").classList.add("is-invalid");
+  } else {
+    document.getElementById("comentarioADD").classList.remove("is-invalid");
     formularioADDSerBit.submit();
   }
 });

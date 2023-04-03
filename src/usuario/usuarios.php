@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +34,7 @@
                 <a href="../../src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold">Clientes</a>
                 <a href="../../src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
                 <a href="../../src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
+                <a href="../../src/rutas/listaRutas.php" class="list-group-item list-group-item-action second-text fw-bold">Rutas</a>
                 <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
@@ -55,7 +61,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>Usuario
+                                <i class="fas fa-user me-2"></i><?php echo $_SESSION['nom_usu']; ?>
                             </a>
                         </li>
                     </ul>
@@ -274,3 +280,9 @@
 </body>
 
 </html>
+
+<?php
+else :
+    header('location: ../../include/logout.php');
+endif;
+?>

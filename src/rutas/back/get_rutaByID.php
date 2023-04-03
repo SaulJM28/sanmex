@@ -7,29 +7,26 @@ $dbConn =  connect($db);
   listar todos los posts/gets o solo uno
  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $num_san = $_POST['num_san'];
+    $id_rut = $_POST['id_rut'];
     header('Content-Type: application/json; charset=utf-8');
-    //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT id_san, num_san, tip_san FROM sanitarios WHERE num_san = '$num_san'  AND  estatus = 'DISPONIBLE';");
+    //Mostrar un POST
+    $sql = $dbConn->prepare("SELECT id_rut, R.id_ope, nom_rut, fec_reg, nom, ap1, ap2, R.estatus FROM rutas R LEFT JOIN  operadores O ON R.id_ope = O.id_ope where R.estatus = 'ACTIVO' AND id_rut = '$id_rut';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
+
     $data = [];
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
             //datos
             $data = array(
-                "resultado" => true,
-                "id_san" => $result->id_san,
-                "num_san" => $result->num_san,
-                "tip_san" => $result->tip_san,
+                "id_rut" => $result->id_rut,
+                "nom_rut" => $result->nom_rut,
+                "id_ope" => $result->id_ope, 
+                "fec_reg" => $result->fec_reg,
+                "estatus" => $result->estatus
             );
         }
-    } else {
-        $data = array(
-            "resultado" => false,
-            "mensaje" => "El sanitario que busca no se encuentra disponible",
-        );
     }
     $json = json_encode($data, JSON_UNESCAPED_UNICODE);
     echo $json;

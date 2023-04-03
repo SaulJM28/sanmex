@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_ser = $_POST['id_ser'];
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, nom_con, num_con,  cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, coordenadas,  rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire WHERE id_ser = '$id_ser';");
+    $sql = $dbConn->prepare("SELECT id_ser, num_san, cost_unit, nom_con, num_con, cost_tot, tip_pag, dia_de_pag, dias_serv, fec_crea, nom_clie, coordenadas, rfc, razon_social, estado, municipio, colonia, calle, num_ext, num_int, cp, nom_rut, nom, ap1, ap2, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire INNER JOIN operadores OP ON OP.id_ope = SE.id_ope INNER JOIN rutas R ON R.id_rut = SE.id_rut WHERE id_ser = '$id_ser';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -46,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "nom_con" => $result->nom_con,
                     "num_con" => $result->num_con
                 ),
+                "operador" => $result->nom . ' ' . $result->ap1 . ' ' . $result->ap2,
+                "ruta" => $result->nom_rut
             );
         }
     }

@@ -11,7 +11,9 @@ if(!$_POST){
     $dia_de_pag = $_POST['dia_de_pag'];
     $diasServicio = $_POST['diasServicio'];
     $hora_aten = $_POST['hora_aten'];
-    $obser = $_POST['obser']; 
+    $obser = $_POST['obser'];
+    $ruta = $_POST['ruta'];
+    $operador = $_POST['operador']; 
 
     $dias = "";
     if(isset($diasServicio['Lunes'])){
@@ -56,7 +58,9 @@ include("../../../include/conexion.php");
     `fec_crea`,
     `estatus`,
     `id_clie`,
-    `id_dire`) VALUES (
+    `id_dire`,
+    `id_rut`,
+    `id_ope`) VALUES (
         NULL, 
         '$num_san', 
         '$cost_unit', 
@@ -69,7 +73,9 @@ include("../../../include/conexion.php");
         '$hoy', 
         'ACTIVO',
         '$id_clie',
-        '$id_dire');";
+        '$id_dire',
+        '$ruta',
+        '$operador');";
   $resultado = mysqli_query($enlace, $sql);
 
   if (!$resultado) {
@@ -77,19 +83,18 @@ include("../../../include/conexion.php");
     $data = array(
         "resultado" => false,
         "mensaje" => "No se pudo hacer el registro",
-        "url" => "../servicios.php"
+        "url" => "servicios.php"
     );
   } else {
-        $data = array(
-            "resultado" => true,
-            "mensaje" => "Registro insertado correctamente",
-            "url" => "../servicios.php"
-        );
+    $data = array(
+        "resultado" => true,
+        "mensaje" => "Registro insertado correctamente",
+        "url" => "create_servicioADDSan.php?id_ser=".$id_ser."&num_san=".$num_san.""
+    );
     } 
     header('Content-Type: application/json; charset=utf-8');  
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit();
-
 }
 
 ?>

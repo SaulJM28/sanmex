@@ -7,6 +7,8 @@ $dbConn =  connect($db);
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $limite = $_GET['limite'];
+    $id_ope = $_GET['id_ope'];
+    
     //header para hacer formato JSON
     header('Content-Type: application/json; charset=utf-8');
     header("HTTP/1.1 200 OK");
@@ -20,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
     }
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_san, CLI.nom_clie, CLI.rfc, CLI.razon_social, CLI.nom_con, CLI.num_con, DIRE.estado, DIRE.municipio, DIRE.colonia, DIRE.calle, DIRE.num_ext, DIRE.num_int, DIRE.cp, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire WHERE SE.estatus <> 'INACTIVO' LIMIT 10 OFFSET " . $limite ."");
+    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_san, CLI.nom_clie, CLI.rfc, CLI.razon_social, CLI.nom_con, CLI.num_con, DIRE.estado, DIRE.municipio, DIRE.colonia, DIRE.calle, DIRE.num_ext, DIRE.num_int, DIRE.cp, SE.estatus, O.nom, O.ap1, O.ap2, R.nom_rut FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN direcciones DIRE ON DIRE.id_dire = SE.id_dire INNER JOIN rutas R ON R.id_rut = SE.id_rut INNER JOIN operadores O ON O.id_ope = SE.id_ope WHERE SE.estatus <> 'INACTIVO' AND SE.id_ope = 5 LIMIT 10 OFFSET " . $limite ."");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
     $data = [];
@@ -54,7 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "san_soli" => $result->num_san,
                 "totalRe" => $totalRegis,
                 "estatus" => $result->estatus,
-                "color" => $color
+                "color" => $color,
+                "operador" => $result->nom . ' ' . $result->ap1 . ' ' . $result->ap2,
+                "ruta" => $result->nom_rut 
             );
         }
     } else {

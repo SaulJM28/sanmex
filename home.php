@@ -1,11 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR" ) :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == "ALMACENISTA" || $_SESSION['tip_usu'] == "VENDEDOR") ) :
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,7 +14,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR" ) :
     <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
     <title>SANMEX</title>
 </head>
-
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
@@ -160,6 +157,21 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR" ) :
                                     <p class="card-text">Módulo para ver la bitacora de servicios realizados</p>
                                     <div style="display: flex; justify-content: right;">
                                         <a href="./src/bitacoraSerRea/listaBitacoraServRea.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- RUTAS -->
+                    <div class="col-md-4 mt-2 ">
+                        <a href="./src/rutas/listaRutas.php" class="link__card">
+                            <div class="card sombra">
+                                <div class="card-body">
+                                    <img src="static/img/iconos/truck.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                    <h4 class="card-title">Rutas</h4>
+                                    <p class="card-text">Módulo para la gestión de rutas</p>
+                                    <div style="display: flex; justify-content: right;">
+                                        <a href="./src/rutas/listaRutas.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

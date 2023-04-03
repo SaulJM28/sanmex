@@ -47,6 +47,12 @@ $(document).ready(function () {
         data: "cost_tot",
       },
       {
+        data: "ruta",
+      },
+      {
+        data: "operador",
+      },
+      {
         mRender: function (data, type, row) {
           return `<p style = "background-color: ${row.color}; padding: 2px; border-radius: 5px; margin: 0px; text-align: center;" >${row.estatus}</p>`;
         },

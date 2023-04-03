@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
+?>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -18,16 +23,16 @@
             <div class="fondo__sidebar" id="sidebar-wrapper">
                 <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX</div>
                 <div class="list-group list-group-flush my-3">
-                <a href="../../src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action second-text fw-bold active">Sanitarios</a>
-                <a href="../../src/operadores/operadores.php" class="list-group-item list-group-item-action second-text fw-bold">Operadores</a>
-                <a href="../../src/usuario/usuarios.php" class="list-group-item list-group-item-action second-text fw-bold">Usuarios</a>
-                <a href="../../src/direcciones/direcciones.php" class="list-group-item list-group-item-action second-text fw-bold ">Direcciones</a>
-                <a href="../../src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold">Clientes</a>
-                <a href="../../src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
-                <a href="../../src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
-                <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
-                        class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
-            </div>
+                    <a href="../../src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action second-text fw-bold active">Sanitarios</a>
+                    <a href="../../src/operadores/operadores.php" class="list-group-item list-group-item-action second-text fw-bold">Operadores</a>
+                    <a href="../../src/usuario/usuarios.php" class="list-group-item list-group-item-action second-text fw-bold">Usuarios</a>
+                    <a href="../../src/direcciones/direcciones.php" class="list-group-item list-group-item-action second-text fw-bold ">Direcciones</a>
+                    <a href="../../src/clientes/clientes.php" class="list-group-item list-group-item-action second-text fw-bold">Clientes</a>
+                    <a href="../../src/servicios/servicios.php" class="list-group-item list-group-item-action second-text fw-bold">Generar Servicio</a>
+                    <a href="../../src/bitacoraSerRea/listaBitacoraServRea.php" class="list-group-item list-group-item-action second-text fw-bold">Bitacora de Servicios</a>
+                    <a href="../../src/rutas/listaRutas.php" class="list-group-item list-group-item-action second-text fw-bold">Rutas</a>
+                    <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+                </div>
             </div>
             <!-- /#sidebar-wrapper -->
 
@@ -47,7 +52,7 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user me-2"></i>Usuario
+                                    <i class="fas fa-user me-2"></i><?php echo $_SESSION['nom_usu']; ?>
                                 </a>
                             </li>
                         </ul>
@@ -62,30 +67,30 @@
                                     <div>
                                         <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
                                         <h1 style="text-align: center;">Lista de sanitarios</h1>
-                                    </div>    
+                                    </div>
 
-                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
-                                        <br>
-                                        <br>
-                                        <table id="tableSanitarios" class="table table-striped  nowrap" style="width:100%;">
-                                            <thead style="background-color: #222059; color: white;">
-                                                <tr>
-                                                    <th># SANITARIO</th>
-                                                    <th>TIPO</th>
-                                                    <th>FEC_REG</th>
-                                                    <th>ESTATUS</th>
-                                                    <th>ACCIONES</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
+                                    <br>
+                                    <br>
+                                    <table id="tableSanitarios" class="table table-striped  nowrap" style="width:100%;">
+                                        <thead style="background-color: #222059; color: white;">
+                                            <tr>
+                                                <th># SANITARIO</th>
+                                                <th>TIPO</th>
+                                                <th>FEC_REG</th>
+                                                <th>ESTATUS</th>
+                                                <th>ACCIONES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <!-- The Modal -->
@@ -238,3 +243,8 @@
     </body>
 
     </html>
+<?php
+else :
+    header('location: ../../include/logout.php');
+endif;
+?>

@@ -71,7 +71,7 @@ body {
 .list-group-item {
   background-color: #222059;
   border: none;
-  padding: 20px 30px;
+  padding: 10px 20px;
 }
 
 .list-group-item.active {

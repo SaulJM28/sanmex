@@ -18,6 +18,11 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
             display: none;
         }
     </style>
+
+    <script>
+        var id_ope = <?php echo $_SESSION['id_ope']; ?> 
+    </script>        
+
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->

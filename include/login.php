@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
     } else {
         if ($password == $result['pwd_usu']) {
-            $queryGetInfoUsu = $dbConn->prepare("SELECT nom, ap1, ap2 FROM usuarios USU INNER JOIN operadores OP ON USU.id_ope = OP.id_ope WHERE nom_usu = '$username'");
+            $queryGetInfoUsu = $dbConn->prepare("SELECT OP.id_ope, nom, ap1, ap2 FROM usuarios USU INNER JOIN operadores OP ON USU.id_ope = OP.id_ope WHERE nom_usu = '$username'");
             $queryGetInfoUsu->execute();
         
             $resultResponse = $queryGetInfoUsu->fetch(PDO::FETCH_ASSOC);
@@ -38,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['tip_usu'] = $result['tip_usu'];
             $_SESSION['estatus'] = $result['estatus'];
             $_SESSION['nombre'] = $nombre;
+            $_SESSION['id_ope'] = $result['id_ope'];
+
             //validamos que tipo de usuario es y cual sera su url
-            if ($result['tip_usu'] == 'ADMINISTRADOR') {
+            if ($result['tip_usu'] == 'ADMINISTRADOR' || $result['tip_usu'] == 'ALMACENISTA'  || $result['tip_usu'] == 'VENDEDOR') {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
