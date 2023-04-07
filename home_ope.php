@@ -24,8 +24,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="servicio.php" class="list-group-item list-group-item-action second-text">Realizar Servicio</a>
-                <a href="./src/serviciosRea/servicios_rea.php" class="list-group-item list-group-item-action second-text fw-bold">Servicios Realizados</a>
                 <a href="./include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
@@ -110,6 +108,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
 
 <?php 
 else : 
-    header('location: ./include/logout.php'); 
+    header('location: include/logout.php'); 
 endif;
 ?>

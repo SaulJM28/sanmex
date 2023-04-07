@@ -89,7 +89,7 @@ include("../../../include/conexion.php");
     $data = array(
         "resultado" => true,
         "mensaje" => "Registro insertado correctamente",
-        "url" => "create_servicioADDSan.php?id_ser=".$id_ser."&num_san=".$num_san.""
+        "url" => "servicios.php"
     );
     } 
     header('Content-Type: application/json; charset=utf-8');  

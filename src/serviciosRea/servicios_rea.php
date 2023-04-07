@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
-?>
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR"):
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -23,30 +23,34 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
                 <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
                 </div>
                 <div class="list-group list-group-flush my-3">
-                    <a href="../../servicio.php" class="list-group-item list-group-item-action second-text">Realizar Servicio</a>
-                    <a href="../../src/serviciosRea/servicios_rea.php" class="list-group-item list-group-item-action second-text fw-bold active">Servicios Realizados</a>
-                    <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+                    <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i
+                            class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
 
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4" style="background-color:  #222059; color: white;">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4"
+                    style="background-color:  #222059; color: white;">
                     <div class="d-flex align-items-center">
                         <i class="fas fa-align-left primary-text fs-4 me-3" style="color: white;" id="menu-toggle"></i>
                         <h2 class="fs-2 m-0">SERVICIOS</h2>
                     </div>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user me-2"></i><?php echo $_SESSION['nom_usu']; ?>
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-user me-2"></i>
+                                    <?php echo $_SESSION['nom_usu']; ?>
                                 </a>
                             </li>
                         </ul>
@@ -57,8 +61,10 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
                     <div class="row g-3">
                         <div class="col-md-12 mt-3">
                             <div>
-                                <a href="../../home_ope.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
-                                <h1 style="text-align: center;">Servicios Realizados por <?php echo $_SESSION['nombre']; ?>
+                                <a href="../../home_ope.php" style="color: black; text-decoration: none;"><i
+                                        class="fas fa-arrow-left"> Volver</i></a>
+                                <h1 style="text-align: center;">Servicios Realizados por
+                                    <?php echo $_SESSION['nombre']; ?>
                                 </h1>
                                 <input type="hidden" id="nom_usu" value="<?php echo $_SESSION['nombre']; ?>">
                             </div>
@@ -80,8 +86,8 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
 
     </html>
 
-<?php
-else :
+    <?php
+else:
     header('location: ../../include/logout.php');
 endif;
 ?>

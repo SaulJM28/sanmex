@@ -193,8 +193,8 @@ formularioADDServicio.addEventListener("submit", (e) =>  {
           id_clie: id_clie,
           id_dire: id_dire,
           num_san: num_san,
-          cost_unit: cost_unit,
-          cost_tot: cost_tot, 
+          cost_unit: 0,
+          cost_tot: 0, 
           tip_pag: tip_pag, 
           dia_de_pag: dia_de_pag,
           diasServicio: dias,
@@ -255,7 +255,7 @@ const getListRutas = () => {
 }
 
 document.getElementById('ruta').addEventListener('change', function handleChange(event) {
-  let id_ope = event.target.value; 
+  let id_rut = event.target.value; 
   $.ajax({
     type: "GET",
     url: "../rutas/back/get_listRutas.php",
@@ -263,7 +263,8 @@ document.getElementById('ruta').addEventListener('change', function handleChange
     beforeSend: function () {},
     success: function (response) {
       response.data.forEach(element => {
-        if(id_ope == element.id_ope){
+        if(id_rut == element.id_rut){
+          console.log(element.operador);
           document.getElementById('operador').value = element.id_ope;
           document.getElementById('viewOperador').value = `${element.operador}`;
         }else{

@@ -97,23 +97,13 @@ const get_infoSanBySer = () => {
     success: function (response) {
       let totalAllenar = document.getElementById("num_sans").value;
 
-      if(tipo == "ALMACENISTA" || tipo == "ADMINISTRADOR"){
-        if (response.totalRe >= totalAllenar) {
-          document
-            .getElementById("btnAddSan")
-            .setAttribute("disabled", "disabled");
-        }
-      }
-
-      if(tipo == "VENDEDOR" || tipo == "ADMINISTRADOR"){
-        if (response.totalRe >= totalAllenar) {
-          document
-            .getElementById("btnAddSan")
-            .setAttribute("disabled", "disabled");
-          document
-            .getElementById("btnADDInfoSan")
-            .setAttribute("disabled", "disabled");
-        }
+      if (response.totalRe >= totalAllenar) {
+        document
+          .getElementById("btnAddSan")
+          .setAttribute("disabled", "disabled");
+        document
+          .getElementById("btnADDInfoSan")
+          .setAttribute("disabled", "disabled");
       }
 
       document.getElementById(
@@ -121,78 +111,43 @@ const get_infoSanBySer = () => {
       ).innerHTML = `Informacion de los sanitarios asignados ${response.totalRe} de ${totalAllenar}`;
       let html = "";
       response.data.map((element) => {
-        if (element.estatus == "FINALIZADO") {
-          vendedor = "";
-          almacenista = "";
-          if (tipo == "ADMINISTRADOR" || tipo == "VENDEDOR") {
-            vendedor = `
-            <div>
-              <p class="card-text"><strong>Tipo de sanitario:</strong> ${element.tipo}</p>
-              <p class="card-text"><strong>Costo de renta:</strong>$ ${element.costo}</p>
-                <div style="display: flex; justify-content: right;">
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" disabled data-bs-target="#modalREMOVESAN" onclick="removeSan(${element.num_san})">Remover <i class="fas fa-times"></i></button>
-                </div>
-            </div>`;
-          }
-          if (tipo == "ADMINISTRADOR" || tipo == "ALMACENISTA") {
-            almacenista = `
-            <div>
-              <p class="card-text"><strong>Numero de sanitario:</strong> ${element.num_san}</p>
-              <div style="display: flex; justify-content: right;">
-                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" disabled data-bs-target="#modalREMOVESAN" onclick="removeSan(${element.num_san})">Remover <i class="fas fa-times"></i></button>
-              </div>
-            </div>`;
-          }
+        console.log(element)
+        if (element.estatus_sesa == "FINALIZADO") {
           html += `
           <div class="col-md-4 mt-12">
             <div class="card">
               <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
               <div class="card-body">
-                ${vendedor}
-                ${almacenista}
-              </div>
-            </div>
-          </div>`;
-        } else {
-          vendedor = "";
-          almacenista = "";
-          if (tipo == "ADMINISTRADOR" || tipo == "VENDEDOR") {
-            vendedor = `
-            <div>
-              <p class="card-text"><strong>Tipo de sanitario:</strong> ${element.tipo}</p>
-              <p class="card-text"><strong>Costo de renta:</strong>$ ${element.costo}</p>
-                <div style="display: flex; justify-content: right;">
-                    <button class="btn btn-danger btn-sm" onclick="removeSanInfo(${element.id_sersan})">Remover <i class="fas fa-trash"></i></button>
-                </div>
-            </div>`;
-          }
-          if (tipo == "ADMINISTRADOR" || tipo == "ALMACENISTA") {
-            boton = `<button 
+                <div>
+              <p class="card-text"><strong>Numero de sanitario:</strong> ${element.num_san}</p>
+              <div style="display: flex; justify-content: right;">
+                <button class="btn btn-danger btn-sm" onclick="removeSan(${element.id_san}, ${element.id_ser})">Remover <i class="fas fa-trash"></i></button>
+                <button 
             class="btn btn-primary btn-sm" 
             data-bs-toggle="modal" 
             data-bs-target="#modalADDSAN" 
             onclick="addSan(${element.id_ser}, ${element.id_sersan})" 
-            id = "hola">Agregar Sanitario <i class="fas fa-plus"></i></button>`;
-            //validamos que ya se haya registrado un sanitario
-            if (element.id_san != "Sin sanitario asignado") {
-              boton = "";
-            }
-            almacenista = `
-            <div>
-              <p class="card-text"><strong>Numero de sanitario:</strong> ${element.num_san}</p>
-              <div style="display: flex; justify-content: right;">
-                <button class="btn btn-danger btn-sm" onclick="removeSan(${element.id_san}, ${element.id_ser})">Remover <i class="fas fa-trash"></i></button>
-                ${boton}
+            id = "hola">Agregar Sanitario <i class="fas fa-plus"></i></button>
               </div>
-            </div>`;
-          }
+            </div>
+              </div>
+            </div>
+          </div>`;
+        } else {
           html += `
           <div class="col-md-4 mt-12">
             <div class="card">
               <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
               <div class="card-body">
-                ${vendedor}
-                ${almacenista}
+                <div>
+                  <p class="card-text"><strong>Tipo de Sanitario</strong> ${element.tipo} <br>
+                  <p class="card-text"><strong>Numero de sanitario asignado:</strong> ${element.num_san} <br>
+                    <small class="card-text">Esto lo debe asignar el encargado del almacen</small>
+                  </p>
+                <div style="display: flex; justify-content: right;">
+                <button class="btn btn-danger btn-sm" onclick="removeSanInfo(${element.id_sersan} )">Remover <i class="fas fa-trash"></i></button>
+              </div>
+            </div>
               </div>
             </div>
           </div>`;
@@ -217,8 +172,9 @@ function removeSanInfo(id) {
     type: "POST",
     url: "./back/removeSanBySer.php",
     data: {
-      id: id,
+      id: 0,
       id_ser: 0,
+      id_sersan: id,
       tipo: "REMOVERINFO",
     },
     async: true,
@@ -231,102 +187,6 @@ function removeSanInfo(id) {
           text: `${response.mensaje}`,
           icon: "success",
           confirmButtonText: "Aceptar",
-        });
-      }
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
-}
-
-function removeSan(id, id_ser) {
-  $.ajax({
-    type: "POST",
-    url: "./back/removeSanBySer.php",
-    data: {
-      id: id,
-      id_ser: id_ser,
-      tipo: "REMOVERSAN",
-    },
-    async: true,
-    beforeSend: function () {},
-    success: function (response) {
-      if (response.resultado == true) {
-        get_infoSanBySer();
-        Swal.fire({
-          title: "Alerta",
-          text: `${response.mensaje}`,
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        });
-      }
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
-}
-
-/* ESCANEAR QR DE SANITARIO */
-var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
-  fps: 10,
-  qrbox: 200,
-});
-
-function onScanSuccess(decodedText, decodedResult) {
-  html5QrcodeScanner.clear();
-  $.ajax({
-    type: "POST",
-    url: "./back/disponibilidadSan.php",
-    data: {
-      id_san: decodedText,
-    },
-    async: true,
-    beforeSend: function () {},
-    success: function (response) {
-      if (response.resultado == true) {
-        $("#modalADDSAN").modal("hide");
-        Swal.fire({
-          title: "Alerta",
-          text: `${response.mensaje}`,
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      } else {
-        $.ajax({
-          type: "POST",
-          url: "./back/get_sanitarioById.php",
-          data: {
-            num_san: decodedText,
-          },
-          async: true,
-          beforeSend: function () {},
-          success: function (response) {
-            if (response.resultado == true) {
-              Swal.fire({
-                title: "Alerta",
-                text: `Codigo Qr escaneado Correctamente`,
-                icon: "success",
-                confirmButtonText: "Aceptar",
-              });
-              document.getElementById("botonADDSan").disabled = false;
-              document.getElementById("id_san").value = response.id_san;
-              document.getElementById("num_san").value = response.num_san;
-              document.getElementById("tip_sanQR").value = response.tip_san;
-            } else {
-              $("#modalADDSAN").modal("hide");
-              Swal.fire({
-                title: "Error!",
-                text: `${response.mensaje}`,
-                icon: "error",
-                confirmButtonText: "Aceptar",
-              });
-            }
-          },
-          error: function (error) {
-            console.log(error);
-          },
         });
       }
     },
@@ -386,58 +246,7 @@ formularioADDInfoSanServ.addEventListener("submit", (e) => {
   }
 });
 
-/* This function send data by method POST to file PHP */
 
-formularioADDSanServ.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let id_san = document.getElementById("id_san").value;
-  let id_ser = document.getElementById("id_serQr").value;
-  let id_sersan = document.getElementById("id_sersan").value;
-  $.ajax({
-    type: "POST",
-    url: "./back/insert_sersan.php",
-    data: {
-      id_san: id_san,
-      id_ser: id_ser,
-      id_sersan: id_sersan,
-    },
-    async: true,
-    beforeSend: function () {},
-    success: function (response) {
-      if (response.resultado == true) {
-        $("#modalADDSAN").modal("hide");
-        get_infoSanBySer();
-        document.getElementById("id_san").value = "";
-        document.getElementById("id_serQr").value = "";
-        document.getElementById("id_sersan").value = "";
-        document.getElementById("num_san").value = "";
-        document.getElementById("tip_sanQR").value = "";
-        Swal.fire({
-          title: "Alerta",
-          text: `${response.mensaje}`,
-          confirmButtonText: "Aceptar",
-        });
-      } else {
-        $("#modalADDSAN").modal("hide");
-        get_infoSanBySer();
-        document.getElementById("id_san").value = "";
-        document.getElementById("id_serQr").value = "";
-        document.getElementById("id_sersan").value = "";
-        document.getElementById("num_san").value = "";
-        document.getElementById("tip_sanQR").value = "";
-        Swal.fire({
-          title: "Alerta",
-          text: `${response.mensaje}`,
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      }
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
-});
 
 function finalizarServ() {
   Swal.fire({

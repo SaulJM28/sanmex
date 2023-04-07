@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == "ALMACENISTA" || $_SESSION['tip_usu'] == "VENDEDOR")) :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == "VENDEDOR")) :
     echo "<script> var tipo = " . json_encode($_SESSION['tip_usu']) . ";</script>";
 ?>
     <!DOCTYPE html>
@@ -76,18 +76,11 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                             <h1 style="text-align: center;">Detalles del Servicio</h1>
                                         </div>
                                         <br>
-                                        <?php
-                                        if ($_SESSION['tip_usu'] == "VENDEDOR") :
-                                        ?>
                                             <div class="row g-3">
                                                 <div class="col-md-12 mt-2" style="display: flex; justify-content: right;">
                                                     <button class="btn btn-warning" onclick="finalizarServ()">Finalizar servicio <i class="fas fa-check"></i></button>
                                                 </div>
                                             </div>
-                                        <?php
-                                        else :
-                                        endif;
-                                        ?>
                                         <br>
                                         <div class="row g-3">
                                             <div class="col-md-12 mt-2">
@@ -215,18 +208,10 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                             </div>
                                         </div>
                                         <div class="row g-3" id="divAddSan">
-                                            <div class="col-md-12 mt-2" style="display: flex; justify-content: right;">
+                                            <div class="col-md-12 mt-2" style="display: flex; justify-content: right; margin: 5px;">
                                                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalADDSAN" id="btnAddSan">Agregar sanitario<i class="fas fa-plus"></i></button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div id="viewAlmacenista">
-                                        <div>
-                                            <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
-                                            <h1 style="text-align: center;">Detalles del Servicio</h1>
-                                        </div>
-                                        <!-- Lista de sanitarios aignados -->
                                         <div class="row g-3" id="infoSanAsig">
                                         </div>
                                     </div>
@@ -286,37 +271,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                 <button class="btn btn-success" id="btnADDInfoSan">Agregar</button>
                             </div>
                         </form>
-                        <!-- formulario para el vendedor -->
-                        <form class="row g-3" id="formularioADDSanServ">
-                            <div class="row g-3">
-                                <p style="font-size: 25px; text-align: center;">Por favor escanea el código QR.</p>
-                            </div>
-                            <div class="row g-3">
-                                <div id="qr-reader" style="width: 100%;"></div>
-                            </div>
-                            <div class="row g-3">
-                                <p style="font-size: 20px; text-align: center;">Informacion del sanitario.</p>
-                            </div>
-                            <input type="hidden" readonly class="form-control" disabled id="id_san" name="id_san">
-                            <input type="hidden" readonly class="form-control" disabled id="id_serQr" name="id_serQr">
-                            <input type="hidden" readonly class="form-control" disabled id="id_sersan" name="id_sersan">
-                            <div class="col-md-6">
-                                <div class="mb-3 mt-3">
-                                    <label for="text" class="form-label"><strong>Número de Sanitario: </strong></label>
-                                    <input type="text" readonly class="form-control" disabled id="num_san" name="num_san">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3 mt-3">
-                                    <label for="tip_sanQR" class="form-label"><strong>Tipo de Sanitario: </strong></label>
-                                    <input type="text" readonly class="form-control" disabled id="tip_sanQR" name="tip_sanQR">
-                                </div>
-                            </div>
-                            <div class="col-md-12" style="display: flex; justify-content: right;">
-                                <button type="submit" class="btn btn-success" id="botonADDSan" disabled>Agregar</button>
-                            </div>
-                        </form>
-
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">

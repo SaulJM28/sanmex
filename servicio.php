@@ -28,13 +28,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="./src/sanitarios/sanitarios.php" class="list-group-item list-group-item-action bg-transparent second-text active">
-                    <i class="fas fa-toilet me-2"></i>Sanitarios</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-project-diagram me-2"></i>Operadores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-dollar me-2"></i>Vendedores</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-users me-2"></i>Clientes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-chart-line me-2"></i>Reportes</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+                <a href="./include/logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -65,7 +59,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
             <div class="container-fluid" style="margin-top: 80px; padding: 10px;">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="text-align: left;"><a href="home_ope.php">Inicio</a>/<a href="servicio.php">Realizar Servicio</a></p>
+                        <a href="listaServicios.php" style="color: black; text-decoration: none;"><i class = "fas fa-arrow-left"> Volver</i></a>
                     </div>
                 </div>
 
@@ -157,6 +151,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
 </html>
 <?php 
 else : 
-    header('location: ../../include/logout.php'); 
+    header('location: ./include/logout.php'); 
 endif;
 ?>

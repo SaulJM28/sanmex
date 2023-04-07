@@ -7,8 +7,10 @@ if (!$_POST) {
     $tipo = $_POST['tipo'];
     $id = $_POST['id'];
     $id_ser = $_POST['id_ser'];
+    $id_sersan = $_POST['id_sersan'];
+
     if ($tipo == 'REMOVERINFO') {
-        $queryUpdate = "DELETE FROM servicio_sani WHERE id_sersan = '$id'";
+        $queryUpdate = "DELETE FROM servicio_sani WHERE id_sersan = '$id_sersan'";
         $resultUpdate = mysqli_query($enlace, $queryUpdate);
         if (!$resultUpdate) {
             echo "Error: " . $queryUpdate . "<br>" . mysqli_error($enlace);
@@ -27,7 +29,7 @@ if (!$_POST) {
     }
 
     if ($tipo == 'REMOVERSAN') {
-        $queryUpdate = "UPDATE servicio_sani set id_san = NULL WHERE id_ser = '$id_ser'";
+        $queryUpdate = "UPDATE servicio_sani set id_san = NULL WHERE id_sersan = '$id_sersan'";
         $resultUpdate = mysqli_query($enlace, $queryUpdate);
         if (!$resultUpdate) {
             echo "Error: " . $queryUpdate . "<br>" . mysqli_error($enlace);
