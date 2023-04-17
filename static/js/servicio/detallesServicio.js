@@ -11,15 +11,6 @@ var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var id = urlParams.get("id");
 
-if(tipo == "ALMACENISTA"){
-  document.getElementById("formularioADDInfoSanServ").classList.add("ocultar");
-  document.getElementById("divAddSan").classList.add("ocultar");
-}
-
-if(tipo == "VENDEDOR"){
-  document.getElementById("formularioADDSanServ").classList.add("ocultar");
-}
-
 const get_datos = () => {
   $.ajax({
     type: "POST",
@@ -30,16 +21,6 @@ const get_datos = () => {
     async: true,
     beforeSend: function () {},
     success: function (response) {
-
-      if(tipo == "ALMACENISTA"){
-        document.getElementById("viewVendedor").classList.add("ocultar");
-      }
-
-      if(tipo == "VENDEDOR"){
-        document.getElementById("viewAlmacenista").classList.add("ocultar");
-      }
-
-
       /* informacion del cliente */
       document.getElementById("nom_clie").value = response.cliente.nom_clie;
       document.getElementById("raz_soc").value = response.cliente.razon_social;
@@ -78,13 +59,14 @@ const get_datos = () => {
       document.getElementById("dias_serv").value = response.dias_serv;
       document.getElementById("operador").value = response.operador;
       document.getElementById("ruta").value = response.ruta;
+      /* titulo del modal */
+      document.getElementById("modalTitle").innerHTML = `Nombre del servicio ${response.cliente.razon_social}-${response.cliente.nom_clie}`;
     },
     error: function (error) {
       console.log(error);
     },
   });
 };
-
 const get_infoSanBySer = () => {
   $.ajax({
     type: "POST",
@@ -104,6 +86,13 @@ const get_infoSanBySer = () => {
         document
           .getElementById("btnADDInfoSan")
           .setAttribute("disabled", "disabled");
+      }else{
+        document
+          .getElementById("btnAddSan")
+          .removeAttribute("disabled", "disabled");
+        document
+          .getElementById("btnADDInfoSan")
+          .removeAttribute("disabled", "disabled");
       }
 
       document.getElementById(
@@ -182,6 +171,7 @@ function removeSanInfo(id) {
     success: function (response) {
       if (response.resultado == true) {
         get_infoSanBySer();
+        get_datos();
         Swal.fire({
           title: "Alerta",
           text: `${response.mensaje}`,
@@ -195,9 +185,6 @@ function removeSanInfo(id) {
     },
   });
 }
-
-
-
 
 formularioADDInfoSanServ.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -225,6 +212,7 @@ formularioADDInfoSanServ.addEventListener("submit", (e) => {
       success: function (response) {
         if (response.resultado == true) {
           get_infoSanBySer();
+          get_datos();
           Swal.fire({
             title: "Alerta",
             text: `${response.mensaje}`,
@@ -245,8 +233,6 @@ formularioADDInfoSanServ.addEventListener("submit", (e) => {
     });
   }
 });
-
-
 
 function finalizarServ() {
   Swal.fire({

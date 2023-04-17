@@ -18,7 +18,17 @@ toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
 
+var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+  fps: 10,
+  qrbox: 200,
+});
+
+function startScanQr(){
+  html5QrcodeScanner.render(onScanSuccess);
+}
+
 function onScanSuccess(decodedText, decodedResult) {
+  html5QrcodeScanner.clear();
   $.ajax({
     type: "POST",
     url: "./include/getInfoServicio.php",
@@ -82,11 +92,7 @@ function onScanSuccess(decodedText, decodedResult) {
     },
   });
 }
-var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
-  fps: 10,
-  qrbox: 200,
-});
-html5QrcodeScanner.render(onScanSuccess);
+
 
 /* funcion para agregar a la bitacora */
 

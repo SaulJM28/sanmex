@@ -68,6 +68,11 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR" ) :
                         <h1 style="text-align: center;">Realizar Servicio</h1>
                     </div>
                 </div>
+                <div class="row" style="margin: 5px;">
+                    <div class="col-md-12" style="display: flex; justify-content: center;">
+                        <button class="btn btn-primary" onclick="startScanQr()">Scanear Qr <i class="fas fa-qrcode"></i></button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div id="qr-reader" style="width: 100%;"></div>

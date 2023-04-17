@@ -231,7 +231,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Agregar un sanitario para el servicio (Poner por JS)</h4>
+                        <h4 class="modal-title" id="modalTitle"></h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 

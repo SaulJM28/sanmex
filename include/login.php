@@ -41,14 +41,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id_ope'] = $result['id_ope'];
 
             //validamos que tipo de usuario es y cual sera su url
-            if ($result['tip_usu'] == 'ADMINISTRADOR' || $result['tip_usu'] == 'ALMACENISTA'  || $result['tip_usu'] == 'VENDEDOR') {
+            if ($result['tip_usu'] == 'ADMINISTRADOR' || $result['tip_usu'] == 'VENDEDOR') {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
                     "rol" => $result['tip_usu'],
                     "url" => "./home.php"
                 );
-            } else if ($result['tip_usu'] == 'OPERADOR') {
+            } 
+            if($result['tip_usu'] == 'ALMACENISTA'){
+                $data = array(
+                    "resultado" => true,
+                    "mensaje" => "Usuario y contraseña correctos",
+                    "rol" => $result['tip_usu'],
+                    "url" => "./homeAlmacenista.php"
+                );
+            }
+
+            if ($result['tip_usu'] == 'OPERADOR') {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",

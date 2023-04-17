@@ -13,7 +13,6 @@ window.addEventListener("load", () => {
   
 
   const get_infoSanBySer = () => {
-
     $.ajax({
       type: "POST",
       url: "./src/servicios/back/get_listSanByServ.php",
