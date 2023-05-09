@@ -1,4 +1,4 @@
-let el = document.getElementById("wrapper");
+  let el = document.getElementById("wrapper");
 let toggleButton = document.getElementById("menu-toggle");
 let limite = 0;
 let servicios = "";
@@ -49,7 +49,7 @@ const cargarServicios = async () => {
                             <h6 class="card-subtitle mb-2"><strong>Nombre cliente:</strong>${element.cliente.nom_clie}. </h6>
                             	<p class="card-text"><strong>Estado:</strong> ${element.dirreccion.estado}. <strong>Municipio:</strong> ${element.dirreccion.municipio} <strong>Colonia:</strong> ${element.dirreccion.colonia} <strong>Calle:</strong> ${element.dirreccion.calle}</p>
                             	<p class="card-text"><strong>Operador:</strong> ${element.operador}. <strong>Ruta:</strong> ${element.ruta}  </p>  
-                              <p class="card-text" style="text-align: right;">Sanitarios asignados: ${element.totalsan} de ${element.san_soli}</p>
+                              <p class="card-text" style="text-align: right;">Sanitarios solicitados: ${element.san_soli}</p>
                                 <div style="display: flex; justify-content: right">
                                     ${botones}
                                 </div>

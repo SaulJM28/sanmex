@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
       beforeSend: function () {},
       success: function (response) {
         let totalRe = response.totalRe;        
-        document.getElementById("titleSanSer").innerHTML = `<h1 style = "text-align: center;">Sanitarios Asignados ${totalRe} de ${san_sol} </h1>`
+        document.getElementById("titleSanSer").innerHTML = `<h1 style = "text-align: center;">Sanitarios solicitados ${san_sol} </h1>`
         let html = "";
         response.data.map((element) => {
           console.log(element);

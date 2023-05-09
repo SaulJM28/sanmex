@@ -18,7 +18,6 @@ addEventListener("load", () => {
     success: function (response) {
       let html = "";
       response.data.map((element) => {
-        console.log(element);
         html += `
         <div class="card sombra" style="width: 100%; border-left: 5px solid ${element.color}">
           <div class="card-body">
