@@ -82,11 +82,13 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                 <br>
                                 <div class="row g-3">
                                     <div class="col-md-12 mt-2">
-                                        <table id="tablaUsuarios" class="table table-striped nowrap"
+                                        <table id="tablaTipUsuarios" class="table table-striped nowrap"
                                             style="width:100%;">
                                             <thead style="background-color: #222059; color: white;">
                                                 <tr>
                                                     <th>Tipo/cargo</th>
+                                                    <th>Fecha Creacion</th>
+                                                    <th>Estatus</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -115,9 +117,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div id="mensajeADD">
-                    </div>
-                    <form method="POST" id="formularioADDUsuario">
+                    <form method="POST" id="formularioADDTipUsuario">
                         <div class="mb-3 mt-3">
                             <label for="tipCarAdd" class="form-label">Tipo/cargo:</label>
                             <input type="text" class="form-control" id="tipCarAdd"
@@ -141,38 +141,19 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar usuario</h4>
+                    <h4 class="modal-title">Editar</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div id="mensajeUP">
                     </div>
-                    <form method="POST" id="formularioUpdateUsuario">
+                    <form method="POST" id="formularioUpdateCargo">
                         <div class="mb-3 mt-3">
-                            <label for="nombre_ope_up" class="form-label">Nombre Operador: </label>
-                            <input type="hidden" id="id_usu_up" name="id_usu_up">
-                            <input type="text" class="form-control" id="nombre_ope_up"
-                                placeholder="Ingrese el nombre del operador" name="nombre_ope_up" readonly>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="nom_usu_up" class="form-label">Nombre Usuario: </label>
-                            <input type="text" class="form-control" id="nom_usu_up"
-                                placeholder="Ingrese el primer apellido del operador" name="nom_usu_up" required>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="pwd_usu_up" class="form-label">Contraseña Usuario: </label>
-                            <input type="password" class="form-control" id="pwd_usu_up"
-                                placeholder="Ingrese el segundo apellido del operador" name="pwd_usu_up" required>
-                        </div>
-                        <div class="mb-3 mt-3">
-                            <label for="tip_usu_up" class="form-label">Tipo de usuario:</label>
-                            <select id="tip_usu_up" name="tip_usu_up" class="form-select" required>
-                                <option value="" selected>seleccione una opcion</option>
-                                <option value="OPERADOR">Operador</option>
-                                <option value="ALMACENISTA">Almacenista</option>
-                                <option value="ADMINISTRADOR">Administrador</option>
-                            </select>
+                            <label for="tipCarUp" class="form-label">Tipo/cargo: </label>
+                            <input type="hidden" id="idCarUp" name="idCarUp">
+                            <input type="text" class="form-control" id="tipCarUp"
+                                placeholder="Ingrese el tipo/cargo" name="tipCarUp">
                         </div>
                         <div style="display: flex; justify-content: right;">
                             <button type="submit" class="btn btn-warning">Aceptar <i class="fas fa-edit"></i></button>
@@ -192,19 +173,17 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar Usuario</h4>
+                    <h4 class="modal-title">Eliminar </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div id="mensajeDE">
-                    </div>
-                    <form method="POST" id="formularioDeleteUsuario">
-                        <div class="mb-3 mt-3">
-                            <label for="num_san_de" class="form-label">Nombre de Usuario:</label>
-                            <input type="hidden" id="id_usu_de" name="id_usu_de">
-                            <input type="text" class="form-control" id="nom_usu_de"
-                                placeholder="Ingrese el numero del saniatraio" name="nom_usu_de" readonly>
+                    <form method="POST" id="formularioDeleteCargo">
+                    <div class="mb-3 mt-3">
+                            <label for="tipCarDe" class="form-label">Tipo/cargo: </label>
+                            <input type="hidden" id="idCarDe" name="idCarDe">
+                            <input type="text" class="form-control" id="tipCarDe"
+                                placeholder="Ingrese el tipo/cargo" name="tipCarDe" readonly>
                         </div>
                         <div style="display: flex; justify-content: right;">
                             <button type="submit" class="btn btn-danger">Aceptar <i class="fas fa-trash"></i></button>
@@ -222,7 +201,8 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
     <script src="../../static/js/datatables.min.js"></script>
-    <!-- <script src="../../static/js/usuarios/usuario.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../static/js/tipousuarios/tipousuarios.js"></script>
 </body>
 
 </html>
