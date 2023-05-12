@@ -26,13 +26,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR") :
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
-            <div class="fondo__sidebar" id="sidebar-wrapper">
-                <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
-                </div>
-                <div class="list-group list-group-flush my-3">
-                    <a href="./include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
-                </div>
-            </div>
+            <?php  include './src/componentes/sidebar.php' ?>
             <!-- /#sidebar-wrapper -->
             <!-- Page Content -->
             <div id="page-content-wrapper">

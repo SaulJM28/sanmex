@@ -106,6 +106,22 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                             </div>
                         </a>
                     </div>
+
+                    <div class="col-md-4 mt-2 ">
+                        <a href="./src/tipoUsuarios/tipoUsuario.php" class="link__card">
+                            <div class="card sombra">
+                                <div class="card-body">
+                                    <img src="static/img/iconos/grupo.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                    <h4 class="card-title">Tipo de Usuarios</h4>
+                                    <p class="card-text">Módulo para la gestión de los tipos de usuarios</p>
+                                    <div style="display: flex; justify-content: right;">
+                                        <a href="./src/tipoUsuarios/tipoUsuario.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                     <div class="col-md-4 mt-2 ">
                         <a href="./src/direcciones/direcciones.php" class="link__card">
                             <div class="card sombra">

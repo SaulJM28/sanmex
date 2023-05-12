@@ -144,15 +144,13 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                     while ($fila = $resultado->fetch_assoc()):
                                         ?>
                                         <option value="<?= $fila["id_ope"] ?>">
-                                            <?= $fila["nom"] ?>         <?= $fila["ap1"] ?>
+                                            <?= $fila["nom"] ?>  <?= $fila["ap1"] ?>
                                             <?= $fila["ap2"] ?>
                                         </option>
                                         <?php
                                     endwhile;
                                 } ?>
                             </select>
-
-
                         </div>
                         <div class="mb-3 mt-3">
                             <label for="nom_usu_add" class="form-label">Nombre Usuario:</label>
@@ -172,9 +170,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                             <label for="tip_usu_add" class="form-label">Tipo de usuario:</label>
                             <select id="tip_usu_add" name="tip_usu_add" class="form-select" required>
                                 <option value="" selected>seleccione una opcion</option>
-                                <option value="OPERADOR">Operador</option>
-                                <option value="ALMACENISTA">Almacenista</option>
-                                <option value="ADMINISTRADOR">Administrador</option>
+                           
                             </select>
                         </div>
                         <div style="display: flex; justify-content: right;">
@@ -276,6 +272,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
     <script src="../../static/js/jquery-3.6.3.min.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
     <script src="../../static/js/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../static/js/usuarios/usuario.js"></script>
 </body>
 

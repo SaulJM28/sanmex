@@ -108,6 +108,8 @@ toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
 
+
+
 formularioADDTipUsuario.addEventListener("submit", (e) => {
   e.preventDefault();
   let tipCarAdd = document.getElementById("tipCarAdd").value;
