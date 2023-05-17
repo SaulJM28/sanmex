@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id_ope'] = $result['id_ope'];
 
             //validamos que tipo de usuario es y cual sera su url
-            if ($result['tip_usu'] == 'ADMINISTRADOR' || $result['tip_usu'] == 'VENDEDOR') {
+            if ($result['tip_usu'] == 'ADMINISTRADOR' || $result['tip_usu'] == 'EJECUTIVO VENTAS' || $_SESSION['tip_usu'] == "DIRECTOR" || $_SESSION['tip_usu'] == "GERENTE") {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",

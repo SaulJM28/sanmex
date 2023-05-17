@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  $("#tablaTipUsuarios").DataTable({
+  $("#tablaTipServicios").DataTable({
     ajax: {
-      url: "./back/tipoUsuarios.php",
+      url: "./back/tiposServicios.php",
     },
     deferRender: true,
     scrollY: 340,
@@ -25,7 +25,7 @@ $(document).ready(function () {
     order: [[0, "asc"]],
     columns: [
       {
-        data: "cargo",
+        data: "tipo",
       },
       {
         data: "fec_cre",
@@ -34,13 +34,13 @@ $(document).ready(function () {
         data: "estatus",
       },
       {
-        data: "id_tipusu",
+        data: "id_tipser",
         bSortable: false,
         mRender: function (data, type, row) {
           return `<div class="btn-group" role="group" aria-label="Basic example">
-                 <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" title="Editar" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-                 <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" title="Eliminar" onclick="get_info(${data}, 'delete')"><i class="fas fa-trash" ></i></button>
-              </div>`;
+                   <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" title="Editar" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
+                   <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" title="Eliminar" onclick="get_info(${data}, 'delete')"><i class="fas fa-trash" ></i></button>
+                </div>`;
         },
       },
     ],
@@ -108,30 +108,30 @@ toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
 
-formularioADDTipUsuario.addEventListener("submit", (e) => {
+formularioADDTipServicio.addEventListener("submit", (e) => {
   e.preventDefault();
-  let tipCarAdd = document.getElementById("tipCarAdd").value;
-  if (tipCarAdd.length == 0) {
+  let tipSerAdd = document.getElementById("tipSerAdd").value;
+  if (tipSerAdd.length == 0) {
     Swal.fire("¡Alerta!", "Campo de cargo vacio", "warning");
   } else {
     $.ajax({
       type: "POST",
-      url: "./back/tipoUsuarios.php",
+      url: "./back/tiposServicios.php",
       data: {
-        cargo: tipCarAdd,
+        tipoServicio: tipSerAdd,
         tipo: "INSERTAR",
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
         if (response.resultado == true) {
-          $("#tablaTipUsuarios").DataTable().ajax.reload();
+          $("#tablaTipServicios").DataTable().ajax.reload();
           Swal.fire("¡Alerta!", `${response.mensaje}`, "success");
-          document.getElementById("tipCarAdd").value = "";
+          document.getElementById("tipSerAdd").value = "";
         } else {
-          $("#tablaTipUsuarios").DataTable().ajax.reload();
+          $("#tablaTipServicios").DataTable().ajax.reload();
           Swal.fire("¡Alerta!", `${response.mensaje}`, "error");
-          document.getElementById("tipCarAdd").value = "";
+          document.getElementById("tipSerAdd").value = "";
         }
       },
       error: function (error) {
@@ -145,16 +145,16 @@ const get_info = (id, tipo) => {
   if (tipo == "update") {
     $.ajax({
       type: "POST",
-      url: "./back/tipoUsuarios.php",
+      url: "./back/tiposServicios.php",
       data: {
-        id : id,
-        tipo: 'GETBYID'
+        id: id,
+        tipo: "GETBYID",
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-        document.getElementById("idCarUp").value = response.id_tipusu;
-        document.getElementById("tipCarUp").value = response.cargo;
+        document.getElementById("idSerUp").value = response.id_tipser;
+        document.getElementById("tipSerUp").value = response.tipo;
       },
       error: function (error) {
         console.log(error);
@@ -163,16 +163,16 @@ const get_info = (id, tipo) => {
   } else if (tipo == "delete") {
     $.ajax({
       type: "POST",
-      url: "./back/tipoUsuarios.php",
+      url: "./back/tiposServicios.php",
       data: {
-        id : id,
-        tipo: 'GETBYID'
+        id: id,
+        tipo: "GETBYID",
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-        document.getElementById("idCarDe").value = response.id_tipusu;
-        document.getElementById("tipCarDe").value = response.cargo;
+        document.getElementById("idSerDe").value = response.id_tipser;
+        document.getElementById("tipSerDe").value = response.tipo;
       },
       error: function (error) {
         console.log(error);
@@ -181,27 +181,27 @@ const get_info = (id, tipo) => {
   }
 };
 /*  funcion para actualizar la informacion */
-formularioUpdateCargo.addEventListener("submit", (e) => {
+formularioUpdateCargTipServicioo.addEventListener("submit", (e) => {
   e.preventDefault();
-  let idCarUp = document.getElementById("idCarUp").value;
-  let tipCarUp = document.getElementById("tipCarUp").value;
+  let idSerUp = document.getElementById("idSerUp").value;
+  let tipSerUp = document.getElementById("tipSerUp").value;
 
   $.ajax({
     type: "POST",
-    url: "./back/tipoUsuarios.php",
+    url: "./back/tiposServicios.php",
     data: {
-      id: idCarUp,
-      cargo: tipCarUp,
+      id: idSerUp,
+      tipoServicio: tipSerUp,
       tipo: "ACTUALIZAR",
     },
     async: true,
     beforeSend: function () {},
     success: function (response) {
       if (response.resultado == true) {
-        $("#tablaTipUsuarios ").DataTable().ajax.reload();
+        $("#tablaTipServicios").DataTable().ajax.reload();
         Swal.fire("¡Alerta!", `${response.mensaje}`, "success");
       } else {
-        $("#tablaTipUsuarios ").DataTable().ajax.reload();
+        $("#tablaTipServicios").DataTable().ajax.reload();
         Swal.fire("¡Alerta!", `${response.mensaje}`, "error");
       }
     },
@@ -211,24 +211,24 @@ formularioUpdateCargo.addEventListener("submit", (e) => {
   });
 });
 /* funcion para eliminar informacion */
-formularioDeleteCargo.addEventListener("submit", (e) => {
+formularioDeleteTipServicioo.addEventListener("submit", (e) => {
   e.preventDefault();
-  let idCarDe = document.getElementById("idCarDe").value;
+  let idSerDe = document.getElementById("idSerDe").value;
   $.ajax({
     type: "POST",
-    url: "./back/tipoUsuarios.php",
+    url: "./back/tiposServicios.php",
     data: {
-      id: idCarDe,
+      id: idSerDe,
       tipo: "ELIMINAR",
     },
     async: true,
     beforeSend: function () {},
     success: function (response) {
       if (response.resultado == true) {
-        $("#tablaTipUsuarios ").DataTable().ajax.reload();
+        $("#tablaTipServicios").DataTable().ajax.reload();
         Swal.fire("¡Alerta!", `${response.mensaje}`, "success");
       } else {
-        $("#tablaTipUsuarios ").DataTable().ajax.reload();
+        $("#tablaTipServicios").DataTable().ajax.reload();
         Swal.fire("¡Alerta!", `${response.mensaje}`, "error");
       }
     },
