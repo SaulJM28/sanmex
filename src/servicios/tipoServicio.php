@@ -35,6 +35,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
+
             <!-- Page Content -->
             <div class="d-flex" id="wrapper">
                 <!-- Sidebar -->
@@ -76,35 +77,35 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                     <div class="container-fluid" style="margin-top: 80px; padding: 10px;">
                         <div class="row">
                             <div>
-                                <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
-                                <h1 style="text-align: center;">Lista de Módulos</h1>
+                                <a href="servicios.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
+                                <h1 style="text-align: center;">Selecciona el tipo de servicio</h1>
                             </div>
                             <?php
                             if ($_SESSION['tip_usu'] == 'EJECUTIVO VENTAS' || $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                             ?>
-                                <div class="col-md-4 mt-2 ">
-                                    <a href="tipoServicio.php" class="link__card">
+                                <div class="col-md-4 mt-2">
+                                    <a href="create_servicioLimpiezaSan.php" class="link__card">
                                         <div class="card sombra">
                                             <div class="card-body">
-                                                <img src="../../static/img/iconos/add.png" class="img-fluid" loading="lazy" width="60" height="60">
-                                                <h4 class="card-title">Generar Servicio</h4>
-                                                <p class="card-text">Aqui se da de alta el servicio</p>
+                                                <img src="../../static/img/iconos/sanitario.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                                <h4 class="card-title">Limpieza de sanitarios</h4>
+                                                <p class="card-text">Aqui se da de alta solo el servicio de limpieza de sanitarios</p>
                                                 <div style="display: flex; justify-content: right;">
-                                                    <a href="tipoServicio.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                                    <a href="create_servicioLimpiezaSan.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-md-4 mt-2 ">
-                                    <a href="listaServicios.php" class="link__card">
+                                    <a href="create_servicioLimpieza.php" class="link__card">
                                         <div class="card sombra">
                                             <div class="card-body">
-                                                <img src="../../static/img/iconos/clipboard.png" class="img-fluid" loading="lazy" width="60" height="60">
-                                                <h4 class="card-title">Lista de Servicios</h4>
-                                                <p class="card-text">Aqui se ve la lista de los servicios dados de alta</p>
+                                                <img src="../../static/img/iconos/cubeta.png" class="img-fluid" loading="lazy" width="60" height="60">
+                                                <h4 class="card-title">Servicios Diferentes</h4>
+                                                <p class="card-text">Desazolvas de fosas septicas, Limpiezas profundas, Sondeos, Inspeccion de camaras, Limpieza de trampas de grasa, Destape de drenajes, Desazolve de fosas portatiles</p>
                                                 <div style="display: flex; justify-content: right;">
-                                                    <a href="listaServicios.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                                    <a href="create_servicioLimpieza.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +122,9 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <script src="../../static/js/datatables.min.js"></script>
         <script src="../../static/js/servicio/listServicios.js"></script>
     </body>
+
     </html>
+
 <?php
 else :
     header('location: ../../include/logout.php');

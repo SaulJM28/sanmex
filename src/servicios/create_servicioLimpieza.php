@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == 'EJECUTIVO VENTAS')) :
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -65,68 +65,70 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                        <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
+                                        <a href="tipoServicio.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
                                         <h1 style="text-align: center;">Crear Servicio</h1>
                                         <p class="text-center">Campos obligatorios<strong style="color: red;">*</strong></p>
                                     </div>
+                                    <h2 style="text-align: center;">Sanitarios Disponibles</h2>
+                                    <div class="row g-3" style="margin: .5rem;">
+                                        <div class="col-md-12">
+                                            <ul class="list-group" id="listSanDisp">
+                                            </ul>
+                                        </div>
+                                    </div>
 
-                                    <div class="row g-3">
-                                        <div class="col-md-6 mt-2">
-                                            <div>
-                                                <label>Cliente<strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" onkeyup="buscador()" id="key" name="key" placeholder="Buscar cliente por RFC o Razon Social">
-                                                <small>De no encontrar el cliente, registralo <a href="../clientes/clientes.php">aqui</a></small>
-                                            </div>
-                                            <div id="clienteInfo">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-2">
-                                            <div>
-                                                <label>Direccion<strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" onkeyup="buscador_dire()" id="key_dire" name="key_dire" placeholder="Buscar direccion por Colonia o Calle">
-                                                <small>De no encontrar la direccion, registrala <a href="../direcciones/direcciones.php">aqui</a></small>
-                                            </div>
-                                            <div id="direInfo">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row g-3">
-                                        <div class="col-md-6 mt-2">
-                                            <h2 class="text-center">Datos del cliente</h2>
-                                            <div class="col-md-12">
-                                                <ul class="list-group" id="infoClient">
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-2">
-                                            <h2 class="text-center">Datos de la direccion</h2>
-                                            <div class="col-md-12">
-                                                <ul class="list-group" id="infoDire">
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <form class="row g-3" id="formularioADDServicio" method="post">
-                                        <div id='mensaje'></div>
-                                        <h2 class="text-center">Datos del servicio</h2>
-                                        <input type="hidden" class="form-control" id="id_clie">
-                                        <input type="hidden" class="form-control" id="id_dire">
+                                        <h2 class="text-center">Formulario Alta Servicio</h2>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="num_san">Numero de Sanitarios <strong style="color: red;">*</strong></label>
-                                                <input type="number" step="any" class="form-control" id="num_san" placeholder="Ingrese el numero de sanitarios a rentar" onChange="calcularTotal()">
+                                                <label for="tipSer">Tipo de Servicio <strong style="color: red;">*</strong></label>
+                                                <select class="form-select" name="tipSer" id="tipSer" >
+                                                </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="cost_unit">Costo Unitario <strong style="color: red;">*</strong></label>
-                                                <input type="number" step="any" class="form-control" id="cost_unit" placeholder="Ingrese el unitario por sanitario" onChange="calcularTotal()">
+                                                <label for="numSan">Numero de Sanitarios <strong style="color: red;">*</strong></label>
+                                                <input type="number" step="any" class="form-control" name="numSan" id="numSan" placeholder="Ingrese el numero de sanitarios a rentar">
                                             </div>
                                         </div>
+
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label for="fecEnt">Fecha de entrega <strong style="color: red;">*</strong></label>
+                                                <input type="date" class="form-control" name="fecEnt" id="fecEnt">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="horEnt">Hora de entrega <strong style="color: red;">*</strong></label>
+                                                <input type="time" class="form-control" name="horEnt" id="horEnt">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="cosSer">Costo de Servicio <strong style="color: red;">*</strong></label>
+                                                <input type="number" step="any" class="form-control" name="cosSer" id="cosSer" placeholder="Ingrese el costo del servicio">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="tipPag">Tipo de pago <strong style="color: red;">*</strong></label>
+                                                <select class="form-select" name="tipPag" id="tipPag">
+                                                    <option value="" selected>Seleccione un tipo de pago</option>
+                                                    <option value="EFECTIVO">EFECTIVO</option>
+                                                    <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                Aqui va la info del cliente
                                                 <label for="cost_tot">Costo Total <strong style="color: red;">*</strong></label>
                                                 <input type="number" step="any" class="form-control" id="cost_tot" placeholder="Ingrese el costo total" readonly>
                                                 <small>El costo total se calcula al ingresar el numero de sanitarios y el
@@ -136,14 +138,36 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="tip_pag">Tipo de pago <strong style="color: red;">*</strong></label>
-                                                <select class="form-select" name="tip_pag" id="tip_pag">
-                                                    <option value="" selected>Seleccione un tipo de pago</option>
-                                                    <option value="EFECTIVO">EFECTIVO</option>
-                                                    <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-                                                </select>
+                                                <label for="conctPag">Contacto de Pago <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="conctPag" id="conctPag" placeholder="Nombre del cliente" readonly>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="telConPag">Telefono del contacto de pago <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="telConPag" id="telConPag" placeholder="Nombre del cliente" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="corConPag">Correo del contacto de pago <strong style="color: red;">*</strong></label>
+                                                <input type="email" class="form-control" name="corConPag" id="corConPag" placeholder="Nombre del cliente" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="corConPag">Nombre del contacto que recibe <strong style="color: red;">*</strong></label>
+                                                <input type="email" class="form-control" name="corConPag" id="corConPag" placeholder="Nombre del cliente" readonly>
+                                            </div>
+                                        </div>
+
+
+                                        
+
+                                     
 
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -157,8 +181,8 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="operador">Operador <strong style="color: red;">*</strong></label>
-                                                <input  type="hidden" name="operador" id="operador" />
-                                                <input  class="form-control" placeholder="Nombre del operador" disabled  name="viewOperador" id="viewOperador" />
+                                                <input type="hidden" name="operador" id="operador" />
+                                                <input class="form-control" placeholder="Nombre del operador" disabled name="viewOperador" id="viewOperador" />
                                             </div>
                                         </div>
 
@@ -253,6 +277,8 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                             <button type="submit" class="btn btn-primary">Aceptar</button>
                                         </div>
                                     </form>
+
+                                    
                                 </div>
                             </div>
                         </div>

@@ -48,7 +48,7 @@
                                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
                                                 <input type="text" class="form-control" id="nom_usu" required
                                                     placeholder="Ingrese su nombre de usuario" name="nom_usu"
-                                                    maxlength="8">
+                                                    maxlength="8" onkeyup="javascript:this.value=this.value.toUpperCase();">
                                             </div>
                                         </div>
 
