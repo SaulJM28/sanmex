@@ -6,10 +6,14 @@ toggleButton.onclick = function () {
 };
 
 function buscadorInfoCliente() {
-  let key = document.getElementById("cost_tot").value;
+  let key = document.getElementById("buscarCli").value;
   let html = "";
   if (key.length == 0) {
-    /* document.getElementById("clienteInfo").innerHTML = ""; */
+    document.getElementById("mensajeBusClie").innerHTML = ``;
+    document.getElementById("nomCli").value = "";
+    document.getElementById("rfcCli").value = "";
+    document.getElementById("razoSocCli").value = "";
+    document.getElementById("idCli").value = "";
   } else {
     $.ajax({
       type: "POST",
@@ -22,22 +26,23 @@ function buscadorInfoCliente() {
       success: function (response) {
         response.forEach((element) => {
           if (element.resultado == true) {
-            console.log(element);
-            html += `
-              <div class="card">
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-8 mt-2">
-                            <p>Nombre del cliente: ${element.nom_clie}. RFC del cliente: ${element.rfc}. Razon social del cliente  ${element.razon_social}</p>
-                        </div>
-                        <div class="col-md-4 mt-2">
-                            <button class="btn btn-primary"  onclick="infoClient('${element.id_clie}', '${element.nom_clie}', '${element.rfc}', '${element.razon_social}', '${element.nom_con}', '${element.num_con}')" >Seleccionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div><br/>`;
+            document.getElementById("nomCli").value = `${element.nom_clie}`;
+            document.getElementById("rfcCli").value = `${element.rfc}`;
+            document.getElementById("idCli").value = `${element.id_clie}`;
+            document.getElementById(
+              "razoSocCli"
+            ).value = `${element.razon_social}`;
           } else {
-            console.log("Sin Informacion");
+            document.getElementById(
+              "mensajeBusClie"
+            ).innerHTML = ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Alerta!</strong> No se pudo encontrar informacion del cliente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+            document.getElementById("nomCli").value = "";
+            document.getElementById("rfcCli").value = "";
+            document.getElementById("razoSocCli").value = "";
+            document.getElementById("idCli").value = "";
           }
         });
       },
@@ -48,11 +53,19 @@ function buscadorInfoCliente() {
   }
 }
 
-function buscador_dire() {
-  let key_dire = document.getElementById("key_dire").value;
+function buscadorInfoDireClie() {
+  let key_dire = document.getElementById("buscarDir").value;
   let html = "";
   if (key_dire.length == 0) {
-    document.getElementById("direInfo").innerHTML = "";
+    document.getElementById("mensajeBusDire").innerHTML = ``;
+    document.getElementById("dirEst").value = "";
+    document.getElementById("dirMun").value = "";
+    document.getElementById("dirCol").value = "";
+    document.getElementById("dirCalle").value = "";
+    document.getElementById("dirNumExt").value = "";
+    document.getElementById("dirNumInt").value = "";
+    document.getElementById("dirCP").value = "";
+    document.getElementById("idDir").value = "";
   } else {
     $.ajax({
       type: "POST",
@@ -65,24 +78,32 @@ function buscador_dire() {
       success: function (response) {
         response.forEach((element) => {
           if (element.resultado == true) {
-            html += `
-            <div class="card">
-                <div class="card-body">  
-                    <div class="row g-3">
-                        <div class="col-md-8 mt-2">
-                            <p>Estado: ${element.estado}. Municipio: ${element.municipio}. Colonia: ${element.colonia}. Calle: ${element.calle}. Num_ext: ${element.num_ext}. Num_int: ${element.num_int}.</p>
-                        </div>
-                        <div class="col-md-4 mt-2">
-                            <button class="btn btn-primary" onclick="infoDire('${element.id_dire}', '${element.estado}', '${element.municipio}', '${element.colonia}', '${element.calle}', '${element.num_ext}', '${element.num_int}', '${element.cp}')" >Seleccionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div><br/>`;
+            console.log(element);
+            document.getElementById("dirEst").value = `${element.estado}`;
+            document.getElementById("dirMun").value = `${element.municipio}`;
+            document.getElementById("dirCol").value = `${element.colonia}`;
+            document.getElementById("dirCalle").value = `${element.calle}`;
+            document.getElementById("dirNumExt").value = `${element.num_ext}`;
+            document.getElementById("dirNumInt").value = `${element.num_int}`;
+            document.getElementById("dirCP").value = `${element.num_int}`;
+            document.getElementById("idDir").value = `${element.id_dire}`;
           } else {
-            document.getElementById("direInfo").innerHTML = `Sin informacion`;
+            document.getElementById(
+              "mensajeBusDire"
+            ).innerHTML = ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡Alerta!</strong> No se pudo encontrar informacion de la direccion.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+            document.getElementById("dirEst").value = "";
+            document.getElementById("dirMun").value = "";
+            document.getElementById("dirCol").value = "";
+            document.getElementById("dirCalle").value = "";
+            document.getElementById("dirNumExt").value = "";
+            document.getElementById("dirNumInt").value = "";
+            document.getElementById("dirCP").value = "";
+            document.getElementById("idDir").value = "";
           }
         });
-        document.getElementById("direInfo").innerHTML = html;
       },
       error: function (error) {
         console.log(error);
@@ -129,133 +150,92 @@ const listSanDisp = async () => {
 };
 listSanDisp();
 
-const lisTipSer = async () => {
-  try {
-    let res = await fetch("../tiposServicios/back/tiposServicios.php");
-    let data = await res.json();
-    let listaTipSerHtml = `<option value = "" selected>Seleccione el tipo de servicio</option>`
-    data.data.forEach((element) => {
-      listaTipSerHtml += `<option value = "${element.tipo}"> ${element.tipo} </option>`
-    });
-    document.getElementById("tipSer").innerHTML = listaTipSerHtml;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-lisTipSer();
-
 formularioADDServicio.addEventListener("submit", (e) => {
   e.preventDefault();
-  let id_clie = document.getElementById("id_clie").value;
-  let id_dire = document.getElementById("id_dire").value;
-  let num_san = document.getElementById("num_san").value;
-  let cost_unit = document.getElementById("cost_unit").value;
-  let cost_tot = document.getElementById("cost_tot").value;
-  let tip_pag = document.getElementById("tip_pag").value;
-  let dia_de_pag = document.getElementById("dia_de_pag").value;
-  let ruta = document.getElementById("ruta").value;
-  let operador = document.getElementById("operador").value;
-  /* variables de checkbox */
-  let CheckboxL = document.getElementById("CheckboxL").checked;
-  let CheckboxM = document.getElementById("CheckboxM").checked;
-  let CheckboxMI = document.getElementById("CheckboxMI").checked;
-  let CheckboxJ = document.getElementById("CheckboxJ").checked;
-  let CheckboxV = document.getElementById("CheckboxV").checked;
-  let CheckboxS = document.getElementById("CheckboxS").checked;
-  let CheckboxD = document.getElementById("CheckboxD").checked;
-  /* variables de consideraciones */
-  let hora_aten = document.getElementById("hora_aten").value;
+  
+  let idCli = document.getElementById("idCli").value;
+  let idDir = document.getElementById("idDir").value;
+  let tipSer = document.getElementById("tipSer").value;
+  let numSan = document.getElementById("numSan").value;
+  let fecEnt = document.getElementById("fecEnt").value;
+  let horEnt = document.getElementById("horEnt").value;
+  let cosSer = document.getElementById("cosSer").value;
+  let tipPag = document.getElementById("tipPag").value;
+  let conctPag = document.getElementById("conctPag").value;
+  let telConPag = document.getElementById("telConPag").value;
+  let corConPag = document.getElementById("corConPag").value;
+  let NomConRec = document.getElementById("NomConRec").value;
+  let telConRec = document.getElementById("telConRec").value;
+  let diaPag = document.getElementById("diaPag").value;
   let obser = document.getElementById("obser").value;
 
-  let error = [];
-
-  if (id_clie.length == 0) {
-    Mensaje("Debe de seleccionar un cliente", "danger");
-    error.push("You don't select any costv  mer");
+  if(tipSer.length == 0){
+    Swal.fire("Alerta", "Campo Tipo de Servicio Vacio ", "warning");
+  }else if (numSan.length == 0){
+    Swal.fire("Alerta", "Campo Numeros de Sanitarios Vacio ", "warning");
+  }else if(fecEnt.length == 0){
+    Swal.fire("Alerta", "Campo Fecha de Entrega Vacio ", "warning");
+  }else if(horEnt.length == 0){
+    Swal.fire("Alerta", "Campo Hora de Entrega Vacio ", "warning");
+  }else if(cosSer.length == 0){
+    Swal.fire("Alerta", "Campo Costo de Servicio Vacio ", "warning");
+  } 
+  else if(tipPag.length == 0){
+    Swal.fire("Alerta", "Campo Tipo de Pago Vacio ", "warning");
+  } 
+  else if(conctPag.length == 0){
+    Swal.fire("Alerta", "Campo Contacto de Pago Vacio ", "warning");
+  } 
+  else if(telConPag.length == 0){
+    Swal.fire("Alerta", "Campo Telefono Contacto de Pago Vacio ", "warning");
   }
-
-  if (id_dire.length == 0) {
-    Mensaje("Debe de seleccionar una direccion", "danger");
-    error.push("You don't select any location");
+  else if(corConPag.length == 0){
+    Swal.fire("Alerta", "Campo Correo Contacto de Pago Vacio ", "warning");
   }
-
-  let dias = {};
-
-  //Validar checkbox
-  if (
-    !CheckboxL &&
-    !CheckboxM &&
-    !CheckboxMI &&
-    !CheckboxJ &&
-    !CheckboxV &&
-    !CheckboxS &&
-    !CheckboxD
-  ) {
-    Mensaje("Debe de seleccionar por lo menos un dia de pago", "danger");
-    error.push("You don't select any checkbox");
-  } else {
-    CheckboxL ? Object.assign(dias, { Lunes: true }) : null;
-    CheckboxM ? Object.assign(dias, { Martes: true }) : null;
-    CheckboxMI ? Object.assign(dias, { Miercoles: true }) : null;
-    CheckboxJ ? Object.assign(dias, { Jueves: true }) : null;
-    CheckboxV ? Object.assign(dias, { Viernes: true }) : null;
-    CheckboxS ? Object.assign(dias, { Sabado: true }) : null;
-    CheckboxD ? Object.assign(dias, { Domingo: true }) : null;
+  else if(NomConRec.length == 0){
+    Swal.fire("Alerta", "Campo Nombre Contacto que Recibe Vacio ", "warning");
   }
-
-  if (num_san.length == 0) {
-    Mensaje("Debe de ingresar un numero de sanitarios a rentar", "danger");
-    error.push("Without numbers sanitarios");
-  }
-
-  if (cost_unit.length == 0) {
-    Mensaje("Debe de ingresar el costo unitario", "danger");
-    error.push("Without unit cost");
-  }
-
-  if (tip_pag.length == 0) {
-    Mensaje("Debe seleccionar el tipo de pago", "danger");
-    error.push("Without kind of pay");
-  }
-
-  if (dia_de_pag.length == 0) {
-    Mensaje("Debe de seleccionar el dia de pago", "danger");
-    error.push("You don't select a day of pay");
-  }
-
-  if (error.length > 0) {
-    Mensaje(
-      "Campos vacio, favor de revisar que los campos esten correctamente llenos",
-      "danger"
-    );
-  } else {
+  else if(telConRec.length == 0){
+    Swal.fire("Alerta", "Campo Telefono Contacto que Recibe Vacio ", "warning");
+  } 
+  else if(diaPag.length == 0){
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } 
+  else if(obser.length == 0){
+    Swal.fire("Alerta", "Campo Observaciones Vacio ", "warning");
+  } 
+  else {
+    console.log("todo bien");
     $.ajax({
       type: "POST",
       url: "./back/insert_servicio.php",
       data: {
-        id_clie: id_clie,
-        id_dire: id_dire,
-        num_san: num_san,
-        cost_unit: 0,
-        cost_tot: 0,
-        tip_pag: tip_pag,
-        dia_de_pag: dia_de_pag,
-        diasServicio: dias,
-        hora_aten: hora_aten,
+        id_clie: idCli,
+        id_dire: idDir,
+        tipSer: tipSer,
+        numSan: numSan,
+        fecEnt: fecEnt,
+        horEnt: horEnt,
+        cosSer: cosSer,
+        tipPag: tipPag,
+        conctPag: conctPag,
+        telConPag: telConPag,
+        corConPag: corConPag,
+        NomConRec: NomConRec,
+        telConRec: telConRec,
+        diaPag: diaPag,
         obser: obser,
-        ruta: ruta,
-        operador: operador,
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-        if (response.resultado == true) {
+        console.log(response);
+        /* if (response.resultado == true) {
           Swal.fire("Alerta", `${response.mensaje}`, "success");
           window.location.href = `${response.url}`;
         } else {
           Swal.fire("Alerta", `${response.mensaje}`, "error");
-        }
+        } */
       },
       error: function (error) {
         console.log(error);
@@ -264,68 +244,3 @@ formularioADDServicio.addEventListener("submit", (e) => {
   }
 });
 
-const calcularTotal = () => {
-  let costTotal =
-    document.getElementById("num_san").value *
-    document.getElementById("cost_unit").value;
-  document.getElementById("cost_tot").value = costTotal;
-};
-
-const getListRutas = () => {
-  $.ajax({
-    type: "GET",
-    url: "../rutas/back/get_listRutas.php",
-    async: true,
-    beforeSend: function () {},
-    success: function (response) {
-      let listRutas = '<option value=""  selected>Seleccione la ruta</option>';
-      response.data.forEach((element) => {
-        listRutas += `<option value="${element.id_rut}"> ${element.nom_rut} </option>`;
-      });
-      document.getElementById("ruta").innerHTML = listRutas;
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
-};
-
-document
-  .getElementById("ruta")
-  .addEventListener("change", function handleChange(event) {
-    let id_rut = event.target.value;
-    $.ajax({
-      type: "GET",
-      url: "../rutas/back/get_listRutas.php",
-      async: true,
-      beforeSend: function () {},
-      success: function (response) {
-        response.data.forEach((element) => {
-          if (id_rut == element.id_rut) {
-            console.log(element.operador);
-            document.getElementById("operador").value = element.id_ope;
-            document.getElementById(
-              "viewOperador"
-            ).value = `${element.operador}`;
-          } else {
-            document.getElementById("operador").value = ``;
-            document.getElementById("viewOperador").value = ``;
-          }
-        });
-      },
-      error: function (error) {
-        console.log(error);
-      },
-    });
-  });
-
-getListRutas();
-
-const Mensaje = (mensaje, color) => {
-  document.getElementById("mensaje").innerHTML = `  
-  <div class="alert alert-${color} alert-dismissible">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>¡Aviso!</strong> ${mensaje}.
-  </div>
-  `;
-};

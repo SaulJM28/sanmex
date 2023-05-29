@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == 'EJECUTIVO VENTAS')) :
 ?>
 
 
@@ -83,8 +83,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                                 <th>TEL_ClIE</th>
                                                 <th>RFC</th>
                                                 <th>RAZON SOCIAL</th>
-                                                <th>NOM_CON</th>
-                                                <th>NUM_CON</th>
+                                                <th>DIRECCION</th>
                                                 <th>FEC_CREA</th>
                                                 <th>ESTATUS</th>
                                                 <th>ACCIONES</th>
@@ -113,7 +112,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                     </div>
                     <div class="modal-body">
                         <form class="row g-3" method="POST" id="formularioADDCliente">
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-12 mt-3">
                                 <h6><b>Informacion del responsable que contrata el servicio</b></h6>
                                 <div class="mb-3 mt-3">
                                     <label for="nom_clie_add" class="form-label">Nombre del cliente:</label>
@@ -132,17 +131,70 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                     <input type="text" class="form-control" id="razsoc_clie_add" name="razsoc_clie_add" placeholder="Ingrese la razon social del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <h6><b>Informacion del responsable que recibe el servicio</b></h6>
-                                <div class="mb-3 mt-3">
-                                    <label for="nomcon_clie_add" class="form-label">Nombre del contacto:</label>
-                                    <input type="text" class="form-control" id="nomcon_clie_add" name="nomcon_clie_add" placeholder="Ingrese el nombre de contacto del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
-                                </div>
-                                <div class="mb-3 mt-3">
-                                    <label for="numtel_clie_add" class="form-label">Número teléfonico del contacto:</label>
-                                    <input type="text" class="form-control" id="numtel_clie_add" name="numtel_clie_add" placeholder="Ingrese el numero telefonico del contacto del cliente" minlength="10" maxlength="10" required>
+                            <div style="display: flex; justify-content: center;">
+                                <h6><b>Direccion del cliente (Fiscal)</b></h6>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="buscarDir">Buscar Direccion</label>
+                                    <input type="text" class="form-control" id="buscarDir" placeholder="Escriba el nombre de la calle/colonia" onkeyup="buscadorInfoDireClie('insert')" required>
+                                    <small>De no exitir la direccion la puedes dar de alta <a href="../direcciones/direcciones.php">aqui</a></small>
                                 </div>
                             </div>
+
+                            <div class="col-md-12" id="mensajeBusDire">
+                            </div>
+                            <input type="hidden" id="idDir">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirEst">Estado</label>
+                                    <input type="text" class="form-control" name="dirEst" id="dirEst" placeholder="Estado" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirMun">Municipio</label>
+                                    <input type="text" class="form-control" name="dirMun" id="dirMun" placeholder="Municipio" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirCol">Colonia</label>
+                                    <input type="text" class="form-control" name="dirCol" id="dirCol" placeholder="Colonia" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirCalle">Calle</label>
+                                    <input type="text" class="form-control" name="dirCalle" id="dirCalle" placeholder="Calle" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirNumExt">Num Ext</label>
+                                    <input type="text" class="form-control" name="dirNumExt" id="dirNumExt" placeholder="Numero Exterior" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirNumInt">Num Int</label>
+                                    <input type="text" class="form-control" name="dirNumInt" id="dirNumInt" placeholder="Numero Interior" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirCP">CP</label>
+                                    <input type="text" class="form-control" name="dirCP" id="dirCP" placeholder="Codigo Postal" disabled readonly>
+                                </div>
+                            </div>
+
+
                             <div style="display: flex; justify-content: right;">
                                 <button type="submit" class="btn btn-primary">Agregar <i class="fas fa-plus"></i></button>
                             </div>
@@ -163,7 +215,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                     </div>
                     <div class="modal-body">
                         <form class="row g-3" method="POST" id="formularioUPDATECliente">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <h6><b>Informacion del responsable que contrata el servicio</b></h6>
                                 <div class="mb-3 mt-3">
                                     <input type="hidden" id="id_up" name="id_up">
@@ -183,15 +235,66 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                     <input type="text" class="form-control" id="razsoc_clie_up" name="razsoc_clie_up" placeholder="Ingrese la razon social del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h6><b>Informacion del responsable que recibe el servicio</b></h6>
-                                <div class="mb-3 mt-3">
-                                    <label for="nomcon_clie_up" class="form-label">Nombre del contacto:</label>
-                                    <input type="text" class="form-control" id="nomcon_clie_up" name="nomcon_clie_up" placeholder="Ingrese el nombre de contacto del cliente" required onkeyup="javascript:this.value=this.value.toUpperCase();">
+                            <div style="display: flex; justify-content: center;">
+                                <h6><b>Direccion del cliente (Fiscal)</b></h6>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="buscarDirUp">Buscar Direccion</label>
+                                    <input type="text" class="form-control" id="buscarDirUp" placeholder="Escriba el nombre de la calle/colonia" onkeyup="buscadorInfoDireClie('update')" required>
+                                    <small>De no exitir la direccion la puedes dar de alta <a href="../direcciones/direcciones.php">aqui</a></small>
                                 </div>
-                                <div class="mb-3 mt-3">
-                                    <label for="numtel_clie_up" class="form-label">Número teléfonico del contacto:</label>
-                                    <input type="text" class="form-control" id="numtel_clie_up" name="numtel_clie_up" placeholder="Ingrese el numero telefonico del contacto del cliente" required minlength="10" maxlength="10">
+                            </div>
+
+                            <div class="col-md-12" id="mensajeBusDireUP">
+                            </div>
+                            <input type="hidden" id="idDirUp">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirEstUP">Estado</label>
+                                    <input type="text" class="form-control" name="dirEstUp" id="dirEstUp" placeholder="Estado" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirMunUp">Municipio</label>
+                                    <input type="text" class="form-control" name="dirMunUp" id="dirMunUp" placeholder="Municipio" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirColUp">Colonia</label>
+                                    <input type="text" class="form-control" name="dirColUp" id="dirColUp" placeholder="Colonia" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirCalleUp">Calle</label>
+                                    <input type="text" class="form-control" name="dirCalleUp" id="dirCalleUp" placeholder="Calle" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirNumExtUp">Num Ext</label>
+                                    <input type="text" class="form-control" name="dirNumExtUp" id="dirNumExtUp" placeholder="Numero Exterior" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirNumIntUp">Num Int</label>
+                                    <input type="text" class="form-control" name="dirNumIntUp" id="dirNumIntUp" placeholder="Numero Interior" disabled readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dirCPUp">CP</label>
+                                    <input type="text" class="form-control" name="dirCPUp" id="dirCPUp" placeholder="Codigo Postal" disabled readonly>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: right;">

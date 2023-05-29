@@ -9,7 +9,7 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT * FROM clientes WHERE estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT * FROM clientes C INNER JOIN direcciones D ON C.id_dire = D.id_dire WHERE C.estatus = 'ACTIVO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -24,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "tel_clie" => $result->tel_clie,
                 "rfc" => $result->rfc,
                 "razon_social" => $result->razon_social,
-                "nom_con" => $result->nom_con,
-                "num_con" => $result->num_con,
+                "direccion" => $result->estado . ' ' . $result->municipio . ' ' . $result->colonia . ' ' . $result->calle . ' ' . $result->num_ext . ' ' . $result->num_int . ' ' . $result->cp, 
                 "fec_cre" => $result->fec_cre,
                 "estatus" => $result->estatus
             );

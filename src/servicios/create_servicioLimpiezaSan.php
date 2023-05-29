@@ -79,92 +79,124 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
 
                                     <form class="row g-3" id="formularioADDServicio" method="post">
                                         <h2 class="text-center">Formulario Alta Servicio</h2>
+                                        <h3 class="text-center">Informacion del Servicio</h3>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="tipSer">Tipo de Servicio <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="tipSer" id="tipSer" value="LIMPIEZA SANITARIOS" placeholder="Ingrese el numero de sanitarios a rentar" readonly>
+                                                <input type="text" class="form-control" name="tipSer" id="tipSer" value="LIMPIEZA SANITARIOS" placeholder="Ingrese el numero de sanitarios a rentar" readonly disabled required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="numSan">Numero de Sanitarios <strong style="color: red;">*</strong></label>
-                                                <input type="number" step="any" class="form-control" name="numSan" id="numSan" placeholder="Ingrese el numero de sanitarios a rentar">
+                                                <input type="number" step="any" class="form-control" name="numSan" id="numSan" placeholder="Ingrese el numero de sanitarios a rentar" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="fecEnt">Fecha de entrega <strong style="color: red;">*</strong></label>
-                                                <input type="date" class="form-control" name="fecEnt" id="fecEnt">
+                                                <input type="date" class="form-control" name="fecEnt" id="fecEnt" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="horEnt">Hora de entrega <strong style="color: red;">*</strong></label>
-                                                <input type="time" class="form-control" name="horEnt" id="horEnt">
+                                                <input type="time" class="form-control" name="horEnt" id="horEnt" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="cosSer">Costo de Servicio <strong style="color: red;">*</strong></label>
-                                                <input type="number" step="any" class="form-control" name="cosSer" id="cosSer" placeholder="Ingrese el costo del servicio">
+                                                <input type="number" step="any" class="form-control" name="cosSer" id="cosSer" placeholder="Ingrese el costo del servicio" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="tipPag">Tipo de pago <strong style="color: red;">*</strong></label>
-                                                <select class="form-select" name="tipPag" id="tipPag">
+                                                <select class="form-select" name="tipPag" id="tipPag" required>
                                                     <option value="" selected>Seleccione un tipo de pago</option>
                                                     <option value="EFECTIVO">EFECTIVO</option>
                                                     <option value="TRANSFERENCIA">TRANSFERENCIA</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <h3 class="text-center">Informacion del cliente</h3>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                Aqui va la info del cliente
-                                                <label for="cost_tot">Buscar Cliente<strong style="color: red;">*</strong></label>
-                                                <input type="text" step="any" class="form-control" id="cost_tot" placeholder="Ingrese el costo total" onkeyup="buscadorInfoCliente()">
-                                                <small>El costo total se calcula al ingresar el numero de sanitarios y el
-                                                    costo unitario</small>
+                                                <label for="buscarCli">Buscar Cliente</label>
+                                                <input type="text" class="form-control" id="buscarCli" placeholder="Escriba el nombre del cliente/razon social/rfc" onkeyup="buscadorInfoCliente()">
+                                                <small>De no exitir el cliente lo puedes dar de alta <a href="../clientes/clientes.php">aqui</a></small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12" id="mensajeBusClie">
+                                        </div>
+                                        <input type="hidden" id="idCli">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nomCli">Nombre del cliente <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="nomCli" id="nomCli" placeholder="Nombre del cliente" disabled readonly required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="rfcCli">RFC del Cliente <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="rfcCli" id="rfcCli" placeholder="RFC del Cliente" disabled readonly required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="razoSocCli">Razon Social <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="razoSocCli" id="razoSocCli" placeholder="Razon social del Cliente" disabled readonly required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="conctPag">Contacto de Pago <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="conctPag" id="conctPag" placeholder="Nombre del cliente" readonly>
+                                                <input type="text" class="form-control" name="conctPag" id="conctPag" placeholder="Nombre del cliente" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="telConPag">Telefono del contacto de pago <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="telConPag" id="telConPag" placeholder="Nombre del cliente" readonly>
+                                                <input type="text" class="form-control" name="telConPag" id="telConPag" placeholder="Nombre del cliente" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="corConPag">Correo del contacto de pago <strong style="color: red;">*</strong></label>
-                                                <input type="email" class="form-control" name="corConPag" id="corConPag" placeholder="Nombre del cliente" readonly>
+                                                <input type="email" class="form-control" name="corConPag" id="corConPag" placeholder="Nombre del cliente" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="corConPag">Nombre del contacto que recibe <strong style="color: red;">*</strong></label>
-                                                <input type="email" class="form-control" name="corConPag" id="corConPag" placeholder="Nombre del cliente" readonly>
+                                                <label for="NomConRec">Nombre del contacto que recibe <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="NomConRec" id="NomConRec" placeholder="Nombre del contacto que recibe" required>
                                             </div>
                                         </div>
+
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dia_de_pag">Dia en que se realizaran los pagos <strong style="color: red;">*</strong></label>
-                                                <select class="form-select" name="dia_de_pag" id="dia_de_pag">
+                                                <label for="telConRec">Telefono del contacto que recibe <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="telConRec" id="telConRec" placeholder="Telefono del conctato que recibe" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="diaPag">Dia en que se realizaran los pagos <strong style="color: red;">*</strong></label>
+                                                <select class="form-select" name="diaPag" id="diaPag" required>
                                                     <option value="" selected>Seleccione un dia</option>
                                                     <option value="01">1 </option>
                                                     <option value="02">2 </option>
@@ -200,18 +232,74 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                                 </select>
                                             </div>
                                         </div>
-                                        <h2 class="text-center">Consideraciones</h2>
-                                        <div class="col-md-4">
+
+                                        <h3 class="text-center">Direccion del Cliente (Direccion Fiscal)</h3>
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="hora_aten">Horario y fecha de atencion</label>
-                                                <input type="text" name="hora_aten" id="hora_aten" class="form-control" placeholder="Ingrese el horar y fecha de atencion en el que se puede brindar el servico">
-                                                <small>Ejemplo: de lunes a viernes de 8:00 am a 5:00 pm</small>
+                                                <label for="buscarDir">Buscar Direccion</label>
+                                                <input type="text" class="form-control" id="buscarDir" placeholder="Escriba el nombre de la calle/colonia" onkeyup="buscadorInfoDireClie()">
+                                                <small>De no exitir la direccion la puedes dar de alta <a href="../direcciones/direcciones.php">aqui</a></small>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+
+                                        <div class="col-md-12" id="mensajeBusDire">
+                                        </div>
+                                        <input type="hidden" id="idDir">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirEst">Estado <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEst" id="dirEst" placeholder="Estado" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirMun">Municipio <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirMun" id="dirMun" placeholder="Municipio" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirCol">Colonia <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirCol" id="dirCol" placeholder="Colonia" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirCalle">Calle <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirCalle" id="dirCalle" placeholder="Calle" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirNumExt">Num Ext <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirNumExt" id="dirNumExt" placeholder="Numero Exterior" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirNumInt">Num Int <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirNumInt" id="dirNumInt" placeholder="Numero Interior" disabled readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirCP">CP <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirCP" id="dirCP" placeholder="Codigo Postal" disabled readonly>
+                                            </div>
+                                        </div>
+
+
+                                        <h2 class="text-center">Consideraciones</h2>
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="obser">Observaciones</label>
-                                                <textarea class="form-control" name="obser" id="obser" row="1" placeholder="Ingrese observaciones a tomar en cuenta para realizar el servicio, como; accesos, equipo necesario, etc..."></textarea>
+                                                <textarea class="form-control" name="obser" id="obser" row="1"  required placeholder="Ingrese observaciones a tomar en cuenta para realizar el servicio, como; accesos, equipo necesario, etc..."></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12" style="display: flex; justify-content: right;">

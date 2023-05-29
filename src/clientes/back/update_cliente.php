@@ -7,8 +7,7 @@ if (!$_POST) {
     $tel_clie = $_POST['tel_clie'];
     $rfc_clie = $_POST['rfc_clie'];
     $razsoc_clie = $_POST['razsoc_clie'];
-    $nomcon_clie = $_POST['nomcon_clie'];
-    $numtel_clie = $_POST['numtel_clie'];
+    $idDir = $_POST['idDir'];
     $accion = $_POST['accion'];
 
     if ($accion == 'update') {
@@ -18,8 +17,7 @@ if (!$_POST) {
         tel_clie = '$tel_clie',
         rfc = '$rfc_clie', 
         razon_social = '$razsoc_clie', 
-        nom_con = '$nomcon_clie',  
-        num_con = '$numtel_clie'
+        id_dire = '$idDir'
         WHERE id_clie = '$id';";
         $resultado = mysqli_query($enlace, $sql);
         if (!$resultado) {

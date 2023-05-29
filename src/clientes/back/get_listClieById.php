@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("HTTP/1.1 200 OK");
     $id_clie = $_POST['id_clie'];
     //Mostrar un post
-    $sql = $dbConn->prepare("SELECT * FROM `clientes` WHERE id_clie = '$id_clie'");
+    $sql = $dbConn->prepare("SELECT * FROM clientes C INNER JOIN direcciones D ON D.id_dire = C.id_dire WHERE id_clie = '$id_clie'");
     $sql->execute();
     $sql->setFetchMode(PDO::FETCH_ASSOC);
     header("HTTP/1.1 200 OK");

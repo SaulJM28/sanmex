@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $_SESSION['tip_usu'] == 'EJECUTIVO VENTAS')) :
 ?>
 
     <!DOCTYPE html>
@@ -14,7 +14,18 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
         <link rel="stylesheet" href="../../static/css/style.css" />
         <link rel="stylesheet" href="../../static/css/datatables.min.css">
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <title>SANMEX</title>
+        <style>
+            .leaflet-container {
+                background-color: #222059;
+                height: 400px;
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
     </head>
 
     <body>
@@ -56,7 +67,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                         </ul>
                     </div>
                 </nav>
-
                 <div class="container-fluid px-4" style="margin-top: 80px;">
                     <div class="row g-3">
                         <div class="col-md-12 mt-3">
@@ -145,6 +155,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                                     <input type="text" class="form-control" id="coord_dir_add" placeholder="Coordenadas" name="coord_dir_add" required>
                                 </div>
                             </div>
+                            <div id="map" ></div>
                             <div style="display: flex; justify-content: right;">
                                 <button type="submit" class="btn btn-primary">Aceptar <i class="fas fa-plus"></i></button>
                             </div>
@@ -239,6 +250,40 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                 </div>
             </div>
         </div>
+
+        <script>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    const map = L.map('map').setView([latitude, longitude], 16);
+                    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+                    var marker = L.marker();
+                    const popup = L.popup();
+
+                    function onMapClick(e) {
+                        document.getElementById("coord_dir_add").value = `${e.latlng.lat} ${e.latlng.lng}`;
+                        popup
+                            .setLatLng(e.latlng)
+                            .setContent(`Estas son las coordenadas donde hizo click ${e.latlng.toString()}`)
+                            .openOn(map);
+                        marker
+                            .setLatLng(e.latlng)
+                            .addTo(map);
+                    }
+                    map.on('click', onMapClick);
+
+                }, function(error) {
+                    console.log("Error al obtener la ubicación: " + error.message);
+                });
+            } else {
+                console.log("La geolocalización no es soportada por este navegador.");
+            }
+        </script>
 
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/datatables.min.js"></script>
