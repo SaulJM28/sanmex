@@ -15,11 +15,9 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <link rel="stylesheet" href="../../static/css/datatables.min.css">
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <title>SANMEX</title>
         <style>
             .leaflet-container {
-                background-color: #222059;
                 height: 400px;
                 width: 100%;
                 max-width: 100%;
@@ -76,7 +74,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                         <a href="../../home.php" class="btn btn-default"><i class="fas fa-arrow-left"></i></a>
                                         <h1 style="text-align: center;">Lista de Direcciones</h1>
                                     </div>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar <i class="fas fa-plus"> </i></button>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="afterOpenModal('insert')">Agregar <i class="fas fa-plus"> </i></button>
                                     <br>
                                     <br>
                                     <table id="tableDirecciones" class="table table-striped  nowrap" style="width:100%;">
@@ -114,51 +112,56 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar Dirección</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
-                        <div id="mensajeADD"></div>
                         <form class="row g-3" method="POST" id="formularioADDDireccion">
+                            <div class="col-md-12 mt-2">
+                                <p style="margin: 0px; padding: 0px;">Campos Obligatorios <strong style="color: red;">*</strong></p>
+                            </div>
                             <div class="col-md-6 mt-2">
                                 <div class="mb-3 mt-3">
-                                    <label for="est_dir_add" class="form-label">Estado:</label>
+                                    <label for="est_dir_add" class="form-label">Estado:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="est_dir_add" placeholder="Ingrese el estado" name="est_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="mun_dir_add" class="form-label">Municipio:</label>
+                                    <label for="mun_dir_add" class="form-label">Municipio:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="mun_dir_add" placeholder="Ingrese el municipio" name="mun_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="col_dir_add" class="form-label">Colonia:</label>
+                                    <label for="col_dir_add" class="form-label">Colonia:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="col_dir_add" placeholder="Ingrese la colonia" name="col_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="call_dir_add" class="form-label">Calle:</label>
+                                    <label for="call_dir_add" class="form-label">Calle:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="call_dir_add" placeholder="Ingrese la calle" name="call_dir_add" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="mb-3 mt-3">
-                                    <label for="numext_dir_add" class="form-label">num_ext:</label>
+                                    <label for="numext_dir_add" class="form-label">num_ext:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="numext_dir_add" placeholder="Ingrese el numero ext" name="numext_dir_add" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="numint_dir_add" class="form-label">num_int:</label>
+                                    <label for="numint_dir_add" class="form-label">num_int:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="numint_dir_add" placeholder="Ingrese el numero int" name="numint_dir_add" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="cp_dir_add" class="form-label">cp:</label>
+                                    <label for="cp_dir_add" class="form-label">cp:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="cp_dir_add" placeholder="Codigo Postal" name="cp_dir_add" required>
                                 </div>
                                 <div class="mb-3 mt-3">
-                                    <label for="coord_dir_add" class="form-label">coordenadas:</label>
+                                    <label for="coord_dir_add" class="form-label">coordenadas:<strong style="color: red;">*</strong></label>
                                     <input type="text" class="form-control" id="coord_dir_add" placeholder="Coordenadas" name="coord_dir_add" required>
                                 </div>
                             </div>
-                            <div id="map" ></div>
-                            <div style="display: flex; justify-content: right;">
-                                <button type="submit" class="btn btn-primary">Aceptar <i class="fas fa-plus"></i></button>
-                            </div>
+                                <div class="col-md-12">
+                                    <p style="text-align: center; margin: 0px; padding: 0px; font-size: 20px;">Para obtner las coordenas use el mapa y haga click sobre el lugar del cual desea obtner las coordendas</p>
+                                    <div id="map"></div>
+                                </div>
+                                <div style="display: flex; justify-content: right;">
+                                    <button type="submit" class="btn btn-primary">Aceptar <i class="fas fa-plus"></i></button>
+                                </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -172,7 +175,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Editar Dirección</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                     </div>
                     <div class="modal-body">
                         <div id="mensajeUP"></div>
@@ -214,6 +217,10 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                     <input type="text" class="form-control" id="coord_dir_up" placeholder="Coordenadas" name="coord_dir_up" required>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <p style="text-align: center; margin: 0px; padding: 0px; font-size: 20px;">Para obtner las coordenas use el mapa y haga click sobre el lugar del cual desea obtner las coordendas</p>
+                                <div id="mapUp"></div>
+                            </div>
                             <div style="display: flex; justify-content: right;">
                                 <button type="submit" class="btn btn-warning">Aceptar <i class="fas fa-edit"></i></button>
                             </div>
@@ -250,51 +257,15 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 </div>
             </div>
         </div>
-
-        <script>
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-
-                    const map = L.map('map').setView([latitude, longitude], 16);
-                    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
-                    var marker = L.marker();
-                    const popup = L.popup();
-
-                    function onMapClick(e) {
-                        document.getElementById("coord_dir_add").value = `${e.latlng.lat} ${e.latlng.lng}`;
-                        popup
-                            .setLatLng(e.latlng)
-                            .setContent(`Estas son las coordenadas donde hizo click ${e.latlng.toString()}`)
-                            .openOn(map);
-                        marker
-                            .setLatLng(e.latlng)
-                            .addTo(map);
-                    }
-                    map.on('click', onMapClick);
-
-                }, function(error) {
-                    console.log("Error al obtener la ubicación: " + error.message);
-                });
-            } else {
-                console.log("La geolocalización no es soportada por este navegador.");
-            }
-        </script>
-
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
-        <script src="../../static/js/datatables.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
+        <script src="../../static/js/datatables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="../../static/js/direcciones/direcciones.js"></script>
-
-
     </body>
 
     </html>
-
 <?php
 else :
     header('location: ../../include/logout.php');

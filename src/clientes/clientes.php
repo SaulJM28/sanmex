@@ -333,8 +333,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 </div>
             </div>
         </div>
-
-
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/datatables.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>

@@ -150,7 +150,6 @@ function buscadorInfoDireClie(tipo ) {
           success: function (response) {
             response.forEach((element) => {
               if (element.resultado == true) {
-                console.log(element);
                 document.getElementById("dirEst").value = `${element.estado}`;
                 document.getElementById("dirMun").value = `${element.municipio}`;
                 document.getElementById("dirCol").value = `${element.colonia}`;
