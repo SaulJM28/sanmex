@@ -234,17 +234,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                         </div>
 
                                         <h3 class="text-center">Direccion del Cliente (Direccion Fiscal)</h3>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="buscarDir">Buscar Direccion</label>
-                                                <input type="text" class="form-control" id="buscarDir" placeholder="Escriba el nombre de la calle/colonia" onkeyup="buscadorInfoDireClie()">
-                                                <small>De no exitir la direccion la puedes dar de alta <a href="../direcciones/direcciones.php">aqui</a></small>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12" id="mensajeBusDire">
-                                        </div>
-                                        <input type="hidden" id="idDir">
+                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="dirEst">Estado <strong style="color: red;">*</strong></label>
