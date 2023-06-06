@@ -17,8 +17,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
         foreach ($results as $result) {
+            $fileCot  = "./docs/cotizaciones/".$result->cotzacion;   
+            $fileSitFis  = "./docs/situacionFiscal/".$result->sit_fis;
+            
             if ($result->estatusS == 'ACTIVO') $color = '#279b37';
             if ($result->estatusS == 'FINALIZADO') $color = '#ffdd00';
+
+            if(!file_exists($fileCot)){
+                $fileCot = "No existe el archivo";
+            }else{
+                $fileCot = $result->cotzacion;
+            }
+            if(!file_exists($fileSitFis)){
+                $fileSitFis = "No existe el archivo";
+            }else{
+                $fileSitFis = $result->sit_fis;
+            } 
 
             if ($result->estadoS != null) {
                 $data[] = array(
@@ -36,14 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "nom_conrec" => $result->nom_conrec,
                     "tel_conrec" => $result->tel_conrec,
                     "dia_pag" => $result->dia_pag,
+                    "rfc_clie" => $result->rfc,
                     "direccion_entrega" => $result->estadoS . ', ' .
                         $result->municipioS . ', ' . $result->coloniaS . ', ' . $result->calleS . ', Num Ext ' .  $result->num_extS . ', Num Int ' . $result->num_intS . ', CP ' . $result->cpS,
                     "cliente" => $result->nom_clie . ', ' . $result->razon_social . ', ' . $result->rfc,
                     "direccion_fiscal" => $result->estadoD . ', ' .
                         $result->municipioD . ', ' . $result->coloniaD . ', ' . $result->calleD . ' Num Ext, ' .  $result->num_extD . ' Num Int, ' . $result->num_intD . ' CP, ' . $result->cpD,
                     "dias_serv" => $result->dias_serv,
-                    "cotizacion" => $result->cotzacion,
-                    "sit_fis" => $result->sit_fis,
+                    "cotizacion" => $fileCot,
+                    "sit_fis" => $fileSitFis,
                     "obser" => $result->obser,
                     "estatus" => $result->estatusS,
                     "color" => $color
@@ -64,13 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "nom_conrec" => $result->nom_conrec,
                     "tel_conrec" => $result->tel_conrec,
                     "dia_pag" => $result->dia_pag,
+                    "rfc_clie" => $result->rfc,
                     "direccion_entrega" => "No aplica",
                     "cliente" => $result->nom_clie . ', ' . $result->razon_social . ', ' . $result->rfc,
                     "direccion_fiscal" => $result->estadoD . ', ' .
                         $result->municipioD . ', ' . $result->coloniaD . ', ' . $result->calleD . ', Num Ext ' .  $result->num_extD . ', Num Int ' . $result->num_intD . ', CP ' . $result->cpD,
                     "dias_serv" => $result->dias_serv,
-                    "cotizacion" => $result->cotzacion,
-                    "sit_fis" => $result->sit_fis,
+                    "cotizacion" => $fileCot,
+                    "sit_fis" => $fileSitFis,
                     "obser" => $result->obser,
                     "estatus" => $result->estatusS,
                     "color" => $color

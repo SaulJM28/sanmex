@@ -72,9 +72,23 @@ $(document).ready(function () {
       },
       {
         data: "cotizacion",
+        mRender: function(data) {
+          if(data == null){
+            return `No hay archivo`
+          }else{
+            return `<a target="_blank" href='./back/docs/cotizaciones/${data}' class = "btn btn-primary btn-sm">Ver <i class="fas fa-file"></i></a>`
+          }
+        }
       },
       {
         data: "sit_fis",
+        mRender: function(data) {
+          if(data == null){
+            return `No hay archivo`
+          }else{
+            return `<a target="_blank" href='./back/docs/situacionFiscal/${data}' class = "btn btn-primary btn-sm">Ver <i class="fas fa-file"></i></a>`
+          }
+        }
       },
       {
         data: "obser",
@@ -91,7 +105,7 @@ $(document).ready(function () {
           return `
           <div class="dropdown"><a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">OPCIONES</a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUploadDoc">Subir Documentos</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUploadDoc" onclick = "sendInfDocs('${row.rfc_clie}', ${data})">Subir Documentos</a></li>
             <li><a class="dropdown-item" href="#">Agregar Sanitarios</a></li>
             <li><a class="dropdown-item" href="#">Editar</a></li>
             <li><a class="dropdown-item" href="#">Eliminar</a></li>
@@ -170,6 +184,12 @@ const verServicio = (id) => {
   window.location.href = `detallesServicio.php?id=${id}`;
 };
 
+const sendInfDocs = (rfc, id) => {
+  document.getElementById('rfcUploadDoc').value = rfc;
+  document.getElementById('idUploadDoc').value = id;
+
+
+}
 
 /* formularioUploadDoc.addEventListener('submit', e =>{
 e.preventDefault();

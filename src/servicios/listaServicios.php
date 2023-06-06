@@ -127,6 +127,8 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                         <form action="./back/uploadDocs.php" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="docCot" class="form-label">Cotizacion</label>
+                                <input type="hidden" id="idUploadDoc" name="idUploadDoc">
+                                <input type="hidden" id="rfcUploadDoc" name="rfcUploadDoc">
                                 <input type="file" class="form-control" id="docCot" name="docCot" aria-describedby="Upload Doc" accept="application/pdf">
                             </div>
                             <div class="mb-3">
