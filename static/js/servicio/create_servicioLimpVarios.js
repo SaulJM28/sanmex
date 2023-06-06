@@ -5,6 +5,32 @@ toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
 
+function getLisTipSer() {
+  fetch("../tiposServicios/back/tiposServicios.php")
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error en la respuesta de la API');
+      }
+    })
+    .then(data => {
+      // Hacer algo con los datos de la API
+      let html = `<option value = "" selected>SELECCIONE EL TIPO DE SERVICIO</option>`;
+      data.data.forEach(element => {
+        if(element.tipo != 'LIMPIEZA SANITARIOS'){
+          html += `<option value = "${element.tipo}" >${element.tipo}</option>`;
+        }
+      });
+      document.getElementById("tipSer").innerHTML = html;
+    })
+    .catch(error => {
+      // Manejar el error en caso de que ocurra
+      console.error(error);
+    });
+  }
+  getLisTipSer();
+
 function buscadorInfoCliente() {
   let key = document.getElementById("buscarCli").value;
   let html = "";
@@ -78,31 +104,10 @@ function buscadorInfoCliente() {
   }
 }
 
-const listSanDisp = async () => {
-  try {
-    const res = await fetch("../sanitarios/back/getSanNumDisp.php");
-    const data = await res.json();
-    let listaHtml = "";
-    data.forEach((element) => {
-      listaHtml += `
-          <li class="list-group-item bg-white d-flex justify-content-between align-items-center">${element.tip_san} <span class="badge bg-primary rounded-pill">${element.total}</span></li>
-          `;
-    });
-    listaHtml += `
-      <li class="list-group-item bg-white d-flex justify-content-between align-items-center">Ver lista completa  <button class = "btn btn-info btn-sm" >Ir <i class='fas fa-arrow-right'></i></button></li>
-      `;
-    document.getElementById("listSanDisp").innerHTML = listaHtml;
-  } catch (e) {
-    console.log(e);
-  }
-};
-listSanDisp();
-
 formularioADDServicio.addEventListener("submit", (e) => {
   e.preventDefault();
   let idCli = document.getElementById("idCli").value;
   let tipSer = document.getElementById("tipSer").value;
-  let numSan = document.getElementById("numSan").value;
   let fecEnt = document.getElementById("fecEnt").value;
   let horEnt = document.getElementById("horEnt").value;
   let cosSer = document.getElementById("cosSer").value;
@@ -113,20 +118,19 @@ formularioADDServicio.addEventListener("submit", (e) => {
   let NomConRec = document.getElementById("NomConRec").value;
   let telConRec = document.getElementById("telConRec").value;
   let diaPag = document.getElementById("diaPag").value;
-/*   let dirEst = document.getElementById("dirEst").value;
-  let dirMun = document.getElementById("dirMun").value;
-  let dirCol = document.getElementById("dirCol").value;
-  let dirCalle = document.getElementById("dirCalle").value;
-  let dirNumExt = document.getElementById("dirNumExt").value;
-  let dirNumInt = document.getElementById("dirNumInt").value;
-  let dirCP  = document.getElementById("dirCP").value; */
+  let dirEst = document.getElementById("dirEntEst").value;
+  let dirMun = document.getElementById("dirEntMun").value;
+  let dirCol = document.getElementById("dirEntCol").value;
+  let dirCalle = document.getElementById("dirEntCalle").value;
+  let dirNumExt = document.getElementById("dirEntNumExt").value;
+  let dirNumInt = document.getElementById("dirEntNumInt").value;
+  let dirCP = document.getElementById("dirEntCP").value;
+  let coord = document.getElementById("dirEntCoord").value;
   let obser = document.getElementById("obser").value;
 
   if (tipSer.length == 0) {
     Swal.fire("Alerta", "Campo Tipo de Servicio Vacio ", "warning");
-  } else if (numSan.length == 0) {
-    Swal.fire("Alerta", "Campo Numeros de Sanitarios Vacio ", "warning");
-  } else if (fecEnt.length == 0) {
+   } else if (fecEnt.length == 0) {
     Swal.fire("Alerta", "Campo Fecha de Entrega Vacio ", "warning");
   } else if (horEnt.length == 0) {
     Swal.fire("Alerta", "Campo Hora de Entrega Vacio ", "warning");
@@ -146,16 +150,29 @@ formularioADDServicio.addEventListener("submit", (e) => {
     Swal.fire("Alerta", "Campo Telefono Contacto que Recibe Vacio ", "warning");
   } else if (diaPag.length == 0) {
     Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirEst.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirMun.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirCol.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirCalle.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirNumExt.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirNumInt.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
+  } else if (dirCP.length == 0) {
+    Swal.fire("Alerta", "Campo Dia de Pago Vacio ", "warning");
   } else if (obser.length == 0) {
     Swal.fire("Alerta", "Campo Observaciones Vacio ", "warning");
   } else {
     $.ajax({
       type: "POST",
-      url: "./back/insert_servicio.php",
+      url: "./back/insert_servicio_varios.php",
       data: {
         id_clie: idCli,
         tipSer: tipSer,
-        numSan: numSan,
         fecEnt: fecEnt,
         horEnt: horEnt,
         cosSer: cosSer,
@@ -166,19 +183,20 @@ formularioADDServicio.addEventListener("submit", (e) => {
         NomConRec: NomConRec,
         telConRec: telConRec,
         diaPag: diaPag,
-/*         dirEst: dirEst,
+        dirEst: dirEst,
         dirMun: dirMun,
         dirCol: dirCol,
         dirCalle: dirCalle,
         dirNumExt: dirNumExt,
         dirNumInt: dirNumInt,
-        dirCP: dirCP, */
+        dirCP: dirCP,
+        coord: coord,
         obser: obser,
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
-      if (response.resultado == true) {
+        if (response.resultado == true) {
           Swal.fire("Alerta", `${response.mensaje}`, "success");
           window.location.href = `${response.url}`;
         } else {
@@ -191,3 +209,22 @@ formularioADDServicio.addEventListener("submit", (e) => {
     });
   }
 });
+
+const map = L.map("map").setView([20.57237122303309, -100.28431903160978], 15);
+const popup = L.popup();
+
+const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+function onMapClick(e) {
+  document.getElementById(
+    "dirEntCoord"
+  ).value = `${e.latlng.lat},${e.latlng.lng}`;
+  popup
+    .setLatLng(e.latlng)
+    .setContent(`You clicked the map at ${e.latlng.toString()}`)
+    .openOn(map);
+}
+map.on("click", onMapClick);

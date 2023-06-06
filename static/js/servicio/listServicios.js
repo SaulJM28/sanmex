@@ -1,6 +1,6 @@
 $(document).ready(function () {
   //$("#datatable").DataTable();
-  $("#tableServicios").DataTable({
+  $("#tableListSer").DataTable({
     ajax: {
       url: "./back/get_listServicios.php",
     },
@@ -26,46 +26,77 @@ $(document).ready(function () {
     order: [[0, "asc"]],
     columns: [
       {
-        bSortable: false,
-        mRender: function (data, type, row) {
-          return `${row.cliente.nom_clie}, ${row.cliente.razon_social}, ${row.cliente.rfc} `;
-        },
+        data: "num_ser",
       },
       {
-        bSortable: false,
-        mRender: function (data, type, row) {
-          return `${row.direccion.estado}, ${row.direccion.municipio}, ${row.direccion.colonia}, ${row.direccion.calle}, ${row.direccion.num_ext}, ${row.direccion.num_int}, ${row.direccion.cp}`;
-        },
-      },
-      {
-        data: "cost_unit",
+        data: "tip_ser",
       },
       {
         data: "num_san",
       },
       {
-        data: "cost_tot",
+        data: "cliente",
       },
       {
-        data: "ruta",
+        data: "direccion_entrega",
       },
       {
-        data: "operador",
+        data: "fec_ent",
+      },
+      {
+        data: "hor_ent",
+      },
+      {
+        data: "cost_ser",
+      },
+      {
+        data: "tip_pag",
+      },
+      {
+        data: "dia_pag",
+      },
+      {
+        data: "conct_pag",
+      },
+      {
+        data: "tel_conpag",
+      },
+      {
+        data: "cor_conpag",
+      },
+      {
+        data: "nom_conrec",
+      },
+      {
+        data: "tel_conrec",
+      },
+      {
+        data: "cotizacion",
+      },
+      {
+        data: "sit_fis",
+      },
+      {
+        data: "obser",
       },
       {
         mRender: function (data, type, row) {
-          return `<p style = "background-color: ${row.color}; padding: 2px; border-radius: 5px; margin: 0px; text-align: center;" >${row.estatus}</p>`;
+          return `<p style = "text-align: center; margin: 0px; padding: 2px; border-radius: 5px; background-color: ${row.color};">${row.estatus}</p>`;
         },
       },
       {
         data: "id_ser",
         bSortable: false,
         mRender: function (data, type, row) {
-          return `<div class="btn-group" role="group" aria-label="Basic example">
-               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalUpdate" title="Editar" onclick="get_info(${data}, 'update')" ><i class="fas fa-edit" ></i></button>
-               <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete" title="Eliminar" onclick="get_info(${data}, 'delete')"><i class="fas fa-trash"></i></button>
-               <button type="button" class="btn btn-secondary btn-sm" title="Ver Servicio" onclick="verServicio(${data})"><i class="fas fa-file"></i></button>
-             </div>`;
+          return `
+          <div class="dropdown"><a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">OPCIONES</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUploadDoc">Subir Documentos</a></li>
+            <li><a class="dropdown-item" href="#">Agregar Sanitarios</a></li>
+            <li><a class="dropdown-item" href="#">Editar</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+          </ul>
+          </div>`;
         },
       },
     ],
@@ -128,8 +159,6 @@ $(document).ready(function () {
   });
 });
 
-
-
 var el = document.getElementById("wrapper");
 var toggleButton = document.getElementById("menu-toggle");
 
@@ -140,3 +169,11 @@ toggleButton.onclick = function () {
 const verServicio = (id) => {
   window.location.href = `detallesServicio.php?id=${id}`;
 };
+
+
+/* formularioUploadDoc.addEventListener('submit', e =>{
+e.preventDefault();
+const data = Object.fromEntries(new FormData(e.target))
+
+console.log(data.docCot.name);
+}); */

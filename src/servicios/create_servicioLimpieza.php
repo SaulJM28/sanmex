@@ -13,7 +13,16 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <link rel="stylesheet" href="../../static/css/style.css" />
         <link rel="stylesheet" href="../../static/css/datatables.min.css">
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
         <title>SANMEX</title>
+        <style>
+            .leaflet-container {
+                height: 400px;
+                width: 100%;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
     </head>
 
     <body>
@@ -35,7 +44,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
-
             <!-- Page Content -->
             <div id="page-content-wrapper">
                 <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4" style="background-color:  #222059; color: white;">
@@ -43,11 +51,9 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                         <i class="fas fa-align-left primary-text fs-4 me-3" style="color: white;" id="menu-toggle"></i>
                         <h2 class="fs-2 m-0">SERVICIOS</h2>
                     </div>
-
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
@@ -58,7 +64,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                         </ul>
                     </div>
                 </nav>
-
                 <div class="container-fluid px-4" style="margin-top: 80px;">
                     <div class="row g-3">
                         <div class="col-md-12 mt-3">
@@ -75,7 +80,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="tipSer">Tipo de Servicio <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="tipSer" id="tipSer" value="LIMPIEZA SANITARIOS" placeholder="Ingrese el numero de sanitarios a rentar" readonly disabled required>
+                                                <select class="form-select" name="tipSer" id="tipSer" required></select>
                                             </div>
                                         </div>
 
@@ -269,52 +274,63 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
                                         <h3 class="text-center">Direccion de entrega de servicio</h3>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirEst">Estado <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirEst" id="dirEst" placeholder="Estado" disabled readonly>
+                                                <label for="dirEntEst">Estado <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntEst" id="dirEntEst" placeholder="Estado">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dirEntMun">Municipio <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntMun" id="dirEntMun" placeholder="Municipio">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirMun">Municipio <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirMun" id="dirMun" placeholder="Municipio" disabled readonly>
+                                                <label for="dirEntCol">Colonia <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntCol" id="dirEntCol" placeholder="Colonia">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirCol">Colonia <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirCol" id="dirCol" placeholder="Colonia" disabled readonly>
+                                                <label for="dirEntCalle">Calle <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntCalle" id="dirEntCalle" placeholder="Calle">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirCalle">Calle <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirCalle" id="dirCalle" placeholder="Calle" disabled readonly>
+                                                <label for="dirEntNumExt">Num Ext <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntNumExt" id="dirEntNumExt" placeholder="Numero Exterior">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirNumExt">Num Ext <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirNumExt" id="dirNumExt" placeholder="Numero Exterior" disabled readonly>
+                                                <label for="dirEntNumInt">Num Int <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntNumInt" id="dirEntNumInt" placeholder="Numero Interior">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirNumInt">Num Int <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirNumInt" id="dirNumInt" placeholder="Numero Interior" disabled readonly>
+                                                <label for="dirEntCP">CP <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntCP" id="dirEntCP" placeholder="Codigo Postal">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="dirCP">CP <strong style="color: red;">*</strong></label>
-                                                <input type="text" class="form-control" name="dirCP" id="dirCP" placeholder="Codigo Postal" disabled readonly>
+                                                <label for="dirEntCoord">Coordenadas <strong style="color: red;">*</strong></label>
+                                                <input type="text" class="form-control" name="dirEntCoord" id="dirEntCoord" placeholder="Coordenadas">
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <p style="text-align: center; margin: 0px; padding: 0px; font-size: 20px;">Para obtner las coordenas use el mapa y haga click sobre el lugar del cual desea obtner las coordendas</p>
+                                        </div>
+                                            <div id="map" style="width: 100%; height: 400px;"></div>
+
                                         <h2 class="text-center">Consideraciones</h2>
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -336,8 +352,9 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.bundle.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="../../static/js/servicio/create_servicioLimpiezaSan.js"></script>
+        <script src="../../static/js/servicio/create_servicioLimpVarios.js"></script>
     </body>
 
     </html>

@@ -375,7 +375,7 @@ const mapCoord = (tipo) => {
   var marker = L.marker();
   const popup = L.popup();
   const onMapClick = (e) => {
-    coordnedas.value = `${e.latlng.lat} ${e.latlng.lng}`;
+    coordnedas.value = `${e.latlng.lat}, ${e.latlng.lng}`;
     popup
       .setLatLng(e.latlng)
       .setContent(

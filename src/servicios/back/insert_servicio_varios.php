@@ -4,7 +4,7 @@ if(!$_POST){
 }else{
     $id_clie = $_POST["id_clie"]; 
     $tipSer = $_POST["tipSer"]; 
-    $numSan = $_POST["numSan"]; 
+    $numSan = 0; 
     $fecEnt = $_POST["fecEnt"]; 
     $horEnt = $_POST["horEnt"]; 
     $cosSer = $_POST["cosSer"]; 
@@ -15,6 +15,14 @@ if(!$_POST){
     $NomConRec = $_POST["NomConRec"]; 
     $telConRec = $_POST["telConRec"]; 
     $diaPag = $_POST["diaPag"];
+    $dirEst = $_POST["dirEst"];
+    $dirMun =  $_POST["dirMun"];
+    $dirCol =  $_POST["dirCol"];
+    $dirCalle =  $_POST["dirCalle"];
+    $dirNumExt = $_POST["dirNumExt"];
+    $dirNumInt = $_POST["dirNumInt"];
+    $dirCP =  $_POST["dirCP"];    
+    $coord = $_POST["coord"];
     $obser = $_POST["obser"]; 
 
 date_default_timezone_set('america/mexico_city');
@@ -30,7 +38,53 @@ $fec_crea = date('Y-m-d h:i:s');
   `cor_conpag`, 
   `nom_conrec`, 
   `tel_conrec`, 
-  `dia_pag`, `estado`, `municipio`, `colonia`, `calle`, `num_ext`, `num_int`, `cp`, `coordenadas`, `id_rut`, `dias_serv`, `cotzacion`, `sit_fis`, `id_clie`, `fec_cre`, `obser`, `estatus`) VALUES (NULL, NULL, '$tipSer', '$numSan','$fecEnt', '$horEnt', '$cosSer', '$tipPag', '$conctPag', ' $telConPag', '$corConPag', '$NomConRec', '$telConRec', '$diaPag', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$id_clie', NULL, '$obser', 'ACTIVO');";
+  `dia_pag`, 
+  `estado`, 
+  `municipio`, 
+  `colonia`, 
+  `calle`, 
+  `num_ext`, 
+  `num_int`, 
+  `cp`, 
+  `coordenadas`, 
+  `id_rut`, 
+  `dias_serv`, 
+  `cotzacion`, 
+  `sit_fis`, 
+  `id_clie`, 
+  `fec_cre`,
+  `obser`, 
+  `estatus`) VALUES (
+    NULL, 
+    NULL, 
+    '$tipSer', 
+    '$numSan',
+    '$fecEnt', 
+    '$horEnt', 
+    '$cosSer', 
+    '$tipPag', 
+    '$conctPag', 
+    '$telConPag', 
+    '$corConPag', 
+    '$NomConRec', 
+    '$telConRec', 
+    '$diaPag', 
+    '$dirEst', 
+    '$dirMun', 
+    '$dirCol', 
+    '$dirCalle', 
+    '$dirNumExt', 
+    '$dirNumInt ', 
+    '$dirCP', 
+    '$coord', 
+    NULL, 
+    NULL, 
+    NULL, 
+    NULL, 
+    NULL, 
+    NULL, 
+    '$obser', 
+    'ACTIVO');";
 
     
   $resultado = mysqli_query($enlace, $sql);
