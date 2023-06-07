@@ -13,11 +13,11 @@
     <!-- link de iconos -->
     <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
     <title>sanmex</title>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("sw.js");
         }
-    </script> -->
+    </script>
 </head>
 
 <body>
