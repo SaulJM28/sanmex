@@ -1,6 +1,6 @@
 <?php
-include "../../../include/config.php";
-include "../../../include/utils.php";
+include "config.php";
+include "utils.php";
 
 $dbConn =  connect($db);
 /*
@@ -9,22 +9,21 @@ $dbConn =  connect($db);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json; charset=utf-8');
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT S.id_ser, S.num_ser, S.tip_ser, S.num_san, S.fec_ent, S.hor_ent, S.cost_ser, S.tip_pag, S.conct_pag, S.tel_conpag, S.cor_conpag, S.nom_conrec, S.tel_conrec, S.dia_pag, S.estado as estadoS, S.municipio as municipioS, S.colonia as coloniaS, S.calle as calleS, S.num_ext as num_extS, S.num_int as num_intS, S.cp as cpS, S.coordenadas as coordena, S.dias_serv, S.cotzacion, S.sit_fis, S.fec_cre, S.obser, S.estatus as estatusS, D.estado as estadoD, D.municipio as municipioD, D.colonia as coloniaD, D.calle as calleD, D.num_ext as num_extD, D.num_int as num_intD, D.cp as cpD, D.coordenadas as coordenadasD, C.nom_clie, C.tel_clie, C.rfc, C.razon_social FROM `servicio` S INNER JOIN clientes C ON S.id_clie = C.id_clie INNER JOIN direcciones D ON C.id_dire = D.id_dire WHERE S.estatus = 'ACTIVO';");
+    $sql = $dbConn->prepare("SELECT S.id_ser, S.num_ser, S.tip_ser, S.num_san, S.fec_ent, S.hor_ent, S.cost_ser, S.tip_pag, S.conct_pag, S.tel_conpag, S.cor_conpag, S.nom_conrec, S.tel_conrec, S.dia_pag, S.estado as estadoS, S.municipio as municipioS, S.colonia as coloniaS, S.calle as calleS, S.num_ext as num_extS, S.num_int as num_intS, S.cp as cpS, S.coordenadas as coordena, S.dias_serv, S.cotzacion, S.sit_fis, S.fec_cre, S.obser, S.estatus as estatusS, D.estado as estadoD, D.municipio as municipioD, D.colonia as coloniaD, D.calle as calleD, D.num_ext as num_extD, D.num_int as num_intD, D.cp as cpD, D.coordenadas as coordenadasD, C.nom_clie, C.tel_clie, C.rfc, C.razon_social FROM `servicio` S 
+    LEFT JOIN clientes C ON S.id_clie = C.id_clie 
+    LEFT JOIN direcciones D ON C.id_dire = D.id_dire
+    LEFT JOIN rutas R ON S.id_rut = R.id_rut
+    LEFT JOIN operadores O ON R.id_ope = O.id_ope
+    WHERE S.estatus = 'ACTIVO';");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
     $data = [];
     if ($sql->rowCount() > 0) {
         header("HTTP/1.1 200 OK");
-        foreach ($results as $result) {
-            $fileCot  = "./docs/cotizaciones/".$result->cotzacion;   
-            $fileSitFis  = "./docs/situacionFiscal/".$result->sit_fis;
-            
+        foreach ($results as $result) {            
             if ($result->estatusS == 'ACTIVO') $color = '#279b37';
             if ($result->estatusS == 'FINALIZADO') $color = '#ffdd00';
-
-            $fileCot = !file_exists($fileCot) ? $result->cotzacion : false;
-            $fileSitFis = !file_exists($fileSitFis) ? $result->sit_fis : false;
 
             if ($result->estadoS != null) {
                 $data[] = array(
@@ -49,8 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "direccion_fiscal" => $result->estadoD . ', ' .
                         $result->municipioD . ', ' . $result->coloniaD . ', ' . $result->calleD . ' Num Ext, ' .  $result->num_extD . ' Num Int, ' . $result->num_intD . ' CP, ' . $result->cpD,
                     "dias_serv" => $result->dias_serv,
-                    "cotizacion" => $fileCot,
-                    "sit_fis" => $fileSitFis,
                     "obser" => $result->obser,
                     "estatus" => $result->estatusS,
                     "color" => $color
@@ -77,8 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "direccion_fiscal" => $result->estadoD . ', ' .
                         $result->municipioD . ', ' . $result->coloniaD . ', ' . $result->calleD . ', Num Ext ' .  $result->num_extD . ', Num Int ' . $result->num_intD . ', CP ' . $result->cpD,
                     "dias_serv" => $result->dias_serv,
-                    "cotizacion" => $fileCot,
-                    "sit_fis" => $fileSitFis,
                     "obser" => $result->obser,
                     "estatus" => $result->estatusS,
                     "color" => $color

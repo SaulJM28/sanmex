@@ -77,7 +77,7 @@ $fec_crea = date('Y-m-d h:i:s');
     '$dirNumInt ', 
     '$dirCP', 
     '$coord', 
-    NULL, 
+    999, 
     NULL, 
     NULL, 
     NULL, 

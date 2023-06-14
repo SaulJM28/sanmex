@@ -389,9 +389,9 @@ formularioDeleteCliente.addEventListener("submit", (e) => {
     beforeSend: function () {},
     success: function (response) {
       if (response.resultado == true) {
-        Swal.fire("Alerta", `${response.mensaje}`, "success");
-        $("#datatableListClient ").DataTable().ajax.reload();
-        document.getElementById("id_de").value = "";
+          Swal.fire("Alerta", `${response.mensaje}`, "success");
+          $("#datatableListClient ").DataTable().ajax.reload();
+          document.getElementById("id_de").value = "";
         document.getElementById("nom_clie_de").value = "";
       } else {
         Swal.fire("Alerta", `${response.mensaje}`, "error");

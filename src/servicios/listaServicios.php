@@ -5,7 +5,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
 
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,16 +13,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <link rel="stylesheet" href="../../static/css/style.css" />
         <link rel="stylesheet" href="../../static/css/datatables.min.css">
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <title>SANMEX</title>
-        <style>
-            .leaflet-container {
-                height: 400px;
-                width: 100%;
-                max-width: 100%;
-                max-height: 100%;
-            }
-        </style>
     </head>
 
     <body>
@@ -152,7 +142,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
         <script src="../../static/js/bootstrap.bundle.min.js"></script>
         <script src="../../static/js/datatables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="../../static/js/servicio/listServicios.js"></script>
     </body>
 

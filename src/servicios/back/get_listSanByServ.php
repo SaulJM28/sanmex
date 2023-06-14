@@ -22,7 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //Mostrar un GET
-    $sql = $dbConn->prepare("SELECT SESA.id_sersan, SESA.id_ser, SESA.id_san, SESA.costo, SESA.tipo, SESA.coordenadas, SESA.estatus as estatus_sesa, SE.estatus as estatus_ser, SA.num_san FROM servicio_sani SESA INNER JOIN servicio SE ON SE.id_ser = SESA.id_ser LEFT JOIN sanitarios SA ON SA.id_san = SESA.id_san WHERE SESA.id_ser = '$id_ser'");
+    $sql = $dbConn->prepare("SELECT SESA.id_sersan, SESA.id_ser, SESA.id_san, SESA.tipo,  SESA.estatus as estatus_sesa, SE.estatus as estatus_ser, SA.num_san 
+    FROM servicio_sani SESA 
+    INNER JOIN servicio SE ON SE.id_ser = SESA.id_ser 
+    LEFT JOIN sanitarios SA ON SA.id_san = SESA.id_san 
+    WHERE SESA.id_ser = '$id_ser'");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -48,10 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "id_sersan" => $result->id_sersan,
                 "id_ser" => $result->id_ser,
                 "id_san" => $id_san,
-                "costo" => $result->costo,
                 "num_san" => $num_san,
                 "tipo" => $result->tipo,
-                "coordenadas" => $result->coordenadas,
                 "estatus_sesa" => $result->estatus_sesa,
                 "estatus_ser" => $result->estatus_ser,
                 "color" => $color

@@ -20,21 +20,22 @@ if(!$_POST){
 date_default_timezone_set('america/mexico_city');
 $fec_crea = date('Y-m-d h:i:s');
   include("../../../include/conexion.php");
-  $sql = "INSERT INTO `servicio` (`id_ser`, `num_ser`, `tip_ser`, `num_san`, 
-  `fec_ent`, 
-  `hor_ent`, 
-  `cost_ser`, 
+  $sql = "INSERT INTO `servicio` (
+    `id_ser`, 
+    `num_ser`, 
+    `tip_ser`, 
+    `num_san`, 
+    `fec_ent`, 
+    `hor_ent`, 
+    `cost_ser`, 
   `tip_pag`, 
   `conct_pag`, 
   `tel_conpag`, 
   `cor_conpag`, 
   `nom_conrec`, 
   `tel_conrec`, 
-  `dia_pag`, `estado`, `municipio`, `colonia`, `calle`, `num_ext`, `num_int`, `cp`, `coordenadas`, `id_rut`, `dias_serv`, `cotzacion`, `sit_fis`, `id_clie`, `fec_cre`, `obser`, `estatus`) VALUES (NULL, NULL, '$tipSer', '$numSan','$fecEnt', '$horEnt', '$cosSer', '$tipPag', '$conctPag', ' $telConPag', '$corConPag', '$NomConRec', '$telConRec', '$diaPag', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$id_clie', NULL, '$obser', 'ACTIVO');";
-
-    
+  `dia_pag`, `estado`, `municipio`, `colonia`, `calle`, `num_ext`, `num_int`, `cp`, `coordenadas`, `id_rut`, `dias_serv`, `cotzacion`, `sit_fis`, `id_clie`, `fec_cre`, `obser`, `estatus`) VALUES (NULL, NULL, '$tipSer', '$numSan','$fecEnt', '$horEnt', '$cosSer', '$tipPag', '$conctPag', ' $telConPag', '$corConPag', '$NomConRec', '$telConRec', '$diaPag', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 999, NULL, NULL, NULL, '$id_clie', NULL, '$obser', 'ACTIVO');";
   $resultado = mysqli_query($enlace, $sql);
-
   if (!$resultado) {
     echo "Error: " . $sql . "<br>" . mysqli_error($enlace);
     $data = array(

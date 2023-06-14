@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "num_ext" => $result->num_ext,
                 "num_int" => $result->num_int,
                 "cp" => $result->cp,
+                "coordenadas" => $result->coordenadas,
             );
         }
     }else{

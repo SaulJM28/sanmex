@@ -47,12 +47,6 @@ $(document).ready(function () {
         data: "hor_ent",
       },
       {
-        data: "cost_ser",
-      },
-      {
-        data: "tip_pag",
-      },
-      {
         data: "dia_pag",
       },
       {
@@ -70,26 +64,8 @@ $(document).ready(function () {
       {
         data: "tel_conrec",
       },
-      {
-        data: "cotizacion",
-        mRender: function(data) {
-          if(data == false){
-            return `No hay archivo`
-          }else{
-            return `<a target="_blank" href='./back/docs/cotizaciones/${data}' class = "btn btn-primary btn-sm">Ver <i class="fas fa-file"></i></a>`
-          }
-        }
-      },
-      {
-        data: "sit_fis",
-        mRender: function(data) {
-          if(data == false){
-            return `No hay archivo`
-          }else{
-            return `<a target="_blank" href='./back/docs/situacionFiscal/${data}' class = "btn btn-primary btn-sm">Ver <i class="fas fa-file"></i></a>`
-          }
-        }
-      },
+   
+ 
       {
         data: "obser",
       },
@@ -128,19 +104,19 @@ $(document).ready(function () {
     buttons: [
       {
         extend: "excelHtml5",
-        title: "Lista de Servicios",
+        title: "Lista de Servicios Jefe de Operaciones",
         text: '<i class="fas fa-file-excel"></i>',
         className: "btn-sm",
       },
       {
         extend: "csvHtml5",
-        title: "Lista de Servicios",
+        title: "Lista de Servicios Jefe de Operaciones",
         text: '<i class="fa-solid fa-file-csv"></i>',
         className: "btn-sm",
       },
       {
         extend: "pdfHtml5",
-        title: "Lista de Servicios",
+        title: "Lista de Servicios Jefe de Operaciones",
         text: '<i class="fas fa-file-pdf"></i>',
         className: "btn-sm",
         orientation: "landscape",
@@ -151,7 +127,7 @@ $(document).ready(function () {
       },
       {
         extend: "print",
-        title: "Lista de Servicios",
+        title: "Lista de Servicios Jefe de Operaciones",
         className: "btn-sm",
         text: '<i class="fa-solid fa-print"></i>',
         footer: "true",
@@ -161,7 +137,7 @@ $(document).ready(function () {
       },
       {
         extend: "copy",
-        title: "Lista de Servicios",
+        title: "Lista de Servicios Jefe de Operaciones",
         className: "btn-sm",
         text: '<i class="fas fa-copy"></i>',
       },
@@ -190,17 +166,6 @@ var toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
-
-function verServicio (id, cliente, sanSol){
-  window.location.href = `detallesServicio.php?id=${id}&cliente=${cliente}&sanSol=${sanSol}`;
-}
-
-const sendInfDocs = (rfc, id) => {
-  document.getElementById('rfcUploadDoc').value = rfc;
-  document.getElementById('idUploadDoc').value = id;
-
-
-}
 
 /* formularioUploadDoc.addEventListener('submit', e =>{
 e.preventDefault();

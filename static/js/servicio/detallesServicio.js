@@ -1,5 +1,4 @@
 window.addEventListener("load", () => {
-  get_datos();
   get_infoSanBySer();
 });
 var el = document.getElementById("wrapper");
@@ -10,63 +9,9 @@ toggleButton.onclick = function () {
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var id = urlParams.get("id");
-
-const get_datos = () => {
-  $.ajax({
-    type: "POST",
-    url: "./back/get_servicioDetalleById.php",
-    data: {
-      id_ser: id,
-    },
-    async: true,
-    beforeSend: function () {},
-    success: function (response) {
-      /* informacion del cliente */
-      document.getElementById("nom_clie").value = response.cliente.nom_clie;
-      document.getElementById("raz_soc").value = response.cliente.razon_social;
-      document.getElementById("rfc").value = response.cliente.rfc;
-      document.getElementById("nom_con").value = response.cliente.nom_con;
-      document.getElementById("num_con").value = response.cliente.num_con;
-      /* informacion de la direccion */
-      document.getElementById("datosDireccion").innerHTML = `
-      <div class="row g-0">
-      <div class="col-md-4">
-          <iframe width="100%" height="100%" frameborder="0" scrolling="no"
-              marginheight="0" marginwidth="0" loading="lazy"
-              src="https://maps.google.com/maps?width=100%25&amp;height=100%&amp;hl=es&amp;q=${response.direccion.coordenadas}&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-      </div>
-      <div class="col-md-8">
-          <div class="card-body">
-              <h5 class="card-title">Direccion del Cliente ${response.cliente.nom_clie}</h5>
-              <p class="card-text"><strong>Estado:</strong> ${response.direccion.estado}.</p> 
-              <p class="card-text"><strong>Municipio:</strong> ${response.direccion.municipio}.</p>  
-              <p class="card-text"><strong>Colonia:</strong> ${response.direccion.colonia}.</p> 
-              <p class="card-text"><strong>Calle:</strong> ${response.direccion.calle}.</p> 
-              <p class="card-text"><strong>Número Exterior:</strong> ${response.direccion.num_ext}.</p>  
-              <p class="card-text"><strong>Número Int:</strong> ${response.direccion.num_int}.</p>  
-              <p class="card-text"><strong>CP:</strong> ${response.direccion.cp}.</p> 
-          </div>
-      </div>
-  </div>
-      `;
-      /* informacion del servicio */
-      document.getElementById("id_ser").value = response.id_ser;
-      document.getElementById("num_sans").value = response.num_san;
-      document.getElementById("cost_unit").value = response.cost_unit;
-      document.getElementById("cost_tot").value = response.cost_tot;
-      document.getElementById("tip_pag").value = response.tip_pag;
-      document.getElementById("dia_pag").value = response.dia_de_pag;
-      document.getElementById("dias_serv").value = response.dias_serv;
-      document.getElementById("operador").value = response.operador;
-      document.getElementById("ruta").value = response.ruta;
-      /* titulo del modal */
-      document.getElementById("modalTitle").innerHTML = `Nombre del servicio ${response.cliente.razon_social}-${response.cliente.nom_clie}`;
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
-};
+var cliente = urlParams.get("cliente");
+var sanSol = urlParams.get("sanSol");
+document.getElementById("infoServ").innerHTML = `<strong>Nombre del cliente:</strong> ${cliente}`;
 const get_infoSanBySer = () => {
   $.ajax({
     type: "POST",
@@ -77,70 +22,52 @@ const get_infoSanBySer = () => {
     async: true,
     beforeSend: function () {},
     success: function (response) {
-      let totalAllenar = document.getElementById("num_sans").value;
-
-      if (response.totalRe >= totalAllenar) {
-        document
-          .getElementById("btnAddSan")
-          .setAttribute("disabled", "disabled");
-        document
-          .getElementById("btnADDInfoSan")
-          .setAttribute("disabled", "disabled");
-      }else{
-        document
-          .getElementById("btnAddSan")
-          .removeAttribute("disabled", "disabled");
-        document
-          .getElementById("btnADDInfoSan")
-          .removeAttribute("disabled", "disabled");
-      }
-
-      document.getElementById(
-        "tittleSanAsig"
-      ).innerHTML = `Informacion de los sanitarios asignados ${response.totalRe} de ${totalAllenar}`;
       let html = "";
+      document.getElementById("tittleSanAsig").innerHTML = `Sanitarios asignados ${response.totalRe} de ${sanSol}`;
+      if(response.totalRe >= sanSol){
+          document.getElementById("btnAddSan").setAttribute("disabled", "");
+      }else{
+        document.getElementById("btnAddSan").removeAttribute("disabled", "");
+      }
       response.data.map((element) => {
-        console.log(element)
-        if (element.estatus_sesa == "FINALIZADO") {
-          html += `
-          <div class="col-md-4 mt-12">
-            <div class="card">
-              <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
-              <div class="card-body">
-                <div>
-              <p class="card-text"><strong>Numero de sanitario:</strong> ${element.num_san}</p>
-              <div style="display: flex; justify-content: right;">
-                <button class="btn btn-danger btn-sm" onclick="removeSan(${element.id_san}, ${element.id_ser})">Remover <i class="fas fa-trash"></i></button>
-                <button 
-            class="btn btn-primary btn-sm" 
-            data-bs-toggle="modal" 
-            data-bs-target="#modalADDSAN" 
-            onclick="addSan(${element.id_ser}, ${element.id_sersan})" 
-            id = "hola">Agregar Sanitario <i class="fas fa-plus"></i></button>
+          if (element.estatus_sesa == "FINALIZADO") {
+            html += `
+            <div class="col-md-4 mt-12">
+              <div class="card">
+                <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
+                <div class="card-body">
+                  <div>
+                    <p class="card-text"><strong>Tipo de Sanitario</strong> ${element.tipo} <br>
+                    <p class="card-text"><strong>Numero de sanitario asignado:</strong> ${element.num_san} <br>
+                      <small class="card-text">Esto lo debe asignar el encargado del almacen</small>
+                    </p>
+                  <div style="display: flex; justify-content: right;">
+                  <button class="btn btn-danger btn-sm" disabled onclick="removeSanInfo(${element.id_sersan} )">Remover <i class="fas fa-trash"></i></button>
+                </div>
               </div>
-            </div>
+                </div>
               </div>
-            </div>
-          </div>`;
-        } else {
-          html += `
-          <div class="col-md-4 mt-12">
-            <div class="card">
-              <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
-              <div class="card-body">
-                <div>
-                  <p class="card-text"><strong>Tipo de Sanitario</strong> ${element.tipo} <br>
-                  <p class="card-text"><strong>Numero de sanitario asignado:</strong> ${element.num_san} <br>
-                    <small class="card-text">Esto lo debe asignar el encargado del almacen</small>
-                  </p>
-                <div style="display: flex; justify-content: right;">
-                <button class="btn btn-danger btn-sm" onclick="removeSanInfo(${element.id_sersan} )">Remover <i class="fas fa-trash"></i></button>
+            </div>`;
+          } 
+          if(element.estatus_sesa == "ACTIVO") {
+            html += `
+            <div class="col-md-4 mt-12">
+              <div class="card">
+                <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
+                <div class="card-body">
+                  <div>
+                    <p class="card-text"><strong>Tipo de Sanitario</strong> ${element.tipo} <br>
+                    <p class="card-text"><strong>Numero de sanitario asignado:</strong> ${element.num_san} <br>
+                      <small class="card-text">Esto lo debe asignar el encargado del almacen</small>
+                    </p>
+                  <div style="display: flex; justify-content: right;">
+                  <button class="btn btn-danger btn-sm" onclick="removeSanInfo(${element.id_sersan} )">Remover <i class="fas fa-trash"></i></button>
+                </div>
               </div>
-            </div>
+                </div>
               </div>
-            </div>
-          </div>`;
-        }
+            </div>`;
+          }
       });
       document.getElementById("infoSanAsig").innerHTML = html;
     },
@@ -149,12 +76,6 @@ const get_infoSanBySer = () => {
     },
   });
 };
-
-function addSan(id_ser, id_sersan) {
-  document.getElementById("id_serQr").value = id_ser;
-  document.getElementById("id_sersan").value = id_sersan;
-  html5QrcodeScanner.render(onScanSuccess);
-}
 
 function removeSanInfo(id) {
   $.ajax({
@@ -171,7 +92,6 @@ function removeSanInfo(id) {
     success: function (response) {
       if (response.resultado == true) {
         get_infoSanBySer();
-        get_datos();
         Swal.fire({
           title: "Alerta",
           text: `${response.mensaje}`,
@@ -188,10 +108,9 @@ function removeSanInfo(id) {
 
 formularioADDInfoSanServ.addEventListener("submit", (e) => {
   e.preventDefault();
-  let precio_san = document.getElementById("precio_san").value;
   let tip_san = document.getElementById("tip_san").value;
-  let coord_san = document.getElementById("coord_san").value;
-  if (precio_san.length == 0 && tip_san.length == 0 && coord_san.length == 0) {
+  let idDire = document.getElementById("idDir").value;
+  if (idDire.length == 0 && tip_san.length == 0) {
     Swal.fire({
       title: "Alerta",
       text: `Todos los campos vacios`,
@@ -203,22 +122,25 @@ formularioADDInfoSanServ.addEventListener("submit", (e) => {
       url: "./back/insert_sanser.php",
       data: {
         id_ser: id,
-        precio: precio_san,
+        idDire: idDire,
         tipo: tip_san,
-        coord: coord_san,
       },
       async: true,
       beforeSend: function () {},
       success: function (response) {
         if (response.resultado == true) {
           get_infoSanBySer();
-          get_datos();
+          $('#modalADDSAN').modal('hide');
+          document.getElementById("formularioADDInfoSanServ").reset();
           Swal.fire({
             title: "Alerta",
             text: `${response.mensaje}`,
             confirmButtonText: "Aceptar",
           });
         } else {
+          get_infoSanBySer();
+          $('#modalADDSAN').modal('hide');
+          document.getElementById("formularioADDInfoSanServ").reset();
           Swal.fire({
             title: "Alerta",
             text: `${response.mensaje}`,
@@ -269,4 +191,67 @@ function finalizarServ() {
       /* poner el ajax */
     }
   });
+}
+
+
+function buscadorInfoDireClie() {
+    let key_dire = document.getElementById("buscarDir").value;
+    let html = "";
+    if (key_dire.length == 0) {
+      document.getElementById("mensajeBusDire").innerHTML = ``;
+      document.getElementById("dirEst").value = "";
+      document.getElementById("dirMun").value = "";
+      document.getElementById("dirCol").value = "";
+      document.getElementById("dirCalle").value = "";
+      document.getElementById("dirNumExt").value = "";
+      document.getElementById("dirNumInt").value = "";
+      document.getElementById("dirCP").value = "";
+      document.getElementById("idDir").value = "";
+      document.getElementById("coord").value = "";
+    } else {
+      $.ajax({
+        type: "POST",
+        url: "../servicios/back/buscarDirecciones.php",
+        data: {
+          key: key_dire,
+        },
+        async: true,
+        beforeSend: function () {},
+        success: function (response) {
+          response.forEach((element) => {
+            if (element.resultado == true) {
+              document.getElementById("dirEst").value = `${element.estado}`;
+              document.getElementById("dirMun").value = `${element.municipio}`;
+              document.getElementById("dirCol").value = `${element.colonia}`;
+              document.getElementById("dirCalle").value = `${element.calle}`;
+              document.getElementById("dirNumExt").value = `${element.num_ext}`;
+              document.getElementById("dirNumInt").value = `${element.num_int}`;
+              document.getElementById("dirCP").value = `${element.cp}`;
+              document.getElementById("idDir").value = `${element.id_dire}`;
+              document.getElementById("coord").value = `${element.coordenadas}`;
+            } else {
+              document.getElementById(
+                "mensajeBusDire"
+              ).innerHTML = ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>¡Alerta!</strong> No se pudo encontrar informacion de la direccion.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>`;
+              document.getElementById("dirEst").value = "";
+              document.getElementById("dirMun").value = "";
+              document.getElementById("dirCol").value = "";
+              document.getElementById("dirCalle").value = "";
+              document.getElementById("dirNumExt").value = "";
+              document.getElementById("dirNumInt").value = "";
+              document.getElementById("dirCP").value = "";
+              document.getElementById("idDir").value = "";
+              document.getElementById("coord").value = "";
+            }
+          });
+        },
+        error: function (error) {
+          console.log(error);
+        },
+      });
+    }
+  
 }
