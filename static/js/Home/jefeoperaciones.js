@@ -2,7 +2,7 @@ $(document).ready(function () {
   //$("#datatable").DataTable();
   $("#tableListSer").DataTable({
     ajax: {
-      url: "./back/get_listServicios.php",
+      url: "./back/getListServicioJefeOpe.php",
     },
     deferRender: true,
     scrollY: 340,
@@ -47,9 +47,6 @@ $(document).ready(function () {
         data: "hor_ent",
       },
       {
-        data: "dia_pag",
-      },
-      {
         data: "conct_pag",
       },
       {
@@ -63,9 +60,16 @@ $(document).ready(function () {
       },
       {
         data: "tel_conrec",
+      },  
+      {
+        data : "ruta"
       },
-   
- 
+      {
+        data : "operador"
+      },
+      {
+        data : "dias_serv"
+      },
       {
         data: "obser",
       },
@@ -78,26 +82,9 @@ $(document).ready(function () {
         data: "id_ser",
         bSortable: false,
         mRender: function (data, type, row) {
-          if(row.num_san == "No aplica"){
             return `
-            <div class="dropdown"><a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">OPCIONES</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUploadDoc" onclick = "sendInfDocs('${row.rfc_clie}', ${data})">Subir Documentos</a></li>
-              <li><a class="dropdown-item" href="#">Editar</a></li>
-              <li><a class="dropdown-item" href="#">Eliminar</a></li>
-            </ul>
-            </div>`;
-          }else{
-            return `
-            <div class="dropdown"><a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">OPCIONES</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUploadDoc" onclick = "sendInfDocs('${row.rfc_clie}', ${data})">Subir Documentos</a></li>
-              <li><a class="dropdown-item" href="#" onclick = "verServicio(${data}, '${row.cliente}', ${row.num_san})">Agregar Sanitarios</a></li>
-              <li><a class="dropdown-item" href="#">Editar</a></li>
-              <li><a class="dropdown-item" href="#">Eliminar</a></li>
-            </ul>
-            </div>`;
-          }
+            <button class = "btn btn-sm btn-primary" onclick = "addRuta(${data})" >Agregar Ruta <i class="fas fa-truck"></i></button>`;
+         
         },
       },
     ],
@@ -166,6 +153,10 @@ var toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
+
+function addRuta(id) {
+  window.location.href = `../jefeOperaciones/asignacionRuta.php?id_ser=${id}`
+}
 
 /* formularioUploadDoc.addEventListener('submit', e =>{
 e.preventDefault();

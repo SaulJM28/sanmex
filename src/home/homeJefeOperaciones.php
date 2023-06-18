@@ -8,8 +8,11 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "JEFE OPERACIONES" |
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="static/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="static/css/style.css" />
+        <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../static/css/style.css" />
+        <link rel="stylesheet" href="../../static/css/datatables.css" />
+        <link rel="stylesheet" href="../../static/css/datatables.min.css" />
+
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
         <title>SANMEX</title>
     </head>
@@ -25,7 +28,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "JEFE OPERACIONES" |
                 <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
                 </div>
                 <div class="list-group list-group-flush my-3">
-                    <a href="./include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
+                    <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -67,7 +70,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "JEFE OPERACIONES" |
                                                 <th>DIRECCION ENTREGA</th>
                                                 <th>FECHA DE ENTREGA</th>
                                                 <th>HORA DE ENTREGA</th>
-                                                <th>DIA DE PAGO</th>
                                                 <th>NOMBRE CONTACT PAGO</th>
                                                 <th>TEL CONTACT PAGO</th>
                                                 <th>CORREO CONTACT PAGO</th>
@@ -89,10 +91,13 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "JEFE OPERACIONES" |
                 </div>
             </div>
         </div>
-        <script src="static/js/jquery-3.6.3.min.js"></script>
-        <script src="static/js/bootstrap.min.js"></script>
+        <script src="../../static/js/jquery-3.6.3.min.js"></script>
+        <script src="../../static/js/bootstrap.min.js"></script>
+        <script src="../../static/js/bootstrap.bundle.min.js"></script>
+        <script src="../../static/js/datatables.js"></script>
+        <script src="../../static/js/datatables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="static/js/home/almacenista.js"></script>
+        <script src="../../static/js/home/jefeoperaciones.js"></script>
     </body>
     </html>
 <?php

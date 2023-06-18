@@ -27,7 +27,7 @@ let observador = new IntersectionObserver(
 const cargarServicios = async () => {
   try {
     const respuesta = await fetch(
-      `./include/getListServiciosAlm.php?limite=${limite}`
+      `../../include/getListServiciosAlm.php?limite=${limite}`
     );
     // Si la respuesta es correcta
     if (respuesta.status === 200) {
@@ -36,7 +36,7 @@ const cargarServicios = async () => {
         if (element.estatus == "ACTIVO") {
           color = element.color;
           botones = `<div class="btn-group">
-            <a href="asignarSanAlm.php?id_ser=${element.id_ser}&san_sol=${element.san_soli}" class="btn btn-success">Realizar Servicio</a>
+            <a href="../almacenista/asignarSanAlm.php?id_ser=${element.id_ser}&san_sol=${element.san_sol}" class="btn btn-success">Asignar Sanitarios</a>
           </div>`;
         } else if (element.estatus == "FINALIZADO") {
           color = element.color;
@@ -45,18 +45,17 @@ const cargarServicios = async () => {
         servicios += `
                     <div class="card sombra" style = "margin-top: 10px; border-left: 5px solid  ${color}">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre del servicio: ${element.cliente.razon_social} - ${element.dirreccion.colonia} - ${element.dirreccion.calle}  </h5>
-                            <h6 class="card-subtitle mb-2"><strong>Nombre cliente:</strong>${element.cliente.nom_clie}. </h6>
-                            	<p class="card-text"><strong>Estado:</strong> ${element.dirreccion.estado}. <strong>Municipio:</strong> ${element.dirreccion.municipio} <strong>Colonia:</strong> ${element.dirreccion.colonia} <strong>Calle:</strong> ${element.dirreccion.calle}</p>
-                            	<p class="card-text"><strong>Operador:</strong> ${element.operador}. <strong>Ruta:</strong> ${element.ruta}  </p>  
-                              <p class="card-text" style="text-align: right;">Sanitarios solicitados: ${element.san_soli}</p>
+                            <h5 class="card-title">Numero del servicio: ${element.num_ser}</h5>
+                            <h6 class="card-subtitle mb-2"><strong>Tipo de servicio:</strong>${element.tip_ser}. </h6>
+                            	<p class="card-text"><strong>Tipo de sanitario:</strong> ${element.tip_san}.</p>  
+                              <p class="card-text" style="text-align: right;">Sanitarios asignados: ${element.san_reg} de ${element.san_sol}</p>
                                 <div style="display: flex; justify-content: right">
                                     ${botones}
                                 </div>
                         </div>
                     </div>
 				`;
-      });
+      }); 
       document.getElementById("contenedor").innerHTML = servicios;
 
       if (limite <= datos[0].totalRe) {

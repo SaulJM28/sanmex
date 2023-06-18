@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
                     "rol" => $result['tip_usu'],
-                    "url" => "./homeAlmacenista.php"
+                    "url" => "./src/home/homeAlmacenista.php"
                 );
             }
 
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
                     "rol" => $result['tip_usu'],
-                    "url" => './homeJefeOperaciones.php'
+                    "url" => './src/home/homeJefeOperaciones.php'
                 );
             }
         } else {
