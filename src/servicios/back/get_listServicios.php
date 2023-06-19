@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($result->estatusS == 'ACTIVO') $color = '#279b37';
             if ($result->estatusS == 'FINALIZADO') $color = '#ffdd00';
 
-            $fileCot = !file_exists($fileCot) ? $result->cotzacion : false;
-            $fileSitFis = !file_exists($fileSitFis) ? $result->sit_fis : false;
+            $fileCot = file_exists($fileCot) ? $result->cotzacion : false;
+            $fileSitFis = file_exists($fileSitFis) ? $result->sit_fis : false;
 
             if ($result->estadoS != null) {
                 $data[] = array(
