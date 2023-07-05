@@ -1,4 +1,4 @@
-  let el = document.getElementById("wrapper");
+let el = document.getElementById("wrapper");
 let toggleButton = document.getElementById("menu-toggle");
 let limite = 0;
 let servicios = "";
@@ -33,6 +33,7 @@ const cargarServicios = async () => {
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       datos.forEach((element) => {
+        console.log(element);
         if (element.estatus == "ACTIVO") {
           color = element.color;
           botones = `<div class="btn-group">
@@ -47,7 +48,7 @@ const cargarServicios = async () => {
                         <div class="card-body">
                             <h5 class="card-title">Numero del servicio: ${element.num_ser}</h5>
                             <h6 class="card-subtitle mb-2"><strong>Tipo de servicio:</strong>${element.tip_ser}. </h6>
-                            	<p class="card-text"><strong>Tipo de sanitario:</strong> ${element.tip_san}.</p>  
+                              <p class="card-text"><strong>Nombre de Cliente:</strong> ${element.cliente}.</p>  
                               <p class="card-text" style="text-align: right;">Sanitarios asignados: ${element.san_reg} de ${element.san_sol}</p>
                                 <div style="display: flex; justify-content: right">
                                     ${botones}
@@ -55,7 +56,7 @@ const cargarServicios = async () => {
                         </div>
                     </div>
 				`;
-      }); 
+      });
       document.getElementById("contenedor").innerHTML = servicios;
 
       if (limite <= datos[0].totalRe) {

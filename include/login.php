@@ -58,12 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 );
             }
 
-            if ($result['tip_usu'] == 'OPERADOR') {
+            if ($result['tip_usu'] == 'OPERADOR A') {
                 $data = array(
                     "resultado" => true,
                     "mensaje" => "Usuario y contraseña correctos",
                     "rol" => $result['tip_usu'],
-                    "url" => './home_ope.php'
+                    "url" => './src/home/homeOpeA.php'
                 );
             }
 

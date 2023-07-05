@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //Mostrar un GET
     /* Este query trae la lista de resultados */
-    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_ser, SE.tip_ser, SE.num_san, SA.tipo, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie INNER JOIN servicio_sani SA ON SA.id_ser = SE.id_ser INNER JOIN rutas R ON R.id_rut = SE.id_rut WHERE SE.estatus <> 'INACTIVO' LIMIT 10 OFFSET " . $limite . "");
+    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_ser, SE.tip_ser, SE.num_san, CLI.nom_clie, CLI.rfc, CLI.razon_social, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie WHERE SE.estatus <> 'INACTIVO' LIMIT 10 OFFSET " . $limite . "");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 
@@ -52,9 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     "id_ser" => $result->id_ser,
                     "num_ser" => $result->num_ser,
                     "tip_ser" => $result->tip_ser,
-                    "tip_san" => $result->tipo,
                     "san_sol" => $result->num_san,
                     "san_reg" => $totalReg,
+                    "cliente" => $result->nom_clie .", ". $result->rfc .", ". $result->razon_social ,
                     "estatus" => $result->estatus,
                     "color" => $color,
                 );

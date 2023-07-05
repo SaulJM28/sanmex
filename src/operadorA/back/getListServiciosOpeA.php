@@ -1,6 +1,6 @@
 <?php
-include "config.php";
-include "utils.php";
+include "../../../include/config.php";
+include "../../../include/utils.php";
 $dbConn =  connect($db);
 /*
   listar todos los posts/gets o solo uno
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     LEFT JOIN rutas R ON S.id_rut = R.id_rut
     INNER JOIN operadores O ON R.id_ope = O.id_ope
     INNER JOIN usuarios U ON O.id_ope = U.id_ope
-    WHERE S.tip_ser = 'LIMPIEZA SANITARIOS' AND S.estatus <> 'INACTIVO' AND O.id_ope = '$id_ope' LIMIT 10 OFFSET " . $limite ."");
+    WHERE S.tip_ser = 'DESAZOLVES DE FOSAS SEPTICAS' OR S.tip_ser =  'LIMPIEZAS PROFUNDAS' OR S.tip_ser = 'SONDEOS' OR S.tip_ser = 'INSPECCION DE CAMARAS'  AND S.estatus <> 'INACTIVO' AND O.id_ope = '$id_ope' LIMIT 10 OFFSET " . $limite ."");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
     $data = [];
@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 "num_san" => $result->num_san,
                 "nom_conrec" => $result->nom_conrec,
                 "tel_conrec" => $result->tel_conrec,
-                "obser" => $result->obser
+                "obser" => $result->obser,
+                "color" => $color,
+                "estatus" => $result->estatus
             );
         }
     } else {

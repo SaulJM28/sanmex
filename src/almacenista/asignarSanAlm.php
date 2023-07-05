@@ -58,7 +58,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ALMACENISTA" || $_S
                 </nav>
                 <div class="container-fluid" style="margin-top: 80px; padding: 25px;">
                     <div>
-                        <a href="homeAlmacenista.php" style="color: black; text-decoration: none;"><i class="fas fa-arrow-left"></i> Volver</a>
+                        <a href="../home/homeAlmacenista.php" style="color: black; text-decoration: none;"><i class="fas fa-arrow-left"></i> Volver</a>
                     </div>
                     <h2 class="text-center">Informacion de sanitarios</h2>
                     <p class="text-center" id="tittleSanAsig"></p>  
