@@ -62,6 +62,11 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
                             <h1 style="text-align: center;">Lista de servicios por hacer</h1>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: center;" id = "nomOpeList"></p>
+                        </div>
+                    </div>
                     <div class="contenedor" id="contenedor"></div>
                 </div>
             </div>
@@ -78,7 +83,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form action="../../include/insert_bit.php" id="formularioADDSerBit" method="POST" enctype="multipart/form-data">
+                        <form action="./back/insert_bit.php" id="formularioADDSerBit" method="POST" enctype="multipart/form-data">
                             <input type="hidden" class="form-control" id="id_serADD" name="id_serADD" value="<?php echo $_SESSION['nombre']; ?>">
                             <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="<?php echo $_SESSION['nombre']; ?>">
                             <input type="hidden" class="form-control" id="tipo" name="tipo" value="INCIDENCIA">

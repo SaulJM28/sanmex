@@ -24,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //Mostrar un GET
     /* Este query trae la lista de resultados */
-    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_ser, SE.tip_ser, SE.num_san, CLI.nom_clie, CLI.rfc, CLI.razon_social, SE.estatus FROM servicio SE INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie WHERE SE.estatus <> 'INACTIVO' LIMIT 10 OFFSET " . $limite . "");
+    $sql = $dbConn->prepare("SELECT SE.id_ser, SE.num_ser, SE.tip_ser, SE.num_san, CLI.nom_clie, CLI.rfc, CLI.razon_social, SE.estatus FROM servicio SE 
+    INNER JOIN clientes CLI ON CLI.id_clie = SE.id_clie 
+    WHERE SE.estatus <> 'INACTIVO' LIMIT 10 OFFSET " . $limite . "");
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
 

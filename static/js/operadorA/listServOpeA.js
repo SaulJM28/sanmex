@@ -24,7 +24,6 @@ let observador = new IntersectionObserver(
   }
 );
 
-
 const cargarServicios = async () => {
   try {
     const respuesta = await fetch(
@@ -34,12 +33,13 @@ const cargarServicios = async () => {
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
       datos.forEach((element) => {
+        document.getElementById("nomOpeList").innerHTML = `${element.nom_ope}`;
         console.log(element);
         if (element.estatus == "ACTIVO") {
           color = element.color;
           botones = `<div class="btn-group">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "getInfoServById(${element.id_ser}, '', '' )">Incidencias</button>
-            <a href="servicio.php?id_ser=${element.id_ser}" class="btn btn-success">Realizar Servicio</a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "getInfoServById(${element.id_ser}, '${element.num_ser}', '${element.cliente}' )">Incidencias</button>
+            <a href="servicio.php?id_ser=${element.id_ser}" class="btn btn-success btn-sm">Realizar Servicio</a>
           </div>`;
         } else if (element.estatus == "FINALIZADO") {
           color = element.color;
@@ -48,11 +48,14 @@ const cargarServicios = async () => {
         servicios += `
                     <div class="card sombra" style = "margin-top: 10px; border-left: 5px solid  ${color}">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre del servicio: </h5>
-                            <h6 class="card-subtitle mb-2"><strong>Nombre cliente:</strong>. </h6>
-                            	<p class="card-text"><strong>Estado:</strong> . <strong>Municipio:</strong> <strong>Colonia:</strong>  <strong>Calle:</strong></p>
-                            	<p class="card-text"><strong>Operador:</strong> . <strong>Ruta:</strong>   </p>  
-                              <p class="card-text" style="text-align: right;">Sanitarios a limpiar: </p>
+                            <h5 class="card-title">Numero de servicio: ${element.num_ser}</h5>
+                            <ul class="list-group">
+                            <li class="list-group-item bg-white"><strong>Nombre del contacto:</strong>. ${element.nom_conrec}</li>
+                            <li class="list-group-item bg-white"><strong>Telefono del contacto:</strong>. ${element.tel_conrec}</li>
+                            <li class="list-group-item bg-white"><strong>Tipo de servicio:</strong>. ${element.tip_ser}</li>
+                            <li class="list-group-item bg-white"><strong>Direccion:</strong>. ${element.direccion}</li>
+                            <li class="list-group-item bg-white"><strong>Observaciones:</strong>. ${element.tip_ser}</li>
+                          </ul>
                                 <div style="display: flex; justify-content: right">
                                     ${botones}
                                 </div>
@@ -66,8 +69,9 @@ const cargarServicios = async () => {
         if (ultimoServicio) {
           observador.unobserve(ultimoServicio);
         }
-        const serviciosEnPantalla =
-          document.querySelectorAll(".contenedor .sombra");
+        const serviciosEnPantalla = document.querySelectorAll(
+          ".contenedor .sombra"
+        );
         ultimoServicio = serviciosEnPantalla[serviciosEnPantalla.length - 1];
         observador.observe(ultimoServicio);
       }

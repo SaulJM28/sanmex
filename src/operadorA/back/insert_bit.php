@@ -13,7 +13,7 @@ if (!$_POST) {
         date_default_timezone_set('america/mexico_city');
         $hoy = date('Y-m-d h:i:s');
     
-     include("conexion.php");    
+     include("../../../include/conexion.php");    
         $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `fecha`, `evidencia`, `comentario`, `estatus`) 
         VALUES (NULL, '$servicio', '$cliente', NULL, '$operador', '$hoy', NULL, '$comentario', 'INCIDENCIA');";
         $resultado = mysqli_query($enlace, $sql);
@@ -23,7 +23,7 @@ if (!$_POST) {
             echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
             echo "<script> 
             setTimeout(function(){
-                alert('Servicio realizado correctamente');
+                alert('Reorte de incidencia realizado correctamente');
                 location.href=' ../listaServicios.php'
             } , 100);   
             </script>";
@@ -49,7 +49,7 @@ if (!$_POST) {
         date_default_timezone_set('america/mexico_city');
         $hoy = date('Y-m-d h:i:s');
     
-     include("conexion.php");    
+     include("../../../include/conexion.php");    
         $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `fecha`, `evidencia`, `comentario`, `estatus`) 
         VALUES (NULL, '$servicio', '$cliente', '$sanitario', '$operador', '$hoy', '$nameArch', '$comentario', 'REALIZADO');";
         $resultado = mysqli_query($enlace, $sql);
