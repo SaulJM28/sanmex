@@ -87,31 +87,31 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "JEFE OPERACIONES" |
                                                 </div>
                                                 <label for="dias" class="form-label">Dias en los que se hara el servicio</label>
                                                 <div class="mb-3 form-check">
-                                                    <input type="checkbox" name="dias[]" value="lunes">
+                                                    <input type="checkbox" name="dias[]" value="1">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Lunes
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Martes">
+                                                    <input type="checkbox" name="dias[]" value="2">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Martes
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Miercoles">
+                                                    <input type="checkbox" name="dias[]" value="3">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Miercoles
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Jueves">
+                                                    <input type="checkbox" name="dias[]" value="4">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Jueves
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Viernes">
+                                                    <input type="checkbox" name="dias[]" value="5">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Viernes
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Sabado">
+                                                    <input type="checkbox" name="dias[]" value="6">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Sabado
                                                     </label>
-                                                    <input type="checkbox" name="dias[]" value="Domingo">
+                                                    <input type="checkbox" name="dias[]" value="7">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         Domingo
                                                     </label>

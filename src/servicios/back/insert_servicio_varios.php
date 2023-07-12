@@ -25,8 +25,8 @@ if(!$_POST){
     $coord = $_POST["coord"];
     $obser = $_POST["obser"]; 
 
-date_default_timezone_set('america/mexico_city');
-$fec_crea = date('Y-m-d h:i:s');
+  date_default_timezone_set('america/mexico_city');
+  $fec_crea = date('Y-m-d h:i:s');
   include("../../../include/conexion.php");
   $sql = "INSERT INTO `servicio` (`id_ser`, `num_ser`, `tip_ser`, `num_san`, 
   `fec_ent`, 
@@ -81,7 +81,7 @@ $fec_crea = date('Y-m-d h:i:s');
     NULL, 
     NULL, 
     NULL, 
-    NULL, 
+    '$id_clie', 
     NULL, 
     '$obser', 
     'ACTIVO');";

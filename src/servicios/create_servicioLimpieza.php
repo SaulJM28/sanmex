@@ -126,7 +126,7 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ADMINISTRADOR" || $
 
                                         <div class="col-md-12" id="mensajeBusClie">
                                         </div>
-                                        <input type="hidden" id="idCli">
+                                        <input type="text" id="idCli">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nomCli">Nombre del cliente <strong style="color: red;">*</strong></label>

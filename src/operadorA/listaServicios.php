@@ -21,7 +21,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
 
     <script>
         var id_ope = <?php echo $_SESSION['id_ope']; ?> 
-        console.log(id_ope);
     </script>        
 
     <body>
@@ -84,17 +83,57 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="./back/insert_bit.php" id="formularioADDSerBit" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" class="form-control" id="id_serADD" name="id_serADD" value="<?php echo $_SESSION['nombre']; ?>">
+                            <input type="hidden" class="form-control" id="id_serADD" name="id_serADD" >
                             <input type="hidden" class="form-control" id="operadorADD" name="operadorADD" value="<?php echo $_SESSION['nombre']; ?>">
                             <input type="hidden" class="form-control" id="tipo" name="tipo" value="INCIDENCIA">
                             <input type="hidden" class="form-control" id="servicioADD" name="servicioADD">
                             <input type="hidden" class="form-control" id="clienteADD" name="clienteADD">
                             <div class="mb-3 mt-3">
+                                <label for="fileEvidencia" class="form-label">Tomar evidencia:</label>
+                                <input type="file" class="form-control" id ="fileEvidencia" name ="fileEvidencia" required>
+                            </div>
+                            <div class="mb-3 mt-3">
                                 <label for="comentarioADD" class="form-label">Comentarios:</label>
-                                <textarea class="form-control" rows="5" id="comentarioADD" name="comentarioADD" placeholder="escriba las incidencias por lo cual no pudo realizar el servicio" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
+                                <textarea class="form-control" rows="5" id="comentarioADD" name="comentarioADD" placeholder="escriba las incidencias por lo cual no pudo realizar el servicio" onkeyup="javascript:this.value=this.value.toUpperCase();" required></textarea>
                             </div>
                             <div style="display: flex; justify-content: right;">
-                                <button type="submit" class="btn btn-success">Reportar incidencias</button>
+                                <button type="submit" class="btn btn-danger">Reportar incidencias</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal para realizar servicio -->
+        <div class="modal" id="modalReaSer">
+            <div class="modal-dialog">
+                <div class="modal-content modal-lg">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Realizar Servicio</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="./back/insert_bit.php" id="formularioADDSerReaBit" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" class="form-control" id="id_serSerRea" name="id_serSerRea" >
+                            <input type="hidden" class="form-control" id="operadorSerRea" name="operadorSerRea" value="<?php echo $_SESSION['nombre']; ?>">
+                            <input type="hidden" class="form-control" id="tipo" name="tipo" value="REALIZACION">
+                            <input type="hidden" class="form-control" id="servicioSerRea" name="servicioSerRea">
+                            <input type="hidden" class="form-control" id="clienteSerRea" name="clienteSerRea">
+                            <div class="mb-3 mt-3">
+                                <label for="fileEvidencia" class="form-label">Tomar evidencia:</label>
+                                <input type="file" class="form-control" id ="fileEvidenciaSerRea" name ="fileEvidenciaSerRea" required>
+                            </div>
+                            <div class="mb-3 mt-3">
+                                <label for="comentarioSerRea" class="form-label">Comentarios:</label>
+                                <textarea class="form-control" rows="5" id="comentarioSerRea" name="comentarioSerRea" placeholder="escriba las incidencias por lo cual no pudo realizar el servicio" onkeyup="javascript:this.value=this.value.toUpperCase();" required></textarea>
+                            </div>
+                            <div style="display: flex; justify-content: right;">
+                                <button type="submit" class="btn btn-success">Realizar Servicio</button>
                             </div>
                         </form>
                     </div>
@@ -107,7 +146,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
         <script src="../../static/js/operadorA/listServOpeA.js"></script>
     </body>
     </html>

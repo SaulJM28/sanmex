@@ -32,48 +32,57 @@ const cargarServicios = async () => {
     // Si la respuesta es correcta
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      datos.forEach((element) => {
-        document.getElementById("nomOpeList").innerHTML = `${element.nom_ope}`;
-        console.log(element);
-        if (element.estatus == "ACTIVO") {
-          color = element.color;
-          botones = `<div class="btn-group">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "getInfoServById(${element.id_ser}, '${element.num_ser}', '${element.cliente}' )">Incidencias</button>
-            <a href="servicio.php?id_ser=${element.id_ser}" class="btn btn-success btn-sm">Realizar Servicio</a>
-          </div>`;
-        } else if (element.estatus == "FINALIZADO") {
-          color = element.color;
-          botones = `Ya no puedes realizar limpiezas, el servcio ha terminado`;
-        }
-        servicios += `
-                    <div class="card sombra" style = "margin-top: 10px; border-left: 5px solid  ${color}">
-                        <div class="card-body">
-                            <h5 class="card-title">Numero de servicio: ${element.num_ser}</h5>
-                            <ul class="list-group">
-                            <li class="list-group-item bg-white"><strong>Nombre del contacto:</strong>. ${element.nom_conrec}</li>
-                            <li class="list-group-item bg-white"><strong>Telefono del contacto:</strong>. ${element.tel_conrec}</li>
-                            <li class="list-group-item bg-white"><strong>Tipo de servicio:</strong>. ${element.tip_ser}</li>
-                            <li class="list-group-item bg-white"><strong>Direccion:</strong>. ${element.direccion}</li>
-                            <li class="list-group-item bg-white"><strong>Observaciones:</strong>. ${element.tip_ser}</li>
-                          </ul>
-                                <div style="display: flex; justify-content: right">
-                                    ${botones}
-                                </div>
-                        </div>
-                    </div>
-				`;
-      });
-      document.getElementById("contenedor").innerHTML = servicios;
+      if (datos.resultado == false) {
+        document.getElementById("contenedor").innerHTML += `<p class = "text-center">${datos.mensaje}<p>`;
+      }
+      if (datos.resultado == true) {
+        datos.data.forEach((element) => {
+          document.getElementById(
+            "nomOpeList"
+          ).innerHTML = `${element.nom_ope}`;
+          if (element.estatus == "ACTIVO") {
+            color = element.color;
+            botones = `<div class="btn-group">
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "agregarInfoInci(${element.id_ser}, '${element.num_ser}', '${element.cliente}' )">Incidencias</button>
+              <button onclick="agregarInfoSerRea(${element.id_ser}, '${element.num_ser}', '${element.cliente}')" data-bs-toggle="modal" data-bs-target="#modalReaSer" class="btn btn-success btn-sm">Realizar Servicio</button>
+            </div>`;
+          } else if (element.estatus == "FINALIZADO") {
+            color = element.color;
+            botones = `Ya no puedes realizar limpiezas, el servcio ha terminado`;
+          }
+          servicios += `
+                      <div class="card sombra" style = "margin-top: 10px; border-left: 5px solid  ${color}">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <h5 class="card-title">Numero de servicio: ${element.num_ser}</h5>
+                              <h5 class="card-title">Dias de servicio: ${element.num_ser}</h5>
+                            </div>
+                              <ul class="list-group">
+                              <li class="list-group-item bg-white"><strong>Nombre del contacto:</strong>. ${element.nom_conrec}</li>
+                              <li class="list-group-item bg-white"><strong>Telefono del contacto:</strong>. ${element.tel_conrec}</li>
+                              <li class="list-group-item bg-white"><strong>Tipo de servicio:</strong>. ${element.tip_ser}</li>
+                              <li class="list-group-item bg-white"><strong>Direccion:</strong>. ${element.direccion}</li>
+                              <li class="list-group-item bg-white"><strong>Observaciones:</strong>. ${element.tip_ser}</li>
+                            </ul>
+                                  <div style="display: flex; justify-content: right">
+                                      ${botones}
+                                  </div>
+                          </div>
+                      </div>
+          `;
+        });
+        document.getElementById("contenedor").innerHTML = servicios;
 
-      if (limite <= datos[0].totalRe) {
-        if (ultimoServicio) {
-          observador.unobserve(ultimoServicio);
+        if (limite <= datos.data[0].totalRe) {
+          if (ultimoServicio) {
+            observador.unobserve(ultimoServicio);
+          }
+          const serviciosEnPantalla = document.querySelectorAll(
+            ".contenedor .sombra"
+          );
+          ultimoServicio = serviciosEnPantalla[serviciosEnPantalla.length - 1];
+          observador.observe(ultimoServicio);
         }
-        const serviciosEnPantalla = document.querySelectorAll(
-          ".contenedor .sombra"
-        );
-        ultimoServicio = serviciosEnPantalla[serviciosEnPantalla.length - 1];
-        observador.observe(ultimoServicio);
       }
     } else if (respuesta.resultado === false) {
       console.log("no hay resultados");
@@ -88,19 +97,20 @@ const cargarServicios = async () => {
 cargarServicios();
 
 //SECCION DE INCIDENCIAS
-const getInfoServById = (id_ser, servicio, cliente) => {
+const agregarInfoInci = (id_ser, servicio, cliente) => {
   document.getElementById("id_serADD").value = id_ser;
   document.getElementById("servicioADD").value = servicio;
   document.getElementById("clienteADD").value = cliente;
 };
 
+const agregarInfoSerRea = (id_ser, servicio, cliente) => {
+  document.getElementById("id_serSerRea").value = id_ser;
+  document.getElementById("servicioSerRea").value = servicio;
+  document.getElementById("clienteSerRea").value = cliente;
+};
+
 formularioADDSerBit.addEventListener("submit", (e) => {
   e.preventDefault();
-  let id_serADD = document.getElementById("id_serADD").value;
-  let operadorADD = document.getElementById("operadorADD").value;
-  let tipo = document.getElementById("tipo").value;
-  let servicioADD = document.getElementById("servicioADD").value;
-  let clienteADD = document.getElementById("clienteADD").value;
   let comentarios = document.getElementById("comentarioADD").value;
 
   if (comentarios.length == 0) {
