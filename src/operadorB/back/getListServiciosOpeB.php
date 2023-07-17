@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     INNER JOIN operadores O ON R.id_ope = O.id_ope
     INNER JOIN usuarios U ON O.id_ope = U.id_ope
     INNER JOIN clientes C ON C.id_clie = S.id_clie 
-    WHERE S.tip_ser = 'DESAZOLVES DE FOSAS SEPTICAS' OR S.tip_ser =  'LIMPIEZAS PROFUNDAS' OR S.tip_ser = 'SONDEOS' OR S.tip_ser = 'INSPECCION DE CAMARAS'  AND S.estatus <> 'INACTIVO' AND O.id_ope = '$id_ope' LIMIT 10 OFFSET " . $limite . "");
+    WHERE S.tip_ser = 'LIMPIEZAS DE TRAMPAS DE GRASA' OR S.tip_ser =  'LIMPIEZAS PROFUNDAS' OR S.tip_ser = 'INSPECCION DE CAMARAS' OR S.tip_ser = 'DESTAPE DE DRENAJES' OR S.tip_ser = 'DESAZOLVES DE FOSAS SEPTICAS'  AND S.estatus <> 'INACTIVO' AND O.id_ope = '$id_ope' LIMIT 10 OFFSET " . $limite . "");
+    
     $sql->execute();
     $results = $sql->fetchAll(PDO::FETCH_OBJ);
     $data = [];

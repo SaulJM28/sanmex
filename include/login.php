@@ -67,6 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 );
             }
 
+            if ($result['tip_usu'] == 'OPERADOR B') {
+                $data = array(
+                    "resultado" => true,
+                    "mensaje" => "Usuario y contraseña correctos",
+                    "rol" => $result['tip_usu'],
+                    "url" => './src/home/homeOpeB.php'
+                );
+            }
+
             if ($result['tip_usu'] == 'JEFE OPERACIONES') {
                 $data = array(
                     "resultado" => true,
