@@ -34,8 +34,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ALMACENISTA" || $_S
                     <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
                 </div>
             </div>
-            <!-- /#sidebar-wrapper -->
-            <!-- Page Content -->
             <div id="page-content-wrapper">
                 <nav class="navbar navbar-expand-lg fixed-top navbar-dark px-4" style="background-color:  #222059; color: white;">
                     <div class="d-flex align-items-center">
@@ -66,8 +64,6 @@ if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "ALMACENISTA" || $_S
                     </div>
                 </div>
             </div>
-
-
             <div class="modal fade" id="modalADDSAN">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">

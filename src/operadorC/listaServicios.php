@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
+if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") :
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -52,7 +52,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
                 <div class="container-fluid" style="margin-top: 80px; padding: 25px;">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="../home/homeOpeA.php" style="color: black; text-decoration: none;"><i class = "fas fa-arrow-left"> Volver</i></a>
+                            <a href="../home/homeOpeC.php" style="color: black; text-decoration: none;"><i class = "fas fa-arrow-left"> Volver</i></a>
                         </div>
                     </div>
 
@@ -107,50 +107,14 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR A") :
                 </div>
             </div>
         </div>
-        <!-- Modal para realizar servicio -->
-        <div class="modal" id="modalReaSer">
-            <div class="modal-dialog">
-                <div class="modal-content modal-lg">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Realizar Servicio</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form action="./back/insert_bit.php" id="formularioADDSerReaBit" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" class="form-control" id="id_serSerRea" name="id_serSerRea" >
-                            <input type="hidden" class="form-control" id="operadorSerRea" name="operadorSerRea" value="<?php echo $_SESSION['nombre']; ?>">
-                            <input type="hidden" class="form-control" id="tipo" name="tipo" value="REALIZACION">
-                            <input type="hidden" class="form-control" id="servicioSerRea" name="servicioSerRea">
-                            <input type="hidden" class="form-control" id="clienteSerRea" name="clienteSerRea">
-                            <div class="mb-3 mt-3">
-                                <label for="fileEvidencia" class="form-label">Tomar evidencia:</label>
-                                <input type="file" class="form-control" id ="fileEvidenciaSerRea" name ="fileEvidenciaSerRea" required>
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="comentarioSerRea" class="form-label">Comentarios:</label>
-                                <textarea class="form-control" rows="5" id="comentarioSerRea" name="comentarioSerRea" placeholder="escriba las incidencias por lo cual no pudo realizar el servicio" onkeyup="javascript:this.value=this.value.toUpperCase();" required></textarea>
-                            </div>
-                            <div style="display: flex; justify-content: right;">
-                                <button type="submit" class="btn btn-success">Realizar Servicio</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="../../static/js/operadorA/listServOpeA.js"></script>
+        <script src="../../static/js/operadorC/listServOpeC.js"></script>
     </body>
     </html>
 <?php
 else :
-    header('location: ../../include/logout.php');
+    header('location: ../../../include/logout.php');
 endif;
 ?>

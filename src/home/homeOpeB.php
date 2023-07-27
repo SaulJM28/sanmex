@@ -57,21 +57,21 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR B") :
                                         <h4 class="card-title">Servicios</h4>
                                         <p>Lista de servicios</p>
                                         <div style="display: flex; justify-content: right;">
-                                            <a href="listaServicios.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                            <a href="../operadorB/listaServicios.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-4 mt-2 ">
-                            <a href="./src/serviciosRea/servicios_rea.php" class="link__card">
+                            <a href="../operadorB/listaSerRea.php" class="link__card">
                                 <div class="card sombra">
                                     <div class="card-body">
                                         <img src="../../static/img/iconos/ser_rea.png" class="img-fluid" loading="lazy" width="60" height="60">
                                         <h4 class="card-title">Servicios Realizados</h4>
                                         <p>Lista de servicios que ya haz realizado</p>
                                         <div style="display: flex; justify-content: right;">
-                                            <a href="./src/serviciosRea/servicios_rea.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
+                                            <a href="../operadorB/listaSerRea.php" class="btn btn-default"><i class="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR B") :
         </div>
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
-        <script src="../../static/js/operadorA/operadorA.js"></script>
+        <script src="../../static/js/operadorB/operadorB.js"></script>
     </body>
 
     </html>
