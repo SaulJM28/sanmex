@@ -128,28 +128,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                     <form method="POST" id="formularioADDUsuario">
                         <div class="mb-3 mt-3">
                             <label for="nom_ope_add" class="form-label">Operador:</label>
-
                             <select class="form-select" name="nom_ope_add" id="nom_ope_add" required>
-                                <option value="" selected>Seleccione una opcion</option>
-                                <?php
-                                $mysqli = new mysqli("localhost", "root", "", "sanmex");
-                                /* comprobar la conexión */
-                                if ($mysqli->connect_errno) {
-                                    printf("Falló la conexión: %s\n", $mysqli->connect_error);
-                                    exit();
-                                }
-                                /* consulta SELECT */
-                                if ($resultado = $mysqli->query("SELECT * FROM `operadores` WHERE estatus = 'ACTIVO'")) {
-                                    /* recorrer los resultados  */
-                                    while ($fila = $resultado->fetch_assoc()):
-                                        ?>
-                                        <option value="<?= $fila["id_ope"] ?>">
-                                            <?= $fila["nom"] ?>  <?= $fila["ap1"] ?>
-                                            <?= $fila["ap2"] ?>
-                                        </option>
-                                        <?php
-                                    endwhile;
-                                } ?>
                             </select>
                         </div>
                         <div class="mb-3 mt-3">
@@ -218,10 +197,6 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "ADMINISTRADOR") :
                         <div class="mb-3 mt-3">
                             <label for="tip_usu_up" class="form-label">Tipo de usuario:</label>
                             <select id="tip_usu_up" name="tip_usu_up" class="form-select" required>
-                                <option value="" selected>seleccione una opcion</option>
-                                <option value="OPERADOR">Operador</option>
-                                <option value="ALMACENISTA">Almacenista</option>
-                                <option value="ADMINISTRADOR">Administrador</option>
                             </select>
                         </div>
                         <div style="display: flex; justify-content: right;">

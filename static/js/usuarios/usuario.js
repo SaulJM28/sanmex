@@ -1,8 +1,7 @@
 $(document).ready(function () {
-  //$("#datatable").DataTable();
   $("#tablaUsuarios").DataTable({
     ajax: {
-      url: "./back/get_listUsuarios.php",
+      url: "./back/get_listusuarios.php",
     },
     deferRender: true,
     scrollY: 340,
@@ -122,11 +121,7 @@ toggleButton.onclick = function () {
 };
 
 const getListTipUsu = () => {
-  let html = `
-    <option value="">SELECCIONE UNA OPCION</option>
-    <option value="OPERADOR">OPERADOR</option>
-    <option value="ALMACENISTA">ALMACENISTAS</option>
-    <option value="ADMINISTRADOR">ADMINISTRADOR</option>`;
+  let html = `<option value="">SELECCIONE UNA OPCION</option>`;
   $.ajax({
     type: "GET",
     url: "../tipoUsuarios/back/tipoUsuarios.php",
