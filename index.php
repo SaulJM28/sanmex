@@ -43,10 +43,6 @@
 
                                     <form method="post" id="formularioIniciarSesion">
                                         <div class="mb-3 mt-3">
-                                            <?php
-                                            date_default_timezone_set('america/mexico_city');  
-                                            $hoy = date('Y-m-d h:i:s'); 
-                                            echo $hoy; ?>
                                             <label for="nom_usu" class="form-label"><b>Nombre de usuario:</b></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="fas fa-user"></i></div>
