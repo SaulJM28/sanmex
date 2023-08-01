@@ -88,6 +88,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR B") :
                             <input type="hidden" class="form-control" id="tipo" name="tipo" value="INCIDENCIA">
                             <input type="hidden" class="form-control" id="servicioADD" name="servicioADD">
                             <input type="hidden" class="form-control" id="clienteADD" name="clienteADD">
+                            <input type="text" class="form-control" id="tipSerADD" name="tipSerADD">
                             <div class="mb-3 mt-3">
                                 <label for="fileEvidencia" class="form-label">Tomar evidencia:</label>
                                 <input type="file" class="form-control" id ="fileEvidencia" name ="fileEvidencia" required>
@@ -124,6 +125,7 @@ if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR B") :
                             <input type="hidden" class="form-control" id="tipo" name="tipo" value="REALIZACION">
                             <input type="hidden" class="form-control" id="servicioSerRea" name="servicioSerRea">
                             <input type="hidden" class="form-control" id="clienteSerRea" name="clienteSerRea">
+                            <input type="text" class="form-control" id="tipSerRea" name="tipSerRea">
                             <div class="mb-3 mt-3">
                                 <label for="fileEvidencia" class="form-label">Tomar evidencia:</label>
                                 <input type="file" class="form-control" id ="fileEvidenciaSerRea" name ="fileEvidenciaSerRea" required>

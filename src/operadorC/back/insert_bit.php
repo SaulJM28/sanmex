@@ -7,7 +7,7 @@ if (!$_POST) {
         $operador = $_POST['operadorADD'];
         $servicio = $_POST['servicioADD'];
         $cliente = $_POST['clienteADD'];
-        /*   $coord = $_POST['coordADD']; */
+        $tipSer = $_POST['tipSerADD'];
         $comentario = $_POST['comentarioADD'];
         //archivo 
         $file_name_fileEvidencia = $_FILES['fileEvidencia']['name'];
@@ -22,8 +22,8 @@ if (!$_POST) {
         $hoy = date('Y-m-d h:i:s');
 
         include("../../../include/conexion.php");
-        $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `fecha`, `evidencia`, `comentario`, `estatus`) 
-        VALUES (NULL, '$servicio', '$cliente', NULL, '$operador', '$hoy', '$nameArch', '$comentario', 'INCIDENCIA');";
+        $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `tipser`, `fecha`, `evidencia`, `comentario`, `estatus`) 
+        VALUES (NULL, '$servicio', '$cliente', NULL, '$operador', '$tipSer', '$hoy', '$nameArch', '$comentario', 'INCIDENCIA');";
         $resultado = mysqli_query($enlace, $sql);
         if (!$resultado) {
             echo "Error: " . $sql . "<br>" . mysqli_error($enlace);
@@ -40,6 +40,7 @@ if (!$_POST) {
         $operador = $_POST['operadorSerRea'];
         $servicio = $_POST['servicioSerRea'];
         $cliente = $_POST['clienteSerRea'];
+        $tipSer = $_POST['tipSerRea'];
         $comentario = $_POST['comentarioSerRea'];
         $san = $_POST['sanitarioSerRea'];
         //file
@@ -56,8 +57,8 @@ if (!$_POST) {
         $hoy = date('Y-m-d h:i:s');
 
         include("../../../include/conexion.php");
-        $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `fecha`, `evidencia`, `comentario`, `estatus`) 
-        VALUES (NULL, '$servicio', '$cliente', '$san', '$operador', '$hoy', '$nameArch', '$comentario', 'REALIZADO');";
+        $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `tipser`, `fecha`, `evidencia`, `comentario`, `estatus`) 
+        VALUES (NULL, '$servicio', '$cliente', '$san', '$operador','$tipSer','$hoy', '$nameArch', '$comentario', 'REALIZADO');";
         $resultado = mysqli_query($enlace, $sql);
         if (!$resultado) {
             echo "Error: " . $sql . "<br>" . mysqli_error($enlace);

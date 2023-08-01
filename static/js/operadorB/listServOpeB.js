@@ -37,14 +37,15 @@ const cargarServicios = async () => {
       }
       if (datos.resultado == true) {
         datos.data.forEach((element) => {
+          console.log(element);
           document.getElementById(
             "nomOpeList"
           ).innerHTML = `${element.nom_ope}`;
           if (element.estatus == "ACTIVO") {
             color = element.color;
             botones = `<div class="btn-group">
-              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "agregarInfoInci(${element.id_ser}, '${element.num_ser}', '${element.cliente}' )">Incidencias</button>
-              <button onclick="agregarInfoSerRea(${element.id_ser}, '${element.num_ser}', '${element.cliente}')" data-bs-toggle="modal" data-bs-target="#modalReaSer" class="btn btn-success btn-sm">Realizar Servicio</button>
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "agregarInfoInci(${element.id_ser}, '${element.num_ser}', '${element.cliente}', '${element.tip_ser}' )">Incidencias</button>
+              <button onclick="agregarInfoSerRea(${element.id_ser}, '${element.num_ser}', '${element.cliente}', '${element.tip_ser}')" data-bs-toggle="modal" data-bs-target="#modalReaSer" class="btn btn-success btn-sm">Realizar Servicio</button>
             </div>`;
           } else if (element.estatus == "FINALIZADO") {
             color = element.color;
@@ -97,16 +98,20 @@ const cargarServicios = async () => {
 cargarServicios();
 
 //SECCION DE INCIDENCIAS
-const agregarInfoInci = (id_ser, servicio, cliente) => {
+const agregarInfoInci = (id_ser, servicio, cliente, tipo) => {
   document.getElementById("id_serADD").value = id_ser;
   document.getElementById("servicioADD").value = servicio;
   document.getElementById("clienteADD").value = cliente;
+  document.getElementById("tipSerADD").value = tipo;
+
 };
 
-const agregarInfoSerRea = (id_ser, servicio, cliente) => {
+const agregarInfoSerRea = (id_ser, servicio, cliente, tipo) => {
   document.getElementById("id_serSerRea").value = id_ser;
   document.getElementById("servicioSerRea").value = servicio;
   document.getElementById("clienteSerRea").value = cliente;
+  document.getElementById("tipSerRea").value = tipo;
+
 };
 
 formularioADDSerBit.addEventListener("submit", (e) => {
