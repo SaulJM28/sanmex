@@ -40,8 +40,9 @@ if (!$_POST) {
         $operador = $_POST['operadorSerRea'];
         $servicio = $_POST['servicioSerRea'];
         $cliente = $_POST['clienteSerRea'];
-        $comentario = $_POST['comentarioSerRea'];
         $tipSer = $_POST['tipSerRea'];
+        $comentario = $_POST['comentarioSerRea'];
+        $san = $_POST['sanitarioSerRea'];
         //file
         $file_name_fileEvidenciaSerRea = $_FILES['fileEvidenciaSerRea']['name'];
         $file_size_fileEvidenciaSerRea = $_FILES['fileEvidenciaSerRea']['size'];
@@ -57,7 +58,7 @@ if (!$_POST) {
 
         include("../../../include/conexion.php");
         $sql = " INSERT INTO `bitacora_servicio` (`id_bit`, `servicio`, `cliente`, `sanitario`, `operador`, `tipser`, `fecha`, `evidencia`, `comentario`, `estatus`) 
-        VALUES (NULL, '$servicio', '$cliente', null, '$operador', '$tipSer', '$hoy', '$nameArch', '$comentario', 'REALIZADO');";
+        VALUES (NULL, '$servicio', '$cliente', '$san', '$operador','$tipSer','$hoy', '$nameArch', '$comentario', 'REALIZADO');";
         $resultado = mysqli_query($enlace, $sql);
         if (!$resultado) {
             echo "Error: " . $sql . "<br>" . mysqli_error($enlace);

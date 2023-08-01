@@ -27,7 +27,7 @@ let observador = new IntersectionObserver(
 const cargarServicios = async () => {
   try {
     const respuesta = await fetch(
-      `./back/getListServiciosOpeB.php?limite=${limite}&id_ope=${id_ope}`
+      `./back/getListServiciosOpeC.php?limite=${limite}&id_ope=${id_ope}`
     );
     // Si la respuesta es correcta
     if (respuesta.status === 200) {
@@ -37,15 +37,14 @@ const cargarServicios = async () => {
       }
       if (datos.resultado == true) {
         datos.data.forEach((element) => {
-          console.log(element);
           document.getElementById(
             "nomOpeList"
           ).innerHTML = `${element.nom_ope}`;
           if (element.estatus == "ACTIVO") {
             color = element.color;
             botones = `<div class="btn-group">
-              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "agregarInfoInci(${element.id_ser}, '${element.num_ser}', '${element.cliente}', '${element.tip_ser}' )">Incidencias</button>
-              <button onclick="agregarInfoSerRea(${element.id_ser}, '${element.num_ser}', '${element.cliente}', '${element.tip_ser}')" data-bs-toggle="modal" data-bs-target="#modalReaSer" class="btn btn-success btn-sm">Realizar Servicio</button>
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal" onclick = "agregarInfoInci(${element.id_ser}, '${element.num_ser}', '${element.cliente}' )">Incidencias</button>
+              <button onclick="reaSerLimpSan(${element.id_ser})" class="btn btn-success btn-sm">Realizar</button>
             </div>`;
           } else if (element.estatus == "FINALIZADO") {
             color = element.color;
@@ -56,14 +55,13 @@ const cargarServicios = async () => {
                           <div class="card-body">
                             <div class="d-flex justify-content-between">
                               <h5 class="card-title">Numero de servicio: ${element.num_ser}</h5>
-                              <h5 class="card-title">Dias de servicio: ${element.num_ser}</h5>
                             </div>
                               <ul class="list-group">
-                              <li class="list-group-item bg-white"><strong>Nombre del contacto:</strong>. ${element.nom_conrec}</li>
-                              <li class="list-group-item bg-white"><strong>Telefono del contacto:</strong>. ${element.tel_conrec}</li>
-                              <li class="list-group-item bg-white"><strong>Tipo de servicio:</strong>. ${element.tip_ser}</li>
-                              <li class="list-group-item bg-white"><strong>Direccion:</strong>. ${element.direccion}</li>
-                              <li class="list-group-item bg-white"><strong>Observaciones:</strong>. ${element.tip_ser}</li>
+                              <li class="list-group-item bg-white"><strong>Nombre del contacto:</strong> ${element.nom_conrec}</li>
+                              <li class="list-group-item bg-white"><strong>Telefono del contacto:</strong> ${element.tel_conrec}</li>
+                              <li class="list-group-item bg-white"><strong>Tipo de servicio:</strong> ${element.tip_ser}</li>
+                              <li class="list-group-item bg-white"><strong>Sanitarios a limpiar:</strong> ${element.numSanLimp}</li>
+                              <li class="list-group-item bg-white"><strong>Observaciones:</strong> ${element.tip_ser}</li>
                             </ul>
                                   <div style="display: flex; justify-content: right">
                                       ${botones}
@@ -98,20 +96,14 @@ const cargarServicios = async () => {
 cargarServicios();
 
 //SECCION DE INCIDENCIAS
-const agregarInfoInci = (id_ser, servicio, cliente, tipo) => {
+const agregarInfoInci = (id_ser, servicio, cliente) => {
   document.getElementById("id_serADD").value = id_ser;
   document.getElementById("servicioADD").value = servicio;
   document.getElementById("clienteADD").value = cliente;
-  document.getElementById("tipSerADD").value = tipo;
-
 };
 
-const agregarInfoSerRea = (id_ser, servicio, cliente, tipo) => {
-  document.getElementById("id_serSerRea").value = id_ser;
-  document.getElementById("servicioSerRea").value = servicio;
-  document.getElementById("clienteSerRea").value = cliente;
-  document.getElementById("tipSerRea").value = tipo;
-
+const reaSerLimpSan = (id_ser, servicio, cliente) => {
+  window.location.href = `listSerSan.php?id=${id_ser}`
 };
 
 formularioADDSerBit.addEventListener("submit", (e) => {

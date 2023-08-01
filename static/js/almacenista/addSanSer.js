@@ -23,10 +23,9 @@ const get_infoSanBySer = () => {
         "tittleSanAsig"
       ).innerHTML = `Sanitarios asignados ${response.totalRe} de ${san_sol}`;
       response.data.map((element) => {
-        console.log(element);
         if (element.estatus_sesa == "FINALIZADO") {
           html += `
-              <div class="col-md-4 mt-12">
+              <div class="col-lg-4 col-md-6 col-sm-6 mt-12">
                 <div class="card">
                   <img src="../../static/img/sanitarioServ.png" style="width: 150px; height: 180px;" loading="lazy" class="card-img-top img-fluid" alt="sanitario-${element.num_san}-${element.tipo}">
                   <div class="card-body">
