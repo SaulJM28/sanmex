@@ -1,0 +1,9 @@
+# Comentarios: inician con un signo de numeral (#)
+*.log            # Ignora todos los archivos con extensión .log
+node_modules/    # Ignora el directorio node_modules y todo su contenido
+*.zip            # Ignora todos los archivos con extensión .zip
+secret.txt       # Ignora un archivo específico llamado secret.txt
+include/conexion.php
+include/config.php
+*.sql
+
