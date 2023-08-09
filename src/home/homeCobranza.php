@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ((isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") || (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR SUPLENTE")) :
+if (isset($_SESSION['nom_usu']) && ($_SESSION['tip_usu'] == "COBRANZA" || $_SESSION['tip_usu'] == "ADMINISTRADOR")) :
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -10,6 +10,9 @@ if ((isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") || (is
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../../static/css/style.css" />
+        <link rel="stylesheet" href="../../static/css/datatables.css" />
+        <link rel="stylesheet" href="../../static/css/datatables.min.css" />
+
         <script src="https://kit.fontawesome.com/937f402df2.js" crossorigin="anonymous"></script>
         <title>SANMEX</title>
     </head>
@@ -17,11 +20,11 @@ if ((isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") || (is
         .ocultar {
             display: none;
         }
-    </style>     
+    </style>
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
-            <?php  include '../../src/componentes/sidebar.php' ?>
+            <?php include '../../src/componentes/sidebar.php' ?>
             <!-- /#sidebar-wrapper -->
             <!-- Page Content -->
             <div id="page-content-wrapper">
@@ -47,27 +50,42 @@ if ((isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") || (is
                 <div class="container-fluid" style="margin-top: 80px; padding: 25px;">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="../home/homeOpeC.php" style="color: black; text-decoration: none;"><i class = "fas fa-arrow-left"> Volver</i></a>
+                            <h1 style="text-align: center;">Lista de servicios por cobrar</h1>
+                            <p style="text-align: center;"></p>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-12">
-                            <h1 style="text-align: center;">Lista de servicios realizados</h1>
+                        <table id="tableListSer" class="table table-striped  table-hover table-sm nowrap" style="width:100%; text-align: center;">
+                                        <thead style="background-color: #222059; color: white;">
+                                            <tr>
+                                                <th>NUM SERV</th>
+                                                <th>TIP SERV</th>
+                                                <th>CLIENTE</th>
+                                                <th>COSTO</th>
+                                                <th>TIP PAGO</th>
+                                                <th>DIA PAG</th>
+                                                <th>ESTATUS PAG</th>
+                                                <th>CONCT PAG</th>
+                                                <th>TEl CONCT PAG</th>
+                                                <th>CORR CONCT PAG</th>
+                                                <th>ESTATUS SERV</th>
+                                                <th>OPCIONES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="text-align: center;" id = "nomOpeList"></p>
-                        </div>
-                    </div>
-                    <div class="contenedor" id="contenedor"></div>
                 </div>
             </div>
-        </div>        
+        </div>
         <script src="../../static/js/jquery-3.6.3.min.js"></script>
         <script src="../../static/js/bootstrap.min.js"></script>
+        <script src="../../static/js/bootstrap.bundle.min.js"></script>
+        <script src="../../static/js/datatables.js"></script>
+        <script src="../../static/js/datatables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="../../static/js/operadorC/listServReaOpeC.js"></script>
+        <script src="../../static/js/cobranza/cobranza.js"></script>
     </body>
     </html>
 <?php

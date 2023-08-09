@@ -93,6 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "url" => './src/home/homeJefeOperaciones.php'
                 );
             }
+
+            if ($result['tip_usu'] == 'COBRANZA') {
+                $data = array(
+                    "resultado" => true,
+                    "mensaje" => "Usuario y contraseña correctos",
+                    "rol" => $result['tip_usu'],
+                    "url" => './src/home/homeCobranza.php'
+                );
+            }
         } else {
             $data = array(
                 "resultado" => false,

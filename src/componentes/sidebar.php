@@ -42,13 +42,10 @@ if(isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR B"){
 </div>';
 }
 
-if(isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C"){
+if(isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "COBRANZA"){
     echo '<div class="fondo__sidebar" id="sidebar-wrapper">
-    <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">SANMEX
-    </div>
+    <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><a href="../home/homeCobranza.php" class = "link__sidebar">SANMEX</a></div>
     <div class="list-group list-group-flush my-3">
-        <a href="../operadorC/listaServicios.php" class="list-group-item list-group-item-action second-text fw-bold ">Servicios</a>
-        <a href="../operadorC/listaSerRea.php" class="list-group-item list-group-item-action second-text fw-bold ">Servicios Realizados</a>
         <a href="../../include/logout.php" class="list-group-item list-group-item-action text-danger fw-bold"><i class="fas fa-power-off me-2"></i>Cerrar Sesion</a>
     </div>
 </div>';

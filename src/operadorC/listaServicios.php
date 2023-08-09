@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") :
+if ((isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR C") || (isset($_SESSION['nom_usu']) && $_SESSION['tip_usu'] == "OPERADOR SUPLENTE")) :
 ?>
     <!DOCTYPE html>
     <html lang="en">

@@ -110,3 +110,13 @@ body {
 .text__center{
   text-align: center;
 }
+
+.link__sidebar{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.link__sidebar:hover{
+  color: #f21d44;
+  cursor: pointer;
+}

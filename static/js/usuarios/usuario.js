@@ -1,4 +1,13 @@
 $(document).ready(function () {
+  $("#tip_usu_up").select2({
+    theme: "bootstrap-5",
+  });
+  $("#nom_ope_add").select2({
+    theme: "bootstrap-5",
+  });
+  $("#tip_usu_add").select2({
+    theme: "bootstrap-5",
+  });
   $("#tablaUsuarios").DataTable({
     ajax: {
       url: "./back/get_listusuarios.php",
@@ -119,6 +128,25 @@ var toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
   el.classList.toggle("toggled");
 };
+const getListOpe = () => {
+  let html = `<option value="">SELECCIONE UNA OPCION</option>`;
+  $.ajax({
+    type: "GET",
+    url: "../operadores/back/get_listOperadores.php",
+    async: true,
+    beforeSend: function () {},
+    success: function (response) {
+      response.data.forEach((element) => {
+        html += `<option value="${element.id_ope}">${element.nom} ${element.ap1} ${element.ap2}</option>`;
+      });
+      document.getElementById("nom_ope_add").innerHTML = html;
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+};
+getListOpe();
 
 const getListTipUsu = () => {
   let html = `<option value="">SELECCIONE UNA OPCION</option>`;
