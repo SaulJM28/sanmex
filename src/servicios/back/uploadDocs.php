@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $file_ext_docSitFis = end($tmp_docSitFis);
     $nombreDocCot = 'DocCot_' . $rfc . '_' . $id . '.pdf';
     $nombreDocSitFis = 'DocSitFis_' . $rfc . '_' . $id . '.pdf';
-    if (move_uploaded_file($file_tmp_docCot, "./docs/cotizaciones/" . $nombreDocCot) || move_uploaded_file($file_tmp_docSitFis, "./docs/situacionFiscal/" . $nombreDocSitFis)) {
+    if ((move_uploaded_file($file_tmp_docCot, "./docs/cotizaciones/" . $nombreDocCot)) || (move_uploaded_file($file_tmp_docSitFis, "./docs/situacionFiscal/" . $nombreDocSitFis))) {
         $sql = $dbConn->prepare("UPDATE servicio SET cotzacion = :cot, sit_fis = :sitFis  WHERE id_ser = :id");
         $sql->bindValue(':id', $id, PDO::PARAM_INT);
         $sql->bindValue(':cot', $nombreDocCot, PDO::PARAM_STR);
